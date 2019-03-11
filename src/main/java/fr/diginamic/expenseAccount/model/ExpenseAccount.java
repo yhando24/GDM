@@ -10,9 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Entity
 @Table(name="expense_account")
+@Getter
+@Setter
 public class ExpenseAccount {
 
 	@Id
@@ -39,39 +44,6 @@ public class ExpenseAccount {
 		this.amount = amount;
 		this.status = status;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-	public Float getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Float amount) {
-		this.amount = amount;
-	}
-
-	public ExpenseAccountStatusEnum getStatus() {
-		return status;
-	}
-
-	public void setStatus(ExpenseAccountStatusEnum status) {
-		this.status = status;
-	}
-
 
 	@Override
 	public String toString() {
