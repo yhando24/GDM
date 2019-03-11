@@ -1,4 +1,4 @@
-package fr.diginamic.noteDeFrais.model;
+package fr.diginamic.expenseAccount.model;
 
 public enum ExpenseAccountStatusEnum {
 	EN_ATTENTE("En attente"),
@@ -17,3 +17,4 @@ public enum ExpenseAccountStatusEnum {
         return e;
     }
 }
+
