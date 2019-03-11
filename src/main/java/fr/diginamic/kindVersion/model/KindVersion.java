@@ -54,6 +54,7 @@ public class KindVersion {
 	private Boolean authorizationToExceed;
 	
 	@ManyToOne
+	@JoinColumn(name="id_kind")
 	private Kind kind;
 	
 	@Column ( nullable=false)

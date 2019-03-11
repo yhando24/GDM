@@ -50,6 +50,7 @@ public class Mission {
     private MissionStatusEnum missionStatusEnum;
 	
 	@ManyToOne
+	@JoinColumn(name="id_kindVersion")
 	private KindVersion kindVersion;
 	
 	@Column

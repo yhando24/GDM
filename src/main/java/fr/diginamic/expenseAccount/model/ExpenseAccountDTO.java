@@ -1,4 +1,4 @@
-package fr.diginamic.noteDeFrais.model;
+package fr.diginamic.expenseAccount.model;
 
 import java.time.LocalDate;
 

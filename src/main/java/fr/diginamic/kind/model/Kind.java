@@ -42,11 +42,11 @@ public class Kind {
 	@Column(nullable = false)
 	private Boolean authorizationToExceed;
 	
-	public kind(){
+	public Kind(){
 	}
 	
 
-	public kind(Long id, String name, Float adr, Float bonusPercentage, LocalDate updatedAt, Boolean invoiced,
+	public Kind(Long id, String name, Float adr, Float bonusPercentage, LocalDate updatedAt, Boolean invoiced,
 			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
 		this.id = id;
 		this.name = name;
