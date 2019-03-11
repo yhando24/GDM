@@ -30,10 +30,6 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="id_user_role")
-	private RoleEnum roleEnum;
-	
 	@OneToMany(mappedBy="user")
 	private List<Mission> missions = new ArrayList();
 
