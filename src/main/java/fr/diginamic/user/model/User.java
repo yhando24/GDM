@@ -1,6 +1,8 @@
 package fr.diginamic.user.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,17 +10,30 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.mission.model.Mission;
+
 @Entity
-@Table(name = "user")
+@Table(name = "user_")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name= "id_user")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name="id_user_role")
+	private RoleEnum roleEnum;
+	
+	@OneToMany(mappedBy="user")
+	private List<Mission> missions = new ArrayList();
 
 	@Column
 	private String firstName;
