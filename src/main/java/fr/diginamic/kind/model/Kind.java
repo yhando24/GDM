@@ -1,3 +1,4 @@
+
 package fr.diginamic.kind.model;
 
 import java.time.LocalDate;
@@ -71,3 +72,4 @@ public class Kind {
 	}
 
 }
+
