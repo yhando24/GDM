@@ -48,7 +48,7 @@ public class Mission {
 	private BigDecimal prime;
 	
 	@Enumerated(EnumType.STRING)
-    private MissionStatusEnum missionStatusEnum;
+    private MissionStatusEnum missionStatus;
 	
 	@ManyToOne
 	@JoinColumn(name="id_kindVersion")
@@ -74,7 +74,7 @@ public class Mission {
 		this.departureCity = departureCity;
 		this.arrivalCity = arrivalCity;
 		this.prime = prime;
-		this.missionStatusEnum = missionStatusEnum;
+		this.missionStatus = missionStatusEnum;
 		this.kindVersion = kindVersion;
 		this.amountOfBill = amountOfBill;
 	}
