@@ -1,5 +1,6 @@
 package fr.diginamic.kindVersion.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import fr.diginamic.kind.model.Kind;
@@ -20,41 +22,46 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class KindVersionDTO {
+public class KindVersionDTO implements Serializable  {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2197196861954702653L;
 
 	private Long id;
 	
-	@NotNull
+	@NotBlank
 	private String name;
 	
 	private Float adr;
 	
-	@NotNull
+	@NotBlank
 	private Float bonusPercentage;
 	
-	@NotNull
+	@NotBlank
 	private Boolean invoiced;
 	
-	@NotNull
+	@NotBlank
 	private Boolean bonus;
 	
-	@NotNull
+	@NotBlank
 	private Float dailyCharges; 
 	
-	@NotNull
+	@NotBlank
 	private Boolean authorizationToExceed;
 	
-	@NotNull
+	@NotBlank
 	private Kind kind;
 	
-	@NotNull
+	@NotBlank
 	private Long Version;
 	
-	@NotNull
+	@NotBlank
 	private LocalDate UpdatedAt;
 	
-	@NotNull
+	@NotBlank
 	private List <Mission> mission = new ArrayList<>();
 
 	

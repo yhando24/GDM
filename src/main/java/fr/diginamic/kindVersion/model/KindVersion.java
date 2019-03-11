@@ -2,7 +2,8 @@ package fr.diginamic.kindVersion.model;
 
 
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,14 @@ import lombok.Setter;
 @Table(name = "kind_version")
 @Getter
 @Setter
-public class KindVersion {
+public class KindVersion implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1730166803743833258L;
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -61,17 +68,17 @@ public class KindVersion {
 	private Long Version;
 	
 	@Column ( nullable=false)
-	private LocalDate UpdatedAt;
+	private LocalDateTime UpdatedAt;
 	
 	@OneToMany(mappedBy = "kindVersion")
-	private List <Mission> mission = new ArrayList<>();
+	private List<Mission> mission = new ArrayList<>();
 
 
 	
 //	CONSTRUCTEURS
 	
 	public KindVersion(Long id, String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed, Kind kind, Long version, LocalDate updatedAt,
+			Float dailyCharges, Boolean authorizationToExceed, Kind kind, Long version, LocalDateTime updatedAt,
 			List<Mission> mission) {
 		super();
 		this.id = id;
