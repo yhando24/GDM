@@ -1,32 +1,48 @@
 package fr.diginamic.kind.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class KindDTO {
 	
+	@NotBlank
 	private Long id;
 
+	@NotBlank
 	private String name;
 
+	@NotBlank
 	private Float adr;
 
+	@NotBlank
 	private Float bonusPercentage;
 
-	private LocalDate updatedAt;
-	
+	@NotBlank
+	private LocalDateTime updatedAt;
+
+	@NotBlank
 	private Boolean bonus;
 
+	@NotBlank
 	private Float dailyCharges;
 
+	@NotBlank
 	private Boolean authorizationToExceed;
-	
-	private Boolean invoiced;
-	
-	public KindDTO(){
-	}
-	
 
-	public KindDTO(Long id, String name, Float adr, Float bonusPercentage, LocalDate updatedAt, Boolean invoiced,
+	@NotBlank
+	private Boolean invoiced;
+
+	@NotBlank
+	public KindDTO() {
+	}
+
+	public KindDTO(Long id, String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
 			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
 		this.id = id;
 		this.name = name;
@@ -38,79 +54,6 @@ public class KindDTO {
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Float getAdr() {
-		return adr;
-	}
-
-	public void setAdr(Float adr) {
-		this.adr = adr;
-	}
-
-	public Float getBonusPercentage() {
-		return bonusPercentage;
-	}
-
-	public void setBonusPercentage(Float bonusPercentage) {
-		this.bonusPercentage = bonusPercentage;
-	}
-
-	public LocalDate getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDate updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Boolean getInvoiced() {
-		return invoiced;
-	}
-
-	public void setInvoiced(Boolean invoiced) {
-		this.invoiced = invoiced;
-	}
-
-	public Boolean getBonus() {
-		return bonus;
-	}
-
-	public void setBonus(Boolean bonus) {
-		this.bonus = bonus;
-	}
-
-	public Float getDailyCharges() {
-		return dailyCharges;
-	}
-
-	public void setDailyCharges(Float dailyCharges) {
-		this.dailyCharges = dailyCharges;
-	}
-
-	public Boolean getAuthorizationToExceed() {
-		return authorizationToExceed;
-	}
-
-	public void setAuthorizationToExceed(Boolean authorizationToExceed) {
-		this.authorizationToExceed = authorizationToExceed;
-	}
-
 
 	@Override
 	public String toString() {
