@@ -7,10 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan("fr.diginamic")
 @SpringBootApplication
-@EntityScan("fr.diginamic")
+
+@EntityScan(basePackages = { "fr.diginamic" })
+
 public class GdmApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(GdmApplication.class, args);
 	}
 
