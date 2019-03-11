@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "kind")
-public class kind {
+public class Kind {
 
 	@Id
 	@Column
