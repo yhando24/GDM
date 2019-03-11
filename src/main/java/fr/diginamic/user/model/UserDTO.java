@@ -2,6 +2,8 @@ package fr.diginamic.user.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +14,20 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	
+	@NotBlank
 	private String firstName;
+	
+	@NotBlank
 	private String lastName;
+	
+	@NotBlank
 	private String password;
+	
+	@NotBlank
 	private String email;
+	
+	@NotBlank
 	private RoleEnum role;
 
 	public UserDTO() {
