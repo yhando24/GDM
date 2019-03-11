@@ -2,11 +2,6 @@ package fr.diginamic.kind.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class KindDTO {
 	
 	private Long id;
