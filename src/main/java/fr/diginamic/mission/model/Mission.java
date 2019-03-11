@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.diginamic.kindVersion.model.KindVersion;
+import fr.diginamic.user.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +53,10 @@ public class Mission {
 	@ManyToOne
 	@JoinColumn(name="id_kindVersion")
 	private KindVersion kindVersion;
+	
+	@ManyToOne
+	@JoinColumn(name="id_user")
+	private User user;
 	
 	@Column
 	private BigDecimal amountOfBill;
