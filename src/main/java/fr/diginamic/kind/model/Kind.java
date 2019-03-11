@@ -1,7 +1,7 @@
 
 package fr.diginamic.kind.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class Kind {
 	private Float bonusPercentage;
 
 	@Column(nullable = false)
-	private LocalDate updatedAt;
+	private LocalDateTime updatedAt;
 
 	@Column(nullable = false)
 	private Boolean invoiced;
@@ -51,7 +51,7 @@ public class Kind {
 	public Kind() {
 	}
 
-	public Kind(Long id, String name, Float adr, Float bonusPercentage, LocalDate updatedAt, Boolean invoiced,
+	public Kind(Long id, String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
 			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
 		this.id = id;
 		this.name = name;
@@ -72,4 +72,3 @@ public class Kind {
 	}
 
 }
-
