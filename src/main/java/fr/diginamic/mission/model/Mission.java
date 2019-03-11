@@ -92,6 +92,7 @@ public class Mission implements Serializable {
 		this.arrivalCity = arrivalCity;
 		this.prime = prime;
 		this.missionStatus = missionStatus;
+
 		this.kindVersion = kindVersion;
 		this.amountOfBill = amountOfBill;
 	}
