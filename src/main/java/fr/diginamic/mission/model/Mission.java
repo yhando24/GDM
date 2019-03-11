@@ -1,7 +1,10 @@
 package fr.diginamic.mission.model;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import fr.diginamic.expenseAccount.model.ExpenseAccount;
 import fr.diginamic.kindVersion.model.KindVersion;
 import fr.diginamic.user.model.User;
 import lombok.Getter;
@@ -25,8 +31,14 @@ import lombok.Setter;
 @Table(name = "mission")
 @Getter
 @Setter
-public class Mission {
+public class Mission implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7927345980525760782L;
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -45,28 +57,33 @@ public class Mission {
 	private String arrivalCity;
 	
 	@Column( nullable=true, length = 45)
-	private BigDecimal prime;
+	private Float prime;
 	
 	@Enumerated(EnumType.STRING)
     private MissionStatusEnum missionStatus;
 	
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name="id_kindVersion")
 	private KindVersion kindVersion;
 	
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name="id_user")
 	private User user;
 	
 	@Column
-	private BigDecimal amountOfBill;
-
+	private Float amountOfBill;
+	
+	@OneToMany(mappedBy = "mission")
+	private List<ExpenseAccount> expenseAccounts = new ArrayList<>();
+	
 	
 //	CONSTRUCTEURS
 	
 
 	public Mission(Long id, LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity,
-			BigDecimal prime, MissionStatusEnum missionStatusEnum, KindVersion kindVersion, BigDecimal amountOfBill) {
+			Float prime, MissionStatusEnum missionStatus, KindVersion kindVersion, Float amountOfBill) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -74,7 +91,8 @@ public class Mission {
 		this.departureCity = departureCity;
 		this.arrivalCity = arrivalCity;
 		this.prime = prime;
-		this.missionStatus = missionStatusEnum;
+		this.missionStatus = missionStatus;
+
 		this.kindVersion = kindVersion;
 		this.amountOfBill = amountOfBill;
 	}

@@ -1,5 +1,6 @@
 package fr.diginamic.mission.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import fr.diginamic.kindVersion.model.KindVersion;
@@ -19,32 +21,37 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MissionDTO {
+public class MissionDTO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 942575388236824289L;
+
 	private Long id;
 	
-	@NotNull
+	@NotBlank
 	private LocalDate startDate;
 	
-	@NotNull
+	@NotBlank
 	private LocalDate endDate;
 	
-	@NotNull
+	@NotBlank
 	private String departureCity;
 	
-	@NotNull
+	@NotBlank
 	private String arrivalCity;
 	
-	@NotNull
+	@NotBlank
 	private BigDecimal prime;
 	
-	@NotNull
+	@NotBlank
     private MissionStatusEnum missionStatusEnum;
 	
-	@NotNull
+	@NotBlank
 	private KindVersion kindVersion;
 	
-	@NotNull
+	@NotBlank
 	private BigDecimal amountOfBill;
 
 	
@@ -69,6 +76,14 @@ public class MissionDTO {
 
 	public MissionDTO() {
 
+	}
+
+
+	@Override
+	public String toString() {
+		return "MissionDTO [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", departureCity="
+				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatusEnum="
+				+ missionStatusEnum + ", kindVersion=" + kindVersion + ", amountOfBill=" + amountOfBill + "]";
 	}
 	
 	
