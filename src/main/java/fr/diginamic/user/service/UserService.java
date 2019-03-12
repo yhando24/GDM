@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.user.exception.UserNotFoundException;
+import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
 import fr.diginamic.user.repository.UserRepository;
 
@@ -20,35 +21,98 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<User> findAll() {
-		return (List<User>) userRepository.findAll();
+	// create
+	
+	public User save(User user) {
+		return userRepository.save(user);
+	}
+//
+//	public List<User> saveAll(List<User> users) {
+//		return userRepository.saveAll(users);
+//	}
+
+	// read
+
+	public List<User> findByLastName(String lastName) {
+		return userRepository.findByLastName(lastName);
 	}
 
-	public User save(User user) throws UserNotFoundException {
-		User u = userRepository.findById(id);
-		if (u == null) {
-			throw new UserNotFoundException("user n'existe pas");
-		}
-		return user;
+	public List<User> findByFirstName(String firstName) {
+		return userRepository.findByFirstName(firstName);
 	}
 
-	public User update(User user) {
-		User updateUser = userRepository.findById(id);
-		if (updateUser != null) {
-			throw new UserNotFoundException("");
-		}
-
-		return user;
+	public List<User> findByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
-	public void deleteUser(Long id) {
-		userRepository.deleteById(id);
+	public List<User> findByRole(RoleEnum role) {
+		return userRepository.findByRole(role);
 	}
 
 	public Optional<User> findById(Long id) {
-		Optional<User> user = userRepository.findById(id);
-		return user;
+		return userRepository.findById(id);
 	}
+
+	public List<User> findAllById(List<Long> ids) {
+		return userRepository.findAllById(ids);
+	}
+
+	public Optional<User> findByPwdAndEmail(String password, String email) {
+		return userRepository.findByPasswordAndEmail(password, email);
+	}
+
+	public boolean existsById(Long id) {
+		return userRepository.existsById(id);
+	}
+
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	// delete
+
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);
+	}
+
+	public void delete(User user) {
+		userRepository.delete(user);
+	}
+
+	public void deleteAll(List<? extends User> users) {
+		userRepository.deleteAll(users);
+	}
+	
+	public void deleteAll() {
+		userRepository.deleteAll();
+	}
+
+	
+//	public User save(User user) throws UserNotFoundException {
+//		User u = userRepository.findById(id);
+//		if (u == null) {
+//			throw new UserNotFoundException("user n'existe pas");
+//		}
+//		return user;
+//	}
+
+//	public User update(User user) {
+//		User updateUser = userRepository.findById(id);
+//		if (updateUser != null) {
+//			throw new UserNotFoundException("");
+//		}
+//
+//		return user;
+//	}
+
+//	public void deleteUser(Long id) {
+//		userRepository.deleteById(id);
+//	}
+//
+//	public Optional<User> findById(Long id) {
+//		Optional<User> user = userRepository.findById(id);
+//		return user;
+//	}
 
 //	public List<UserDTO> findAll() {
 //		return toDto(userRepository.findAll());
