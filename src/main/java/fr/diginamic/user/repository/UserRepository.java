@@ -1,37 +1,20 @@
 package fr.diginamic.user.repository;
 
-import java.util.Optional;
+import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.user.model.User;
 
 @Repository
-public class UserRepository extends AbstractJpaRepository<User> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Override
-	protected Class<User> getEntityClass() {
-		return User.class;
-	}
+	User findByUserLastName(String lastName);
 
-	@Transactional(readOnly = true)
+	List<User> findByLastName(String lastName);
 
-	public Optional<User> findOneByLastName(String lastName) {
-		User user = (User) getSession().createCriteria(entityClass).add(Restrictions.eq("lastName", lastName))
-				.uniqueResult();
-		return Optional.of(user);
-	}
-
-	public Optional<User> findOneByFirstName(String firstName) {
-		User user = (User) getSession().createCriteria(entityClass).add(Restrictions.eq("firstName", firstName))
-				.uniqueResult();
-		return Optional.of(user);
-	}
-
-	public void deleteAllUsers() {
-		getSession().createQuery("delete from User").executeUpdate();
-
-	}
+	@Query("select u from User u where u.firstname = :firstname")
+	List<User> findByFirstName(String firstName);
 }

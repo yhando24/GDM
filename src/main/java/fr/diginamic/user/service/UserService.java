@@ -68,26 +68,26 @@ public class UserService {
 		return user.stream().map(u -> toDto(u)).collect(Collectors.toList());
 	}
 
-	private static User toEntity(UserDTO dto) {
-		User user = new User();
-		user.setId(dto.getId());
-		user.setFirstName(dto.getFirstName());
-		user.setLastName(dto.getLastName());
-		user.setEmail(dto.getEmail());
-		user.setPassword(dto.getPassword());
-		user.setRole(dto.getRole());
-		return user;
-	}
-
-	private static UserDTO toDto(User user) {
-		UserDTO dto = new UserDTO();
-		dto.setId(user.getId());
-		dto.setFirstName(user.getFirstName());
-		dto.setLastName(user.getLastName());
-		dto.setEmail(user.getEmail());
-		dto.setPassword(user.getPassword());
-		dto.setRole(user.getRole());
-		return dto;
-	}
+//	private static User toEntity(UserDTO dto) {
+//		User user = new User();
+//		user.setId(dto.getId());
+//		user.setFirstName(dto.getFirstName());
+//		user.setLastName(dto.getLastName());
+//		user.setEmail(dto.getEmail());
+//		user.setPassword(dto.getPassword());
+//		user.setRole(dto.getRole());
+//		return user;
+//	}
+//
+//	private static UserDTO toDto(User user) {
+//		UserDTO dto = new UserDTO();
+//		dto.setId(user.getId());
+//		dto.setFirstName(user.getFirstName());
+//		dto.setLastName(user.getLastName());
+//		dto.setEmail(user.getEmail());
+//		dto.setPassword(user.getPassword());
+//		dto.setRole(user.getRole());
+//		return dto;
+//	}
 
 }
