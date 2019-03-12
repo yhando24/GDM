@@ -46,8 +46,8 @@ public class GdmApplicationTests {
 		
 	}
 	
-	@Test
-	@Transactional
+//	@Test
+//	@Transactional
 //	public void saveMission() {
 //
 //		System.err.println(ms.save(mission));
