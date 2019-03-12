@@ -101,6 +101,15 @@ public class Mission implements Serializable {
 	public Mission() {
 
 	}
+
+
+	@Override
+	public String toString() {
+		return "Mission [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", departureCity="
+				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatus="
+				+ missionStatus + ", kindVersion=" + kindVersion + ", user=" + ", amountOfBill=" + amountOfBill
+				+ ", expenseAccounts=" + expenseAccounts + "]";
+	}
 	
 	
 }
