@@ -14,6 +14,8 @@ import fr.diginamic.user.model.User;
 @Repository
 public interface MissionRepository extends CrudRepository<Mission, Long>  {
 	
+	public void saveMission(Mission mission);
+	
 	public List<Mission> findByUser(User user);
 	
 	public List<Mission> findByDepartureCity(String departureCity);

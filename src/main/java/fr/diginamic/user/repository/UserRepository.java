@@ -11,10 +11,9 @@ import fr.diginamic.user.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	User findByUserLastName(String lastName);
 
 	List<User> findByLastName(String lastName);
 
-	@Query("select u from User u where u.firstname = :firstname")
+
 	List<User> findByFirstName(String firstName);
 }
