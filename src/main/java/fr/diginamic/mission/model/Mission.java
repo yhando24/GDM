@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -75,7 +76,7 @@ public class Mission implements Serializable {
 	@Column
 	private Float amountOfBill;
 	
-	@OneToMany(mappedBy = "mission")
+	@OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
 	private List<ExpenseAccount> expenseAccounts = new ArrayList<>();
 	
 	
@@ -100,6 +101,15 @@ public class Mission implements Serializable {
 
 	public Mission() {
 
+	}
+
+
+	@Override
+	public String toString() {
+		return "Mission [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", departureCity="
+				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatus="
+				+ missionStatus + ", kindVersion=" + kindVersion + ", user=" + ", amountOfBill=" + amountOfBill
+				+ ", expenseAccounts=" + expenseAccounts + "]";
 	}
 	
 	
