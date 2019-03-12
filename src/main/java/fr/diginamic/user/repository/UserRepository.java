@@ -11,6 +11,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	User findByLastName(String lastName);
 
-	@Query("select u from User u where u.firstname = :firstname")
-	User findByFirstName(String firstName);
 }

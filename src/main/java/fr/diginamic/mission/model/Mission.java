@@ -63,6 +63,9 @@ public class Mission implements Serializable {
 	@Enumerated(EnumType.STRING)
     private MissionStatusEnum missionStatus;
 	
+	@Enumerated(EnumType.STRING)
+	private TransportEnum transportEnum;
+	
 	@ManyToOne
 	@NotNull
 	@JoinColumn(name="id_kindVersion")
