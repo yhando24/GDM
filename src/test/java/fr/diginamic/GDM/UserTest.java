@@ -23,45 +23,45 @@ import fr.diginamic.user.service.UserService;
 @SpringBootTest
 @ContextConfiguration(classes = GdmApplication.class, loader = AnnotationConfigContextLoader.class)
 public class UserTest {
-	
+
 	@Autowired
 	private UserService us;
-	
+
 	@Test
 	@Transactional
 	public void findByIdTest() {
 		Optional<User> u = us.findById(2L);
 		assertEquals("user de cet id", u.get(), u.get());
 	}
-	
+
 	@Test
 	@Transactional
 	public void finbByLastNameTest() {
 		List<User> u = us.findByLastName("Delteil");
 		assertNotNull(u);
 		assertEquals("user name", "Delteil", "Delteil");
-		assertEquals("user de cet id",1, 1);
-		assertEquals(u.size(), 0);	
+		assertEquals("user de cet id", 1, 1);
+		assertEquals(u.size(), 0);
 		System.out.println(us.findByLastName("Delteil"));
-		}
-	
+	}
+
 	@Test
 	@Transactional
 	public void finbByFirstNameTest() {
 		List<User> u = us.findByFirstName("Yoann");
 		assertNotNull(u);
 		assertEquals("user name", "Yoann", "Yoann");
-		assertEquals("user de cet id",1, 1);
-		assertEquals(u.size(), 1);	
-		}
-	
+		assertEquals("user de cet id", 1, 1);
+		assertEquals(u.size(), 1);
+	}
+
 	@Test
 	@Transactional
 	public void findByRole() {
 		List<User> u = us.findByRole(RoleEnum.MANAGER);
 		assertNotNull(u);
 		assertEquals("role name", "MANAGER", "MANAGER");
-		assertEquals("user de cet id",2 ,2);
-		assertEquals(u.size(), 1);	
-		}
+		assertEquals("user de cet id", 2, 2);
+		assertEquals(u.size(), 1);
+	}
 }

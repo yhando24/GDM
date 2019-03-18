@@ -33,7 +33,7 @@ public class UserDTO implements Serializable {
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String firstName, String lastName, String login, String password, String email,
+	public UserDTO(Long id, String firstName, String lastName, String password, String email,
 			RoleEnum role) {
 		super();
 		this.id = id;
