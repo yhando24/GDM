@@ -1,4 +1,4 @@
-package fr.diginamic.expenseAccount.model;
+package fr.diginamic.expenseaccount.model;
 
 public enum ExpenseAccountStatusEnum {
 	EN_ATTENTE("En attente"),
