@@ -17,7 +17,6 @@ public interface ExpenseAccountRepository extends CrudRepository<ExpenseAccount,
 
 	public List<ExpenseAccount> findByStatus(ExpenseAccountStatusEnum status);
 
-//	public List<ExpenseAccount> findByUser(User user);
 	public List<ExpenseAccount> findAll();
 
 	public ExpenseAccount save(ExpenseAccount expenseAccount);

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class KindDTO {
-	
+
 	@NotBlank
 	private Long id;
 
@@ -42,9 +42,8 @@ public class KindDTO {
 	public KindDTO() {
 	}
 
-	public KindDTO(Long id, String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
+	public KindDTO(String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
 			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
-		this.id = id;
 		this.name = name;
 		this.adr = adr;
 		this.bonusPercentage = bonusPercentage;
