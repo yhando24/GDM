@@ -1,4 +1,4 @@
-package fr.diginamic.expenseAccount.service;
+package fr.diginamic.expenseaccount.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.diginamic.expenseAccount.model.ExpenseAccount;
-import fr.diginamic.expenseAccount.model.ExpenseAccountStatusEnum;
-import fr.diginamic.expenseAccount.repository.ExpenseAccountRepository;
+import fr.diginamic.expenseaccount.model.ExpenseAccount;
+import fr.diginamic.expenseaccount.model.ExpenseAccountStatusEnum;
+import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
 import fr.diginamic.mission.model.Mission;
 
 @Service

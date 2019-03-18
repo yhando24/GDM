@@ -1,4 +1,4 @@
-package fr.diginamic.expenseAccount.model;
+package fr.diginamic.expenseaccount.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
