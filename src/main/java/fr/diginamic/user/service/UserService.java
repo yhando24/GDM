@@ -22,10 +22,24 @@ public class UserService {
 	private UserRepository userRepository;
 
 	// create
-	
-	public User save(User user) {
-		return userRepository.save(user);
+
+	public User save(User user) throws UserNotFoundException {
+		Optional<User> newUser = userRepository.findById(user.getId());
+		if (newUser == null) {
+			throw new UserNotFoundException("user n'existe pas");
+		}
+		return user;
 	}
+
+	public User update(User user) {
+		User updateUser = userRepository.save(user);
+		if (updateUser != null) {
+			throw new UserNotFoundException("");
+		}
+
+		return user;
+	}
+
 //
 //	public List<User> saveAll(List<User> users) {
 //		return userRepository.saveAll(users);
@@ -82,12 +96,11 @@ public class UserService {
 	public void deleteAll(List<? extends User> users) {
 		userRepository.deleteAll(users);
 	}
-	
+
 	public void deleteAll() {
 		userRepository.deleteAll();
 	}
 
-	
 //	public User save(User user) throws UserNotFoundException {
 //		User u = userRepository.findById(id);
 //		if (u == null) {
