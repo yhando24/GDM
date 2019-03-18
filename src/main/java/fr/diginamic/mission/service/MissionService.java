@@ -25,14 +25,20 @@ public class MissionService {
 	// create
 	public Mission save(Mission mission) throws ErrorLogigDateMission {
 		mission.setMissionStatus(MissionStatusEnum.INITIAL);
-		
+
+
 		if(mission.getEndDate().isBefore(mission.getStartDate())) {
 			throw new ErrorLogigDateMission("La date de fin est avant la date de debut");
-		}	if(mission.getStartDate().isBefore(LocalDate.now())) {
+		}	
+		if(mission.getStartDate().isBefore(LocalDate.now())) {
 			throw new ErrorLogigDateMission("Une mission doit commencer à J+1");
 		}
-//		if(mission.getTransportEnum().equals(TransportEnum.AVION && mission)
-		
+		if(mission.getTransportEnum().equals(TransportEnum.AVION) && !mission.getStartDate().isAfter(LocalDate.now().plusDays(7))){
+			throw new ErrorLogigDateMission("Si une mission se deroule grace à l'utilisation d'un avion, elle doit commencer au moin 7 jours apres la date d'aujourd'hui");
+		}
+		if(missionRepository.findVeriChevauchement( mission.getEndDate() ,mission.getStartDate()).size()!=0) {
+			throw new ErrorLogigDateMission("Probleme de chevauchement de date de mission");
+		}
 	return	missionRepository.save(mission);
 	}
 	

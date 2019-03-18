@@ -1,8 +1,10 @@
 package fr.diginamic.mission.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -36,8 +38,8 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 
 	public List<Mission> findAll();
 	
-
-
+	@Query("SELECT m FROM Mission m WHERE m.startDate>?1 AND m.endDate<?2 ")
+	public List<Mission> findVeriChevauchement(LocalDate dateStart, LocalDate dateEnd);
 	
 	// delete
 	public void delete(Mission mission);

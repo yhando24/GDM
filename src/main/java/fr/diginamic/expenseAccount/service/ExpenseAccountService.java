@@ -29,7 +29,7 @@ public class ExpenseAccountService {
 	public List<ExpenseAccount> findByStatus(ExpenseAccountStatusEnum status){
 		return expenseAccountRepository.findByStatus(status);
 	}
-	public List<ExpenseAccount> findByUser(Mission mission){
-		return expenseAccountRepository.findByUser(mission.getUser());
-	}
+//	public List<ExpenseAccount> findByUser(Mission mission){
+//		return expenseAccountRepository.findByUser(mission.getUser());
+//	}
 }

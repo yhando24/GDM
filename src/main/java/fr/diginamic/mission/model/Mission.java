@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -106,6 +107,8 @@ public class Mission implements Serializable {
 
 	}
 
+	
+	
 
 	@Override
 	public String toString() {
@@ -113,6 +116,30 @@ public class Mission implements Serializable {
 				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatus="
 				+ missionStatus + ", kindVersion=" + kindVersion + ", user=" + ", amountOfBill=" + amountOfBill
 				+ ", expenseAccounts=" + expenseAccounts + "]";
+	}
+
+
+	public Mission(LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity, Float prime,
+			MissionStatusEnum missionStatus, TransportEnum transportEnum, @NotNull KindVersion kindVersion,
+			@NotNull User user, Float amountOfBill, List<ExpenseAccount> expenseAccounts) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.departureCity = departureCity;
+		this.arrivalCity = arrivalCity;
+		this.prime = prime;
+		this.missionStatus = missionStatus;
+		this.transportEnum = transportEnum;
+		this.kindVersion = kindVersion;
+		this.user = user;
+		this.amountOfBill = amountOfBill;
+		this.expenseAccounts = expenseAccounts;
+	}
+
+
+	public Mission(LocalDate now, LocalDate plusDays, String string, String string2, float f, MissionStatusEnum initial,
+			TransportEnum bus, Optional<User> user2, KindVersion kindVersion2, float g, float h) {
+		// TODO Auto-generated constructor stub
 	}
 	
 	
