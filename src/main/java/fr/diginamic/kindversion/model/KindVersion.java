@@ -1,4 +1,4 @@
-package fr.diginamic.kindVersion.model;
+package fr.diginamic.kindversion.model;
 
 
 

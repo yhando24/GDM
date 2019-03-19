@@ -21,8 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import fr.diginamic.expenseAccount.model.ExpenseAccount;
-import fr.diginamic.kindVersion.model.KindVersion;
+import fr.diginamic.expenseaccount.model.ExpenseAccount;
+import fr.diginamic.kindversion.model.KindVersion;
 import fr.diginamic.user.model.User;
 import lombok.Getter;
 import lombok.Setter;

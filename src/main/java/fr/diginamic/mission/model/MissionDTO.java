@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import fr.diginamic.kindVersion.model.KindVersion;
+import fr.diginamic.kindversion.model.KindVersion;
 import lombok.Getter;
 import lombok.Setter;
 

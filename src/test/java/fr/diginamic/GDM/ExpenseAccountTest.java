@@ -8,8 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import fr.diginamic.expenseAccount.model.ExpenseAccountStatusEnum;
-import fr.diginamic.expenseAccount.repository.ExpenseAccountRepository;
+import fr.diginamic.expenseaccount.model.ExpenseAccountStatusEnum;
+import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
 
 
 @RunWith(SpringRunner.class)

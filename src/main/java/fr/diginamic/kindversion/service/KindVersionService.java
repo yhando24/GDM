@@ -1,9 +1,9 @@
-package fr.diginamic.kindVersion.service;
+package fr.diginamic.kindversion.service;
 
 import java.util.Optional;
 
-import fr.diginamic.kindVersion.model.KindVersion;
-import fr.diginamic.kindVersion.repository.KindVersionRepository;
+import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kindversion.repository.KindVersionRepository;
 
 public class KindVersionService {
 

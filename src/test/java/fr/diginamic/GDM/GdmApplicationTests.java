@@ -13,8 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import fr.diginamic.kindVersion.model.KindVersion;
-import fr.diginamic.kindVersion.repository.KindVersionRepository;
+import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kindversion.repository.KindVersionRepository;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionStatusEnum;

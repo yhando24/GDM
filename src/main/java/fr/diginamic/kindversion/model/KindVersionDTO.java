@@ -1,4 +1,4 @@
-package fr.diginamic.kindVersion.model;
+package fr.diginamic.kindversion.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
