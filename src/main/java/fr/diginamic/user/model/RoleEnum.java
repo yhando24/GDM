@@ -11,6 +11,7 @@ public enum RoleEnum {
 		this.role = role;
 	}
 
+	@Override
 	public String toString() {
 		return role;
 	}

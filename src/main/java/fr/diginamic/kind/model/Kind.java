@@ -1,4 +1,3 @@
-
 package fr.diginamic.kind.model;
 
 import java.time.LocalDateTime;
@@ -51,9 +50,8 @@ public class Kind {
 	public Kind() {
 	}
 
-	public Kind(Long id, String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
-			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
-		this.id = id;
+	public Kind(String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced, Boolean bonus,
+			Float dailyCharges, Boolean authorizationToExceed) {
 		this.name = name;
 		this.adr = adr;
 		this.bonusPercentage = bonusPercentage;
