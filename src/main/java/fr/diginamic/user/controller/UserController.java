@@ -37,6 +37,5 @@ public class UserController {
 	public UserDTO verification(@RequestBody UserDTO userDTO) {
 		return userServ.save(userDTO);
 
-	}
-
+}
 }
