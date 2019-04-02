@@ -28,11 +28,6 @@ public class UserController {
 		return this.userServ.findAll();
 	}
 
-	@PostMapping
-	@Transactional
-	public User verification(@RequestBody UserDTO userDTO) {
-		return userServ.save(userDTO);
 
-	}
 
 }
