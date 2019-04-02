@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.mission.model.Mission;
 import lombok.Getter;
 import lombok.Setter;
