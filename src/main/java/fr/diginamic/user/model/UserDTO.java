@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,29 +14,28 @@ import lombok.Setter;
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@JsonIgnore
 	private Long id;
-	
+
 	@NotBlank
 	private String firstName;
-	
+
 	@NotBlank
 	private String lastName;
-	
+
 	@NotBlank
 	private String password;
-	
+
 	@NotBlank
 	private String email;
-	
+
 	@NotBlank
 	private RoleEnum role;
 
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String firstName, String lastName, String password, String email,
-			RoleEnum role) {
+	public UserDTO(Long id, String firstName, String lastName, String password, String email, RoleEnum role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
