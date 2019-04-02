@@ -8,22 +8,23 @@ import org.springframework.stereotype.Service;
 
 import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
+import fr.diginamic.user.model.UserDTO;
 import fr.diginamic.user.repository.UserRepository;
 
 @Service
 public class UserService {
 
-	/**
-	 * Methods with convertion from User entity to User dto and reverse.
-	 */
 
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private MapperUserService mpu;
+
 	// create
 
-	public User save(User user) {
-		return userRepository.save(user);
+	public UserDTO save(UserDTO userDTO) {
+		return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 	}
 
 	// read
