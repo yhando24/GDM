@@ -80,15 +80,8 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 
-	public void delete(User user) {
-		userRepository.delete(user);
+	public void delete(UserDTO userDTO) {
+		userRepository.delete(mpu.toEntity(userDTO));
 	}
 
-	public void deleteAll(List<? extends User> users) {
-		userRepository.deleteAll(users);
-	}
-
-	public void deleteAll() {
-		userRepository.deleteAll();
-	}
 }

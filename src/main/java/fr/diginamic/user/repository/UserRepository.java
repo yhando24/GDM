@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
-import fr.diginamic.user.model.UserDTO;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -42,7 +41,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	public void deleteById(Long id);
 
 	public void delete(User user);
-
-	public void deleteAll();
 
 }
