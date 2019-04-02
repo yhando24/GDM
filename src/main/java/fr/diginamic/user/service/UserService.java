@@ -13,9 +13,6 @@ import fr.diginamic.user.repository.UserRepository;
 @Service
 public class UserService {
 
-	/**
-	 * Methods with convertion from User entity to User dto and reverse.
-	 */
 
 	@Autowired
 	private UserRepository userRepository;
