@@ -10,4 +10,7 @@ import fr.diginamic.kindversion.model.KindVersion;
 public interface KindVersionRepository extends JpaRepository<KindVersion, Long>  {
 	
 
+	KindVersion findTopByNameOrderByVersionDesc(String name);
+	
+	
 }

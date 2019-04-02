@@ -7,6 +7,7 @@ package fr.diginamic.GDM;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import fr.diginamic.expenseaccount.model.ExpenseAccount;
 import fr.diginamic.expenseaccount.model.ExpenseAccountStatusEnum;
 import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
 import fr.diginamic.kind.model.Kind;
+import fr.diginamic.kind.service.KindService;
 import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kindversion.model.MapperKindVersionService;
 import fr.diginamic.kindversion.repository.KindVersionRepository;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionStatusEnum;
@@ -43,10 +46,18 @@ public class StartupDataInit {
     @Autowired
     ExpenseAccountRepository expenseAccountRepository;
     
+    
+    @Autowired
+    KindService ks;
+    
+    @Autowired
+    MapperKindVersionService mapperKindVersionService;
+    
     @Autowired
     UserRepository userRepository;
        
     @EventListener(ContextRefreshedEvent.class)
+    @org.springframework.transaction.annotation.Transactional
     public void init() {
     	
     	
@@ -63,24 +74,29 @@ public class StartupDataInit {
   
     	KindVersion kv = new KindVersion("Formation", 12.05f, 10f, true, true, 10.1f, true, k, 1L, LocalDateTime.now());
      	
-    
+    	KindVersion kv2 = new KindVersion("Formation", 15.05f, 10f, true, true, 10.1f, true, k, 2L, LocalDateTime.now());
     	
-
+    	
     	
     	Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f, MissionStatusEnum.VALIDE, TransportEnum.BUS, kv, u, 150.01f);
     	ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(),  1250F, ExpenseAccountStatusEnum.EN_ATTENTE,m);
     	m.addexpenseAccounts(ea);
     	
     	kv.addMission(m);
+    	kv2.addMission(m);
+
+    	
+    	
     	
     	
     	kindRepository.save(k);
        	kindVersionRepository.save(kv);
+     	kindVersionRepository.save(kv2);
     	missionRepository.save(m);
     	expenseAccountRepository.save(ea);
  
-    	
-    	
+    
+    	System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
 
     }
 }

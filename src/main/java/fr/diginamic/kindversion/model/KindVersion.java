@@ -65,10 +65,10 @@ public class KindVersion implements Serializable  {
 	private Kind kind;
 	
 	@Column ( nullable=false)
-	private Long Version;
+	private Long version;
 	
 	@Column ( nullable=false)
-	private LocalDateTime UpdatedAt;
+	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "kindVersion")
 	private List<Mission> missions = new ArrayList<>();
@@ -89,8 +89,8 @@ public class KindVersion implements Serializable  {
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
 		this.kind = kind;
-		Version = version;
-		UpdatedAt = updatedAt;
+		this.version = version;
+		this.updatedAt = updatedAt;
 
 	}
 	
@@ -101,6 +101,15 @@ public class KindVersion implements Serializable  {
 	
 	public void addMission(Mission m) {
 		this.missions.add(m);
+	}
+
+
+	@Override
+	public String toString() {
+		return "KindVersion [id=" + id + ", name=" + name + ", adr=" + adr + ", bonusPercentage=" + bonusPercentage
+				+ ", invoiced=" + invoiced + ", bonus=" + bonus + ", dailyCharges=" + dailyCharges
+				+ ", authorizationToExceed=" + authorizationToExceed + ", kind=" + kind + ", Version=" + version
+				+ ", UpdatedAt=" + updatedAt + ", missions=" + missions + "]";
 	}
 	
 	
