@@ -78,7 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).and().logout().logoutUrl("/logout")
 				.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()).invalidateHttpSession(true).and()
 				.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
-				.antMatchers("/user").authenticated().anyRequest().permitAll().and().apply(securityConfigurerAdapter());
+				.antMatchers("/user").authenticated().anyRequest().permitAll()
+				.antMatchers("/**").permitAll()
+				.and().apply(securityConfigurerAdapter());
 
 	}
 
