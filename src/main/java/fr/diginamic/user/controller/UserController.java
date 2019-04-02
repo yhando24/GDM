@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.user.model.User;
 import fr.diginamic.user.model.UserDTO;
+import fr.diginamic.user.service.MapperUserService;
 import fr.diginamic.user.service.UserService;
 
 @CrossOrigin
@@ -23,6 +24,9 @@ public class UserController {
 	@Autowired
 	private UserService userServ;
 
+	@Autowired
+	private MapperUserService mpu;
+
 	@GetMapping
 	public List<User> findAll() {
 		return this.userServ.findAll();
@@ -30,7 +34,7 @@ public class UserController {
 
 	@PostMapping
 	@Transactional
-	public User verification(@RequestBody UserDTO userDTO) {
+	public UserDTO verification(@RequestBody UserDTO userDTO) {
 		return userServ.save(userDTO);
 
 	}
