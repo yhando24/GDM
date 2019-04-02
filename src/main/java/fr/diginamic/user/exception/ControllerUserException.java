@@ -1,4 +1,4 @@
-package fr.diginamic.user.service;
+package fr.diginamic.user.exception;
 
 public class ControllerUserException extends RuntimeException {
 
