@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,14 +23,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import fr.diginamic.configuration.JWTConfigurer;
-import fr.diginamic.configuration.TokenProvider;
 
 @Configuration
 @EnableWebSecurity
@@ -41,9 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
-//	@Autowired
-//	private AccessDeniedHandler accessDeniedHandler;
 
 	@Autowired
 	private AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -82,20 +74,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint() {
 
-		})
-		.and().formLogin().loginProcessingUrl("/login")//.authenticationProvider(getProvider())
-				.successHandler(new AuthentificationLoginSuccessHandler())
-				.failureHandler(new SimpleUrlAuthenticationFailureHandler())
-		.and().logout().logoutUrl("/logout")
-				.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler())
-				.invalidateHttpSession(true)
-			.and()
-			.authorizeRequests()
-				.antMatchers("/login").permitAll()
-				.antMatchers("/logout").permitAll()
-				.antMatchers("/user").authenticated().anyRequest().permitAll();
-			.and()
-			.apply(securityConfigurerAdapter));
+		}).and().formLogin().loginProcessingUrl("/login").successHandler(new AuthentificationLoginSuccessHandler())
+				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).and().logout().logoutUrl("/logout")
+				.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()).invalidateHttpSession(true).and()
+				.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
+				.antMatchers("/user").authenticated().anyRequest().permitAll().and().apply(securityConfigurerAdapter());
 
 	}
 
@@ -124,13 +107,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 	}
-
-//	@Bean
-//	public AuthenticationProvider getProvider() {
-//
-//		AuthProvider provider = new AuthProvider();
-//		provider.setUserDDetailsService(userDetailsService);
-//		return provider;
-//	}
 
 }

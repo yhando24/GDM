@@ -28,7 +28,6 @@ public class JWTFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 		String jwt = resolveToken(httpServletRequest);
 		if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
@@ -41,7 +40,6 @@ public class JWTFilter extends GenericFilterBean {
 	}
 
 	private String resolveToken(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		String porteurToken = request.getHeader(AUTHORIZATION_HEADER);
 		if (StringUtils.isEmpty(porteurToken)) {
 			porteurToken = request.getParameter(AUTHORIZATION_HEADER);

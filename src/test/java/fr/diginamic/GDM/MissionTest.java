@@ -25,21 +25,21 @@ public class MissionTest {
 	private MissionRepository mr;
 	
 	
-	@Before 
-	public void init() {
-		Mission mission = new Mission();
-		mission.setAmountOfBill(12.05f);
-		mission.setArrivalCity("marseille");
-		mission.setDepartureCity("paris");
-		mission.setEndDate(LocalDate.of(2019, 7, 25));
-		
-	}
-	
-
-	@Test
-	@Transactional
-	public void findByDepartureCity() {
-		System.err.println("ICICIICCICCCCCCCC" + mr.findByDepartureCity("montpellier"));
-	}
+//	@Before 
+//	public void init() {
+//		Mission mission = new Mission();
+//		mission.setAmountOfBill(12.05f);
+//		mission.setArrivalCity("marseille");
+//		mission.setDepartureCity("paris");
+//		mission.setEndDate(LocalDate.of(2019, 7, 25));
+//		
+//	}
+//	
+//
+//	@Test
+//	@Transactional
+//	public void findByDepartureCity() {
+//		System.err.println("ICICIICCICCCCCCCC" + mr.findByDepartureCity("montpellier"));
+//	}
 
 }

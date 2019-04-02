@@ -52,7 +52,6 @@ public class User implements Serializable {
 	private String email;
 
 	@Enumerated(EnumType.STRING)
-	@NotBlank
 	private RoleEnum role;
 
 	public User() {

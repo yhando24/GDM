@@ -63,32 +63,32 @@ public class GdmApplicationTests {
 //		
 //	}
 	
-	@Test
-	@Transactional
-	public void saveMission() {
-		
-		Optional<User> user = us.findById(1L);
-		KindVersion kindVersion = kindVersionRepository.findById(2l).get();
-		Mission mission = new Mission();
-		mission.setAmountOfBill(20.05f);
-		mission.setArrivalCity("paris");
-		mission.setDepartureCity("marseille");
-		mission.setStartDate(LocalDate.of(2019, 7, 25));
-		mission.setEndDate(LocalDate.of(2018, 8, 25));
-		mission.setKindVersion(kindVersion);
-		mission.setMissionStatus(MissionStatusEnum.VALIDE);
-		mission.setPrime(11.11f);
-		mission.setTransportEnum(TransportEnum.BUS);
-		mission.setUser(us.findById(1L).get());
-		
-
-		try {
-			ms.save(mission);
-		} catch (ErrorLogigDateMission e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.err.println("MESSAGE : " + e.getMessage());
-		}
-	}
+//	@Test
+//	@Transactional
+//	public void saveMission() {
+//		
+//		Optional<User> user = us.findById(1L);
+//		KindVersion kindVersion = kindVersionRepository.findById(2l).get();
+//		Mission mission = new Mission();
+//		mission.setAmountOfBill(20.05f);
+//		mission.setArrivalCity("paris");
+//		mission.setDepartureCity("marseille");
+//		mission.setStartDate(LocalDate.of(2019, 7, 25));
+//		mission.setEndDate(LocalDate.of(2018, 8, 25));
+//		mission.setKindVersion(kindVersion);
+//		mission.setMissionStatus(MissionStatusEnum.VALIDE);
+//		mission.setPrime(11.11f);
+//		mission.setTransportEnum(TransportEnum.BUS);
+//		mission.setUser(us.findById(1L).get());
+//		
+//
+//		try {
+//			ms.save(mission);
+//		} catch (ErrorLogigDateMission e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.err.println("MESSAGE : " + e.getMessage());
+//		}
+//	}
 
 }
