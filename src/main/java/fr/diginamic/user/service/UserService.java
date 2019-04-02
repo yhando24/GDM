@@ -8,60 +8,70 @@ import org.springframework.stereotype.Service;
 
 import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
+import fr.diginamic.user.model.UserDTO;
 import fr.diginamic.user.repository.UserRepository;
 
 @Service
 public class UserService {
 
-	/**
-	 * Methods with convertion from User entity to User dto and reverse.
-	 */
-
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private MapperUserService mpu;
+
 	// create
 
-	public User save(User user) {
-		return userRepository.save(user);
+	public UserDTO save(UserDTO userDTO) {
+		return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 	}
 
 	// read
 
-	public List<User> findByLastName(String lastName) {
-		return userRepository.findByLastName(lastName);
+	public List<UserDTO> findByLastName(String lastName) {
+		return mpu.toDTOs(userRepository.findByLastName(lastName));
 	}
 
-	public List<User> findByFirstName(String firstName) {
-		return userRepository.findByFirstName(firstName);
+	public List<UserDTO> findByFirstName(String firstName) {
+		return mpu.toDTOs(userRepository.findByFirstName(firstName));
 	}
 
-	public List<User> findByEmail(String email) {
-		return userRepository.findByEmail(email);
+	public List<UserDTO> findByEmail(String email) {
+		return mpu.toDTOs(userRepository.findByEmail(email));
 	}
 
-	public List<User> findByRole(RoleEnum role) {
-		return userRepository.findByRole(role);
+	public List<UserDTO> findByRole(RoleEnum role) {
+		return mpu.toDTOs(userRepository.findByRole(role));
 	}
 
-	public Optional<User> findById(Long id) {
-		return userRepository.findById(id);
+	public UserDTO findById(Long id) {
+		Optional<User> userOptional = userRepository.findById(id);
+		if (userOptional.isPresent()) {
+			return mpu.toDTO(userOptional.get());
+		} else {
+			throw new ControllerUserException("L'id correpond à aucun user");
+		}
 	}
 
-	public List<User> findAllById(List<Long> ids) {
-		return userRepository.findAllById(ids);
+	public List<UserDTO> findAllById(List<Long> ids) {
+		return mpu.toDTOs(userRepository.findAllById(ids));
 	}
 
-	public Optional<User> findByPwdAndEmail(String password, String email) {
-		return userRepository.findByPasswordAndEmail(password, email);
+	public UserDTO findByPwdAndEmail(String password, String email) {
+		Optional<User> userOptional = userRepository.findByPasswordAndEmail(password, email);
+		if (userOptional.isPresent()) {
+			return mpu.toDTO(userOptional.get());
+		} else {
+			throw new ControllerUserException("Le user n'existe pas");
+		}
 	}
 
 	public boolean existsById(Long id) {
 		return userRepository.existsById(id);
 	}
 
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public List<UserDTO> findAll() {
+		return mpu.toDTOs(userRepository.findAll());
 	}
 
 	// delete
@@ -70,15 +80,8 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 
-	public void delete(User user) {
-		userRepository.delete(user);
+	public void delete(UserDTO userDTO) {
+		userRepository.delete(mpu.toEntity(userDTO));
 	}
 
-	public void deleteAll(List<? extends User> users) {
-		userRepository.deleteAll(users);
-	}
-
-	public void deleteAll() {
-		userRepository.deleteAll();
-	}
 }

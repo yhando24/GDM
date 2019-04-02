@@ -1,11 +1,5 @@
 package fr.diginamic.GDM;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,31 +7,25 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import fr.diginamic.kindversion.model.KindVersion;
 import fr.diginamic.kindversion.repository.KindVersionRepository;
-import fr.diginamic.mission.exception.ErrorLogigDateMission;
-import fr.diginamic.mission.model.Mission;
-import fr.diginamic.mission.model.MissionStatusEnum;
-import fr.diginamic.mission.model.TransportEnum;
 import fr.diginamic.mission.repository.MissionRepository;
 import fr.diginamic.mission.service.MissionService;
-import fr.diginamic.user.model.User;
 import fr.diginamic.user.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = GdmApplication.class, loader = AnnotationConfigContextLoader.class)
 public class GdmApplicationTests {
-	
+
 	@Autowired
 	private MissionRepository mr;
 
 	@Autowired
 	private MissionService ms;
-	
+
 	@Autowired
 	private UserService us;
-	
+
 	@Autowired
 	private KindVersionRepository kindVersionRepository;
 //	
@@ -48,21 +36,21 @@ public class GdmApplicationTests {
 //		
 //	}
 //	
-	
+
 //	@Test
 //	@Transactional
 //	public void findOptionnalMission() {
 //		System.err.println(ms.findById(5L));
 //		
 //	}
-	
+
 //	@Test
 //	@Transactional
 //	public void findOptionnalMission() {
 //		System.err.println(ms.findAll());
 //		
 //	}
-	
+
 //	@Test
 //	@Transactional
 //	public void saveMission() {

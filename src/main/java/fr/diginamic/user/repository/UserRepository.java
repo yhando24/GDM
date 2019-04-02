@@ -42,6 +42,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	public void delete(User user);
 
-	public void deleteAll();
-
 }
