@@ -40,6 +40,9 @@ public class UserController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private UserService userServ;
+
 	@PostMapping("/authenticate")
 
 	public @ResponseBody JWTToken authorize(@Valid @RequestBody RecupLogin recupLogin) {
@@ -83,14 +86,8 @@ public class UserController {
 
 	}
 
-	@Autowired
-	private UserService userServ;
-
-	@Autowired
-	private MapperUserService mpu;
-
 	@GetMapping
-	public List<User> findAll() {
+	public List<UserDTO> findAll() {
 		return this.userServ.findAll();
 	}
 
