@@ -88,7 +88,7 @@ public class Mission implements Serializable {
 	
 
 	public Mission(Long id, LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity,
-			Float prime, MissionStatusEnum missionStatus, KindVersion kindVersion, Float amountOfBill) {
+			Float prime, MissionStatusEnum missionStatus, KindVersion kindVersion, Float amountOfBill ) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -121,7 +121,7 @@ public class Mission implements Serializable {
 
 	public Mission(LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity, Float prime,
 			MissionStatusEnum missionStatus, TransportEnum transportEnum, @NotNull KindVersion kindVersion,
-			@NotNull User user, Float amountOfBill, List<ExpenseAccount> expenseAccounts) {
+			@NotNull User user, Float amountOfBill) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -133,7 +133,7 @@ public class Mission implements Serializable {
 		this.kindVersion = kindVersion;
 		this.user = user;
 		this.amountOfBill = amountOfBill;
-		this.expenseAccounts = expenseAccounts;
+
 	}
 
 
@@ -142,5 +142,7 @@ public class Mission implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public void addexpenseAccounts( ExpenseAccount ea) {
+		this.expenseAccounts.add(ea);
+	}
 }

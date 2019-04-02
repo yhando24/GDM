@@ -50,11 +50,12 @@ public class ExpenseAccount implements Serializable {
 	public ExpenseAccount() {
 	}
 
-	public ExpenseAccount(Long id, LocalDate date, Float amount, ExpenseAccountStatusEnum status) {
+	public ExpenseAccount(Long id, LocalDate date, Float amount, ExpenseAccountStatusEnum status, Mission mission) {
 		this.id = id;
 		this.date = date;
 		this.amount = amount;
 		this.status = status;
+		this.mission = mission;
 	}
 
 	@Override
