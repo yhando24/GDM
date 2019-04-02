@@ -97,5 +97,43 @@
 			</plugin>
 		</plugins>
 	</build>
+		<profiles>
+		<profile>
+			<id>postgresql</id>
+
+	<!-- 		here for online -->
+				<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+			<properties>
+				<dialect>org.hibernate.dialect.PostgreSQL9Dialect</dialect>
+			</properties>
+
+		</profile>
+
+		<profile>
+			<id>h2</id>
+
+		
+<!-- here for dev -->
+			<dependencies>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+			<properties>
+				<dialect>org.hibernate.dialect.H2Dialect</dialect>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
