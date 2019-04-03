@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,5 +96,10 @@ public class UserController {
 		return userServ.save(userDTO);
 
 	}
+	
+	@PatchMapping
+    public UserDTO update( @RequestBody UserDTO user) {
+        return this.userServ.save(user);
+    }
 
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@JsonIgnore
+
 	private Long id;
 
 	@NotBlank
