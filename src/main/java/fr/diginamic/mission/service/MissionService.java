@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import fr.diginamic.kindversion.model.KindVersion;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
+import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.model.TransportEnum;
 import fr.diginamic.mission.repository.MissionRepository;
@@ -20,6 +21,9 @@ public class MissionService {
 
 	@Autowired
 	private MissionRepository missionRepository;
+	
+	@Autowired
+	private MapperMissionService mapperMissionService;
 
 	// create
 	public Mission save(Mission mission) throws ErrorLogigDateMission {
@@ -76,7 +80,7 @@ public class MissionService {
 		return missionRepository.findByKindVersionAndUser(kindVersion, user);
 	}
 
-	public List<Mission> findAll() {
-		return missionRepository.findAll();
+	public List<MissionDTO> findAll() {
+		return mapperMissionService.toDTOs(missionRepository.findAll());
 	}
 }

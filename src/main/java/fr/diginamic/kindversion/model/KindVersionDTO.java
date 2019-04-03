@@ -54,16 +54,15 @@ public class KindVersionDTO implements Serializable  {
 	@NotBlank
 	private LocalDateTime UpdatedAt;
 	
-	@NotBlank
-	private List <Mission> mission = new ArrayList<>();
+//	@NotBlank
+//	private List <Mission> mission = new ArrayList<>();
 
 	
 //	CONSTRUCTEURS
 	
 	
 	public KindVersionDTO(Long id, String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed, KindDTO kind, Long version, LocalDateTime updatedAt,
-			List<Mission> mission) {
+			Float dailyCharges, Boolean authorizationToExceed, KindDTO kind, Long version, LocalDateTime updatedAt) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -76,7 +75,6 @@ public class KindVersionDTO implements Serializable  {
 		this.kind = kind;
 		Version = version;
 		UpdatedAt = updatedAt;
-		this.mission = mission;
 	}
 	
 	

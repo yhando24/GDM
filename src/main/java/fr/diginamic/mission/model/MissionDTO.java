@@ -4,18 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kindversion.model.KindVersionDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,10 +38,13 @@ public class MissionDTO implements Serializable {
 	private BigDecimal prime;
 	
 	@NotBlank
-    private MissionStatusEnum missionStatusEnum;
+    private MissionStatusEnum missionStatus;
 	
 	@NotBlank
-	private KindVersion kindVersion;
+    private TransportEnum transportEnum;
+	
+	@NotBlank
+	private KindVersionDTO kindVersion;
 	
 	@NotBlank
 	private BigDecimal amountOfBill;
@@ -60,7 +55,7 @@ public class MissionDTO implements Serializable {
 	
 	
 	public MissionDTO(Long id, LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity,
-			BigDecimal prime, MissionStatusEnum missionStatusEnum, KindVersion kindVersion, BigDecimal amountOfBill) {
+			BigDecimal prime, MissionStatusEnum missionStatus,TransportEnum transportEnum, KindVersionDTO kindVersion, BigDecimal amountOfBill) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -68,7 +63,8 @@ public class MissionDTO implements Serializable {
 		this.departureCity = departureCity;
 		this.arrivalCity = arrivalCity;
 		this.prime = prime;
-		this.missionStatusEnum = missionStatusEnum;
+		this.missionStatus = missionStatus;
+		this.transportEnum = transportEnum;
 		this.kindVersion = kindVersion;
 		this.amountOfBill = amountOfBill;
 	}
@@ -83,7 +79,7 @@ public class MissionDTO implements Serializable {
 	public String toString() {
 		return "MissionDTO [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", departureCity="
 				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatusEnum="
-				+ missionStatusEnum + ", kindVersion=" + kindVersion + ", amountOfBill=" + amountOfBill + "]";
+				+ missionStatus + ", kindVersion=" + kindVersion + ", amountOfBill=" + amountOfBill + "]";
 	}
 	
 	
