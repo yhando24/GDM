@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
@@ -35,7 +34,7 @@ public class KindService {
 		return mapperKindService.toDTOs(kindRepository.findAll());
 	}
 
-	@Transactional
+	
 	public KindDTO save(KindDTO k) {
 		
 		Optional<Kind> kind = kindRepository.findByName(k.getName());

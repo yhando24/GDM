@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {})
+import fr.diginamic.kind.service.MapperKindService;
+
+@Mapper(componentModel = "spring", uses = { MapperKindService.class })
 public interface MapperKindVersionService {
 
 	KindVersionDTO toDTO(KindVersion kind);
