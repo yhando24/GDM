@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.user.exception.ControllerUserException;
 import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
 import fr.diginamic.user.model.UserDTO;
