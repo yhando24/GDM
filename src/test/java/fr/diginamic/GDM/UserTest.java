@@ -27,7 +27,7 @@ public class UserTest {
 	@Autowired
 	private UserService us;
 
-	@Test
+	/*@Test
 	@Transactional
 	public void findByIdTest() {
 		Optional<User> u = us.findById(2L);
@@ -63,5 +63,5 @@ public class UserTest {
 		assertEquals("role name", "MANAGER", "MANAGER");
 		assertEquals("user de cet id", 2, 2);
 		assertEquals(u.size(), 1);
-	}
+	}*/
 }
