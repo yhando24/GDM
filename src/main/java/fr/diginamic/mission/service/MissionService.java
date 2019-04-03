@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kindversion.model.KindVersion;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
@@ -83,4 +84,5 @@ public class MissionService {
 	public List<MissionDTO> findAll() {
 		return mapperMissionService.toDTOs(missionRepository.findAll());
 	}
+	
 }

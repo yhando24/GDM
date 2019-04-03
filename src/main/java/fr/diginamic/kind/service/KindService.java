@@ -13,6 +13,8 @@ import fr.diginamic.kind.repository.KindRepository;
 import fr.diginamic.kindversion.model.KindVersionDTO;
 import fr.diginamic.kindversion.model.MapperKindVersionService;
 import fr.diginamic.kindversion.repository.KindVersionRepository;
+import fr.diginamic.mission.model.MissionDTO;
+import fr.diginamic.mission.service.MissionService;
 
 @Service
 public class KindService {
@@ -28,6 +30,9 @@ public class KindService {
 
 	@Autowired
 	private MapperKindVersionService mapperKindVersionService;
+	
+	@Autowired
+	private MissionService missionService;
 
 	public List<KindDTO> findAll() {
 		// TODO Auto-generated method stub
@@ -74,4 +79,9 @@ public class KindService {
 
 	}
 
+	
+	public void deleteKind(Long id) {
+				
+		kindRepository.deleteById(id);
+	}
 }
