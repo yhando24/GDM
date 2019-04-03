@@ -54,7 +54,7 @@ public class KindVersionDTO implements Serializable  {
 	private Boolean authorizationToExceed;
 	
 	@NotBlank
-	private Kind kind;
+	private KindDTO kind;
 	
 	@NotBlank
 	private Long Version;
@@ -70,7 +70,7 @@ public class KindVersionDTO implements Serializable  {
 	
 	
 	public KindVersionDTO(Long id, String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed, Kind kind, Long version, LocalDate updatedAt,
+			Float dailyCharges, Boolean authorizationToExceed, KindDTO kind, Long version, LocalDate updatedAt,
 			List<Mission> mission) {
 		super();
 		this.id = id;
