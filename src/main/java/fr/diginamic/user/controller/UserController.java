@@ -101,5 +101,9 @@ public class UserController {
     public UserDTO update( @RequestBody UserDTO user) {
         return this.userServ.save(user);
     }
-
+	
+	@PostMapping("/delete")
+	public void delete( @RequestBody UserDTO user) {
+         this.userServ.delete(user);
+    }
 }
