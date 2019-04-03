@@ -28,9 +28,8 @@ public class KindController {
 	}
 	
 	@PostMapping
-	public void  saveKind(@RequestBody KindDTO k)  {
-		
-
+	public KindDTO saveKind(@RequestBody KindDTO k)  {	
+		return kindService.save(k);
 	
 	}
 

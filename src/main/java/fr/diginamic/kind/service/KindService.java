@@ -44,11 +44,14 @@ public class KindService {
 			KindVersionDTO Lastversion = mapperKindVersionService.toDTO(kindVersionRepository.findTopByNameOrderByVersionDesc(k.getName()));
 			KindVersionDTO newVersion =  KindService.toKindVersionDTO(k);
 			newVersion.setVersion(Lastversion.getVersion()+1);
-			newVersion.setMission(Lastversion.getMission());
+		
 			
 			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
 		} else {
 			kindRepository.save(mapperKindService.toEntity(k));
+			KindVersionDTO newVersion =  KindService.toKindVersionDTO(k);
+			newVersion.setVersion(1L);
+			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
 		}
 		
 		return  k;

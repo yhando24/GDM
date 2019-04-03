@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import fr.diginamic.kind.model.Kind;
+import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.mission.model.Mission;
 import lombok.Getter;
 import lombok.Setter;
