@@ -91,9 +91,7 @@ public class KindVersion implements Serializable  {
 		this.kind = kind;
 		this.version = version;
 		this.updatedAt = updatedAt;
-
 	}
-	
 	
 	public KindVersion() {
 

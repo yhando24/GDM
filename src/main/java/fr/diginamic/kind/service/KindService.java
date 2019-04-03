@@ -69,7 +69,7 @@ public class KindService {
 		kv.setInvoiced(d.getInvoiced());
 		kv.setKind(d);
 		kv.setName(d.getName());
-		kv.setUpdatedAt(LocalDate.now());
+		kv.setUpdatedAt(d.getUpdatedAt());
 		
 		return kv;
 		

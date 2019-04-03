@@ -2,14 +2,16 @@ package fr.diginamic.kindversion.model;
 
 import java.util.List;
 
+import org.mapstruct.Mapper;
+
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
 
+@Mapper(componentModel = "spring", uses = {})
 public interface MapperKindVersionService {
 
 	KindVersionDTO toDTO(KindVersion kind);
 	
-
 	List<KindVersionDTO> toDTOs(List<KindVersion> kind);
 
 	KindVersion toEntity(KindVersionDTO kindVersionDTO);
