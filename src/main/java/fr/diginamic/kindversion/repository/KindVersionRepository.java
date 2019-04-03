@@ -1,13 +1,16 @@
 package fr.diginamic.kindversion.repository;
 
-import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import fr.diginamic.kindversion.model.KindVersion;
 
-public interface KindVersionRepository extends CrudRepository<KindVersion, Long>  {
+@Repository
+public interface KindVersionRepository extends JpaRepository<KindVersion, Long>  {
 	
-	public  Optional<KindVersion>findById(Long id);
 
+	KindVersion findTopByNameOrderByVersionDesc(String name);
+	
+	
 }

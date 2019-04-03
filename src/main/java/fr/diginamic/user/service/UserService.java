@@ -24,9 +24,9 @@ public class UserService {
 	// create
 
 	public UserDTO save(UserDTO userDTO) {
+		userDTO.setRole(RoleEnum.USER);
 		return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 	}
-
 	// read
 
 	public List<UserDTO> findByLastName(String lastName) {

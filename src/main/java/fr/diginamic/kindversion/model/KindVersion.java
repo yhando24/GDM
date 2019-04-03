@@ -65,23 +65,22 @@ public class KindVersion implements Serializable  {
 	private Kind kind;
 	
 	@Column ( nullable=false)
-	private Long Version;
+	private Long version;
 	
 	@Column ( nullable=false)
-	private LocalDateTime UpdatedAt;
+	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "kindVersion")
-	private List<Mission> mission = new ArrayList<>();
+	private List<Mission> missions = new ArrayList<>();
 
 
 	
 //	CONSTRUCTEURS
 	
-	public KindVersion(Long id, String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed, Kind kind, Long version, LocalDateTime updatedAt,
-			List<Mission> mission) {
+	public KindVersion(String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
+			Float dailyCharges, Boolean authorizationToExceed, Kind kind, Long version, LocalDateTime updatedAt
+			) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.adr = adr;
 		this.bonusPercentage = bonusPercentage;
@@ -90,9 +89,9 @@ public class KindVersion implements Serializable  {
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
 		this.kind = kind;
-		Version = version;
-		UpdatedAt = updatedAt;
-		this.mission = mission;
+		this.version = version;
+		this.updatedAt = updatedAt;
+
 	}
 	
 	
@@ -100,7 +99,18 @@ public class KindVersion implements Serializable  {
 
 	}
 	
-	
+	public void addMission(Mission m) {
+		this.missions.add(m);
+	}
+
+
+	@Override
+	public String toString() {
+		return "KindVersion [id=" + id + ", name=" + name + ", adr=" + adr + ", bonusPercentage=" + bonusPercentage
+				+ ", invoiced=" + invoiced + ", bonus=" + bonus + ", dailyCharges=" + dailyCharges
+				+ ", authorizationToExceed=" + authorizationToExceed + ", kind=" + kind + ", Version=" + version
+				+ ", UpdatedAt=" + updatedAt + ", missions=" + missions + "]";
+	}
 	
 	
 	
