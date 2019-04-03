@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
@@ -21,7 +22,7 @@ public class KindService {
 	private KindRepository kindRepository;
 
 	@Autowired
-	KindVersionRepository kindVersionRepository;
+	private KindVersionRepository kindVersionRepository;
 
 	@Autowired
 	private MapperKindService mapperKindService;
@@ -34,11 +35,12 @@ public class KindService {
 		return mapperKindService.toDTOs(kindRepository.findAll());
 	}
 
+	@Transactional
 	public KindDTO save(KindDTO k) {
-
-		System.out.println(k);
+		
 		Optional<Kind> kind = kindRepository.findByName(k.getName());
 		if (kind.isPresent()) {
+			
 			KindVersionDTO Lastversion = mapperKindVersionService
 					.toDTO(kindVersionRepository.findTopByNameOrderByVersionDesc(k.getName()));
 			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
@@ -46,7 +48,7 @@ public class KindService {
 
 			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
 		} else {
-			kindRepository.save(mapperKindService.toEntity(k));
+			
 			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
 			newVersion.setVersion(1L);
 			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
