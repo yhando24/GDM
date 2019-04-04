@@ -23,28 +23,55 @@ public class UserService {
 
 	// create
 
-	public UserDTO save(UserDTO userDTO) {
-		return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
+	public UserDTO save(UserDTO userDTO) throws ControllerUserException {
+		try {
+			return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
+
+		} catch (Exception e) {
+			throw new ControllerUserException("L'email " + userDTO.getEmail() + " existe déjà.");
+
+		}
 	}
 	// read
 
-	public List<UserDTO> findByLastName(String lastName) {
-		return mpu.toDTOs(userRepository.findByLastName(lastName));
+	public List<UserDTO> findByLastName(String lastName) throws ControllerUserException {
+		try {
+			return mpu.toDTOs(userRepository.findByLastName(lastName));
+
+		} catch (Exception e) {
+			throw new ControllerUserException("Aucun utilisateur avec le nom : " + lastName + "n'a été trouvé.");
+
+		}
 	}
 
-	public List<UserDTO> findByFirstName(String firstName) {
-		return mpu.toDTOs(userRepository.findByFirstName(firstName));
+	public List<UserDTO> findByFirstName(String firstName) throws ControllerUserException {
+		try {
+			return mpu.toDTOs(userRepository.findByFirstName(firstName));
+		} catch (Exception e) {
+			throw new ControllerUserException("Aucun utilisateur avec le nom : " + firstName + "n'a été trouvé.");
+
+		}
 	}
 
-	public UserDTO findByEmail(String email) {
-		return mpu.toDTO(userRepository.findByEmail(email));
+	public UserDTO findByEmail(String email) throws ControllerUserException {
+		try {
+			return mpu.toDTO(userRepository.findByEmail(email));
+		} catch (Exception e) {
+			throw new ControllerUserException("L'utilisateurs avec le mail : " + email + "n'a pas été trouvé.");
+
+		}
 	}
 
-	public List<UserDTO> findByRole(RoleEnum role) {
-		return mpu.toDTOs(userRepository.findByRole(role));
+	public List<UserDTO> findByRole(RoleEnum role) throws ControllerUserException {
+		try {
+			return mpu.toDTOs(userRepository.findByRole(role));
+		} catch (Exception e) {
+			throw new ControllerUserException("Aucun utilisateur avec le role : " + role + '.');
+
+		}
 	}
 
-	public UserDTO findById(Long id) {
+	public UserDTO findById(Long id) throws ControllerUserException {
 		Optional<User> userOptional = userRepository.findById(id);
 		if (userOptional.isPresent()) {
 			return mpu.toDTO(userOptional.get());
