@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kind.model.Kind;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.user.model.User;
@@ -34,7 +34,7 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 
 	public List<Mission> findByMissionStatusAndUser(MissionStatusEnum MissionStatusEnum, User user);
 
-	public List<Mission> findByKindVersionAndUser(KindVersion kindVersion, User user);
+	public List<Mission> findByKindAndUser(Kind kind, User user);
 
 	public List<Mission> findAll();
 	

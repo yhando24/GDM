@@ -22,7 +22,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import fr.diginamic.expenseaccount.model.ExpenseAccount;
-import fr.diginamic.kindversion.model.KindVersion;
+import fr.diginamic.kind.model.Kind;
 import fr.diginamic.user.model.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,8 +69,8 @@ public class Mission implements Serializable {
 	
 	@ManyToOne
 	@NotNull
-	@JoinColumn(name="id_kindVersion")
-	private KindVersion kindVersion;
+	@JoinColumn(name="id_kind")
+	private Kind kind;
 	
 	@ManyToOne
 	@NotNull
@@ -88,7 +88,7 @@ public class Mission implements Serializable {
 	
 
 	public Mission(Long id, LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity,
-			Float prime, MissionStatusEnum missionStatus, KindVersion kindVersion, Float amountOfBill ) {
+			Float prime, MissionStatusEnum missionStatus, Kind kind, Float amountOfBill ) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -98,7 +98,7 @@ public class Mission implements Serializable {
 		this.prime = prime;
 		this.missionStatus = missionStatus;
 
-		this.kindVersion = kindVersion;
+		this.kind = kind;
 		this.amountOfBill = amountOfBill;
 	}
 	
@@ -114,13 +114,13 @@ public class Mission implements Serializable {
 	public String toString() {
 		return "Mission [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", departureCity="
 				+ departureCity + ", arrivalCity=" + arrivalCity + ", prime=" + prime + ", missionStatus="
-				+ missionStatus + ", kindVersion=" + kindVersion + ", user=" + ", amountOfBill=" + amountOfBill
+				+ missionStatus + ", kind=" + kind + ", user=" + ", amountOfBill=" + amountOfBill
 				+ ", expenseAccounts=" + expenseAccounts + "]";
 	}
 
 
 	public Mission(LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity, Float prime,
-			MissionStatusEnum missionStatus, TransportEnum transportEnum, @NotNull KindVersion kindVersion,
+			MissionStatusEnum missionStatus, TransportEnum transportEnum, @NotNull Kind kind,
 			@NotNull User user, Float amountOfBill) {
 		super();
 		this.startDate = startDate;
@@ -130,7 +130,7 @@ public class Mission implements Serializable {
 		this.prime = prime;
 		this.missionStatus = missionStatus;
 		this.transportEnum = transportEnum;
-		this.kindVersion = kindVersion;
+		this.kind = kind;
 		this.user = user;
 		this.amountOfBill = amountOfBill;
 
@@ -138,7 +138,7 @@ public class Mission implements Serializable {
 
 
 	public Mission(LocalDate now, LocalDate plusDays, String string, String string2, float f, MissionStatusEnum initial,
-			TransportEnum bus, Optional<User> user2, KindVersion kindVersion2, float g, float h) {
+			TransportEnum bus, Optional<User> user2, Kind kind2, float g, float h) {
 		// TODO Auto-generated constructor stub
 	}
 	

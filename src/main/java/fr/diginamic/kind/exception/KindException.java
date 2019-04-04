@@ -1,10 +1,10 @@
 package fr.diginamic.kind.exception;
 
-import java.util.function.Supplier;
-
 public class KindException extends RuntimeException {
 
-	  public KindException(String message){
+	private static final long serialVersionUID = 3481775090706790896L;
+
+	public KindException(String message){
 		    super(message);
 		  }   
 }
