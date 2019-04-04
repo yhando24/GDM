@@ -32,15 +32,8 @@ public class KindController {
 	}
 
 	@Transactional
-
 	@PostMapping
 	public KindDTO saveKind(@RequestBody KindDTO k) {
-		return kindService.save(k);
-
-	}
-
-	@PatchMapping
-	public KindDTO updateKind(@RequestBody KindDTO k) {
 		return kindService.save(k);
 	}
 
@@ -52,8 +45,15 @@ public class KindController {
 	@DeleteMapping("/deleteKind/{id}")
 	public void deleteKind(@PathVariable long id) {
 		this.kindService.deleteKind(id);
-		;
-
 	}
 
+	@GetMapping("/historic/{id}/{millis}")
+	public KindDTO getHistoric(@PathVariable("id") long id, @PathVariable("millis") long millis) {
+		return this.kindService.getHistoric(id, millis);
+	}
+
+	@GetMapping("/historic/{id}")
+	public List<KindDTO> getHistoric(@PathVariable("id") long id) {
+		return this.kindService.getHistoric(id);
+	}
 }
