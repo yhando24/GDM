@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Audited
 @Table
 @Getter
 @Setter
@@ -49,9 +52,23 @@ public class Kind {
 
 	public Kind() {
 	}
-
+	
 	public Kind(String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced, Boolean bonus,
 			Float dailyCharges, Boolean authorizationToExceed) {
+		super();
+		this.name = name;
+		this.adr = adr;
+		this.bonusPercentage = bonusPercentage;
+		this.updatedAt = updatedAt;
+		this.invoiced = invoiced;
+		this.bonus = bonus;
+		this.dailyCharges = dailyCharges;
+		this.authorizationToExceed = authorizationToExceed;
+	}
+
+	public Kind(Long id,String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced, Boolean bonus,
+			Float dailyCharges, Boolean authorizationToExceed) {
+		this.id = id ;
 		this.name = name;
 		this.adr = adr;
 		this.bonusPercentage = bonusPercentage;
@@ -68,5 +85,9 @@ public class Kind {
 				+ ", updatedAt=" + updatedAt + ", invoiced=" + invoiced + ", bonus=" + bonus + ", dailyCharges="
 				+ dailyCharges + ", authorizationToExceed=" + authorizationToExceed + "]";
 	}
+
+
+
+	
 
 }

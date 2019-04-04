@@ -1,6 +1,5 @@
 package fr.diginamic.user.controller;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.diginamic.configuration.AuthenticationService;
 import fr.diginamic.configuration.JWTFilter;
 import fr.diginamic.configuration.TokenProvider;
-
 import fr.diginamic.user.dto.RecupLogin;
-import fr.diginamic.user.model.UserDTO;
 import fr.diginamic.user.service.UserService;
 
 @RestController
