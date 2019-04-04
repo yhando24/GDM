@@ -18,35 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.service.KindService;
 
-
 @CrossOrigin
 @RestController()
 @RequestMapping("/kinds")
 public class KindController {
-	
+
 	@Autowired
 	private KindService kindService;
-	
+
 	@GetMapping
 	public List<KindDTO> findAll() {
 		return this.kindService.findAll();
 	}
-	
+
 	@Transactional
+
 	@PostMapping
-	public KindDTO saveKind(@RequestBody KindDTO k)  {	
+	public KindDTO saveKind(@RequestBody KindDTO k) {
 		return kindService.save(k);
-	
+
 	}
-	
+
 	@PatchMapping
-    public KindDTO update( @RequestBody KindDTO kind) {
-        return this.kindService.save(kind);
-    }
-	
+	public KindDTO updateKind(@RequestBody KindDTO k) {
+		return kindService.save(k);
+	}
+
+	@PatchMapping
+	public KindDTO update(@RequestBody KindDTO kind) {
+		return this.kindService.save(kind);
+	}
+
 	@DeleteMapping("/deleteKind/{id}")
 	public void deleteKind(@PathVariable long id) {
-		this.kindService.deleteKind(id);;
+		this.kindService.deleteKind(id);
+		;
+
 	}
 
 }
