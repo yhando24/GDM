@@ -44,7 +44,7 @@ public class JWTFilter extends GenericFilterBean {
 		if (StringUtils.isEmpty(porteurToken)) {
 			porteurToken = request.getParameter(AUTHORIZATION_HEADER);
 		}
-		if (StringUtils.hasText(porteurToken) && porteurToken.startsWith("Porteur")) {
+		if (StringUtils.hasText(porteurToken) && porteurToken.startsWith("Bearer ")) {
 			return porteurToken.substring(7, porteurToken.length());
 		}		
 		return null;

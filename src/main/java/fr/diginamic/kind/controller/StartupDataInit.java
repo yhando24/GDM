@@ -62,10 +62,10 @@ public class StartupDataInit {
     	
     	
     	// Ajout user
-    	User u = new User(1L, "Plop1", "Plopeur1", "ADMIN", "ADMIN@ADMIN.fr", RoleEnum.ADMIN);
+    	User u = new User(1L, "Plop1", "Plopeur1", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "admin@admin.fr", RoleEnum.ADMIN);
     	userRepository.save(u);
-    	userRepository.save(new User(2L, "Plop2", "Plopeur2", "MANAGER", "MANAGER@MANAGER.fr", RoleEnum.MANAGER));
-    	userRepository.save(new User(3L, "Plop3", "Plopeur3", "USER", "USER@USER.fr", RoleEnum.USER));
+    	userRepository.save(new User(2L, "Plop2", "Plopeur2", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "manager@manager.fr", RoleEnum.MANAGER));
+    	userRepository.save(new User(3L, "Plop3", "Plopeur3", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER));
    
     	
     	Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true);

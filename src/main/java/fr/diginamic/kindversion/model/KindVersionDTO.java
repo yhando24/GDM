@@ -1,15 +1,13 @@
 package fr.diginamic.kindversion.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import fr.diginamic.kind.model.KindDTO;
-import fr.diginamic.mission.model.Mission;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +21,7 @@ public class KindVersionDTO implements Serializable  {
 	 */
 	private static final long serialVersionUID = -2197196861954702653L;
 
+	@JsonIgnore
 	private Long id;
 	
 	@NotBlank
@@ -54,16 +53,17 @@ public class KindVersionDTO implements Serializable  {
 	@NotBlank
 	private LocalDateTime UpdatedAt;
 	
-	@NotBlank
-	private List <Mission> mission = new ArrayList<>();
+//	@NotBlank
+//	private List <Mission> mission = new ArrayList<>();
 
 	
 //	CONSTRUCTEURS
 	
 	
 	public KindVersionDTO(Long id, String name, Float adr, Float bonusPercentage, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed, KindDTO kind, Long version, LocalDateTime updatedAt,
-			List<Mission> mission) {
+
+			Float dailyCharges, Boolean authorizationToExceed, KindDTO kind, Long version, LocalDateTime updatedAt) {
+
 		super();
 		this.id = id;
 		this.name = name;
@@ -76,7 +76,6 @@ public class KindVersionDTO implements Serializable  {
 		this.kind = kind;
 		Version = version;
 		UpdatedAt = updatedAt;
-		this.mission = mission;
 	}
 	
 	

@@ -24,7 +24,6 @@ public class UserService {
 	// create
 
 	public UserDTO save(UserDTO userDTO) {
-		userDTO.setRole(RoleEnum.USER);
 		return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 	}
 	// read
@@ -37,8 +36,8 @@ public class UserService {
 		return mpu.toDTOs(userRepository.findByFirstName(firstName));
 	}
 
-	public List<UserDTO> findByEmail(String email) {
-		return mpu.toDTOs(userRepository.findByEmail(email));
+	public UserDTO findByEmail(String email) {
+		return mpu.toDTO(userRepository.findByEmail(email));
 	}
 
 	public List<UserDTO> findByRole(RoleEnum role) {

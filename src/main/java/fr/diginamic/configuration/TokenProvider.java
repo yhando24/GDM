@@ -46,6 +46,7 @@ public class TokenProvider {
 
 		byte[] keyBytes;
 		String secret = "Q2h1Y2sgTm9ycmlzIGEgcsOpdXNzaSDDoCB0cm91dmVyIGxhIHBhZ2UgNDA0ISEgQ04gbmUgbWVudCBqYW1haXMsIGMnZXN0IGxhIHbDqXJpdMOpIHF1aSBzZSB0cm9tcGUuIENOIHBldXQgc2Ugc291dmVuaXIgZHUgZnV0dXIuIAo=";
+
 		if (!StringUtils.isEmpty(secret)) {
 			log.warn("Warning: the JWT key used is not Base64-encoded. "
 					+ "We recommend using the `jhipster.security.authentication.jwt.base64-secret` key for optimum security.");

@@ -22,7 +22,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	public List<User> findByFirstName(String firstName);
 
-	public List<User> findByEmail(String email);
+	public User findByEmail(String email);
 
 	public List<User> findByRole(RoleEnum role);
 

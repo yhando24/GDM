@@ -47,7 +47,7 @@ public class User implements Serializable {
 	@NotBlank
 	private String password;
 
-	@Column
+	@Column(unique = true)
 	@NotBlank
 	private String email;
 
