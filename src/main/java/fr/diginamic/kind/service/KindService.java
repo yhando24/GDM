@@ -37,10 +37,10 @@ public class KindService {
 
 	@Transactional
 	public KindDTO save(KindDTO k) {
-		
+
 		Optional<Kind> kind = kindRepository.findByName(k.getName());
 		if (kind.isPresent()) {
-			
+
 			KindVersionDTO Lastversion = mapperKindVersionService
 					.toDTO(kindVersionRepository.findTopByNameOrderByVersionDesc(k.getName()));
 			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
@@ -48,7 +48,7 @@ public class KindService {
 
 			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
 		} else {
-			
+
 			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
 			newVersion.setVersion(1L);
 			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
@@ -73,6 +73,16 @@ public class KindService {
 
 		return kv;
 
+	}
+
+	// delete
+
+	public void deleteById(Long id) {
+		kindRepository.deleteById(id);
+	}
+
+	public void delete(KindDTO kindDTO) {
+		kindRepository.delete(mapperKindService.toEntity(kindDTO));
 	}
 
 }

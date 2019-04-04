@@ -88,7 +88,7 @@ public class StartupDataInit {
     	
     	
     	
-    	
+  
     	kindRepository.save(k);
        	kindVersionRepository.save(kv);
      	kindVersionRepository.save(kv2);
