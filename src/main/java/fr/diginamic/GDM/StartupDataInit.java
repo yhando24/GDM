@@ -69,11 +69,12 @@ public class StartupDataInit {
    
     	
     	Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true);
+    	Kind k1 = new Kind("TEST", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true);
     	
     
   
     	KindVersion kv = new KindVersion("Formation", 12.05f, 10f, true, true, 10.1f, true, k, 1L, LocalDateTime.now());
-     	
+
     	KindVersion kv2 = new KindVersion("Formation", 15.05f, 10f, true, true, 10.1f, true, k, 2L, LocalDateTime.now());
     	
     	
@@ -90,6 +91,7 @@ public class StartupDataInit {
     	
   
     	kindRepository.save(k);
+    	kindRepository.save(k1);
        	kindVersionRepository.save(kv);
      	kindVersionRepository.save(kv2);
     	missionRepository.save(m);
