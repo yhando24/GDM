@@ -48,12 +48,12 @@ public class KindController {
 	}
 
 	@GetMapping("/historic/{id}/{millis}")
-	public KindDTO getHistoric(@PathVariable("id") long id, @PathVariable("millis") long millis) {
-		return this.kindService.getHistoric(id, millis);
+	public KindDTO getKindVersion(@PathVariable("id") long id, @PathVariable("millis") long millis) {
+		return this.kindService.getKindVersion(id, millis);
 	}
 
 	@GetMapping("/historic/{id}")
-	public List<KindDTO> getHistoric(@PathVariable("id") long id) {
-		return this.kindService.getHistoric(id);
+	public List<KindDTO> getKindHistoric(@PathVariable("id") long id) {
+		return this.kindService.getKindHistoric(id);
 	}
 }

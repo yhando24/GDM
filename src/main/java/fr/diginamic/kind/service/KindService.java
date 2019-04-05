@@ -47,7 +47,7 @@ public class KindService {
 		kindRepository.deleteById(id);
 	}
 
-	public KindDTO getHistoric(long id, long millis) {
+	public KindDTO getKindVersion(long id, long millis) {
 		Kind kind = null;
 		AuditReader reader = AuditReaderFactory.get(em);
 		Number num = reader.getRevisionNumberForDate(Date.from(Instant.ofEpochMilli(millis)));
@@ -57,7 +57,7 @@ public class KindService {
 		return mapperKindService.toDTO(kind);
 	}
 
-	public List<KindDTO> getHistoric(long id) {
+	public List<KindDTO> getKindHistoric(long id) {
 		List<Kind> kinds = new ArrayList<>();
 		AuditReader reader = AuditReaderFactory.get(em);
 		List<Number> revs = reader.getRevisions(Kind.class, id);
