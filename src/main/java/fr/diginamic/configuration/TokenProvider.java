@@ -58,7 +58,7 @@ public class TokenProvider {
 		}
 		this.key = Keys.hmacShaKeyFor(keyBytes);
 		this.tokenValidityInMilliseconds = 1000 * 3600;
-		this.tokenValidityInMillisecondsForRemenberMe = 1000 * 84400;
+		this.tokenValidityInMillisecondsForRemenberMe = 1000 * 3600 * 10;
 
 	}
 
