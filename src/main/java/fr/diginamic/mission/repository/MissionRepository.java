@@ -20,10 +20,9 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	public Mission save(Mission mission);
 
 	// read
-	
-	public  Optional<Mission>findById(Long id);
-	
-	
+
+	public Optional<Mission> findById(Long id);
+
 	public List<Mission> findByUser(User user);
 
 	public List<Mission> findByDepartureCity(String departureCity);
@@ -37,10 +36,10 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	public List<Mission> findByKindAndUser(Kind kind, User user);
 
 	public List<Mission> findAll();
-	
+
 	@Query("SELECT m FROM Mission m WHERE m.startDate>?1 AND m.endDate<?2 ")
 	public List<Mission> findVeriChevauchement(LocalDate dateStart, LocalDate dateEnd);
-	
+
 	// delete
 	public void delete(Mission mission);
 
