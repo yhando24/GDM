@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.kind.model.Kind;
-import fr.diginamic.kindversion.model.KindVersion;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
@@ -22,7 +21,7 @@ public class MissionService {
 
 	@Autowired
 	private MissionRepository missionRepository;
-	
+
 	@Autowired
 	private MapperMissionService mapperMissionService;
 
@@ -77,12 +76,12 @@ public class MissionService {
 		return missionRepository.findByMissionStatusAndUser(MissionStatusEnum, user);
 	}
 
-	public List<Mission> findByKindVersionAndUser(KindVersion kindVersion, User user) {
-		return missionRepository.findByKindVersionAndUser(kindVersion, user);
+	public List<Mission> findByKindAndUser(Kind kind, User user) {
+		return missionRepository.findByKindAndUser(kind, user);
 	}
 
 	public List<MissionDTO> findAll() {
 		return mapperMissionService.toDTOs(missionRepository.findAll());
 	}
-	
+
 }

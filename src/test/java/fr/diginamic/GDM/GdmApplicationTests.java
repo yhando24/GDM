@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import fr.diginamic.kindversion.repository.KindVersionRepository;
 import fr.diginamic.mission.repository.MissionRepository;
 import fr.diginamic.mission.service.MissionService;
 import fr.diginamic.user.service.UserService;
@@ -26,8 +25,6 @@ public class GdmApplicationTests {
 	@Autowired
 	private UserService us;
 
-	@Autowired
-	private KindVersionRepository kindVersionRepository;
 //	
 //	@Test
 //	@Transactional

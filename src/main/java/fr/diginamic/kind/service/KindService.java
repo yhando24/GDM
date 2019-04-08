@@ -1,19 +1,23 @@
 package fr.diginamic.kind.service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.repository.KindRepository;
-import fr.diginamic.kindversion.model.KindVersionDTO;
-import fr.diginamic.kindversion.model.MapperKindVersionService;
-import fr.diginamic.kindversion.repository.KindVersionRepository;
-import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.service.MissionService;
 
 @Service
@@ -23,67 +27,47 @@ public class KindService {
 	private KindRepository kindRepository;
 
 	@Autowired
-	private KindVersionRepository kindVersionRepository;
-
-	@Autowired
 	private MapperKindService mapperKindService;
 
 	@Autowired
-	private MapperKindVersionService mapperKindVersionService;
-	
-	@Autowired
 	private MissionService missionService;
 
+	@PersistenceContext
+	EntityManager em;
+
 	public List<KindDTO> findAll() {
-		// TODO Auto-generated method stub
 		return mapperKindService.toDTOs(kindRepository.findAll());
 	}
 
-	
 	public KindDTO save(KindDTO k) {
-		
-		Optional<Kind> kind = kindRepository.findByName(k.getName());
-		if (kind.isPresent()) {
-			
-			KindVersionDTO Lastversion = mapperKindVersionService
-					.toDTO(kindVersionRepository.findTopByNameOrderByVersionDesc(k.getName()));
-			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
-			newVersion.setVersion(Lastversion.getVersion() + 1);
-
-			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
-		} else {
-			
-			KindVersionDTO newVersion = KindService.toKindVersionDTO(k);
-			newVersion.setVersion(1L);
-			kindVersionRepository.save(mapperKindVersionService.toEntity(newVersion));
-		}
-
-		return k;
-
+		return mapperKindService.toDTO(kindRepository.save(mapperKindService.toEntity(k)));
 	}
 
-	public static KindVersionDTO toKindVersionDTO(KindDTO d) {
-
-		KindVersionDTO kv = new KindVersionDTO();
-		kv.setAdr(d.getAdr());
-		kv.setAuthorizationToExceed(d.getAuthorizationToExceed());
-		kv.setBonus(d.getBonus());
-		kv.setBonusPercentage(d.getBonusPercentage());
-		kv.setDailyCharges(d.getDailyCharges());
-		kv.setInvoiced(d.getInvoiced());
-		kv.setKind(d);
-		kv.setName(d.getName());
-
-		kv.setUpdatedAt(LocalDateTime.now());
-
-
-		return kv;
-
-	}
-
-	
 	public void deleteKind(Long id) {
-				
 		kindRepository.deleteById(id);
 	}
+
+	public KindDTO getKindVersion(long id, long millis) {
+		Kind kind = null;
+		AuditReader reader = AuditReaderFactory.get(em);
+		Number num = reader.getRevisionNumberForDate(Date.from(Instant.ofEpochMilli(millis)));
+		AuditQuery query = reader.createQuery().forEntitiesAtRevision(Kind.class, num);
+		query.add(AuditEntity.id().eq(id));
+		kind = (Kind) query.getSingleResult();
+		return mapperKindService.toDTO(kind);
+	}
+
+	public List<KindDTO> getKindHistoric(long id) {
+		List<Kind> kinds = new ArrayList<>();
+		AuditReader reader = AuditReaderFactory.get(em);
+		List<Number> revs = reader.getRevisions(Kind.class, id);
+		revs.stream().forEach(rev -> {
+			AuditQuery query = reader.createQuery().forEntitiesAtRevision(Kind.class, rev);
+			query.add(AuditEntity.id().eq(id));
+			Kind kind = (Kind) query.getSingleResult();
+			kinds.add(kind);
+		});
+		return mapperKindService.toDTOs(kinds);
+	}
+
 }

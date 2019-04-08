@@ -25,13 +25,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 
 @Configuration
 @EnableWebSecurity
@@ -50,8 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public static void main(String[] merde) {
 		System.out.println(new BCryptPasswordEncoder().encode("test"));
 	}
-	
-	
+
 	@PostConstruct
 	public void init() {
 		try {
@@ -81,26 +78,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint() {
+		http.cors().and().csrf().disable().exceptionHandling()
+				.authenticationEntryPoint(new Http403ForbiddenEntryPoint() {
 
-		}).and()
-		//.formLogin().loginProcessingUrl("/login").successHandler(new AuthentificationLoginSuccessHandler())
-			//	.failureHandler(new SimpleUrlAuthenticationFailureHandler()).and().logout().logoutUrl("/logout")
-			//	.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()).invalidateHttpSession(true).and()
+				}).and()
+				// .formLogin().loginProcessingUrl("/login").successHandler(new
+				// AuthentificationLoginSuccessHandler())
+				// .failureHandler(new
+				// SimpleUrlAuthenticationFailureHandler()).and().logout().logoutUrl("/logout")
+				// .logoutSuccessHandler(new
+				// AuthenticationLogoutSuccessHandler()).invalidateHttpSession(true).and()
 				.authorizeRequests().antMatchers("/login").permitAll()
 //				.antMatchers("/logout").permitAll()
 				.antMatchers("/accueil").authenticated()
 //				.antMatchers("/**").permitAll()
-				.antMatchers("/*").authenticated()
+//				.antMatchers("/*").authenticated()
 				.and().apply(securityConfigurerAdapter());
 
 	}
-	
+
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("*", "http://127.0.0.1:4200"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;

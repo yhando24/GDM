@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import fr.diginamic.mission.model.Mission;
-
 @ComponentScan("fr.diginamic")
 @SpringBootApplication
 @EntityScan(basePackages = { "fr.diginamic" })
