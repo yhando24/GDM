@@ -15,6 +15,8 @@ import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.kind.exception.KindException;
+import fr.diginamic.kind.model.HistoricDTO;
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.repository.KindRepository;
@@ -44,30 +46,46 @@ public class KindService {
 	}
 
 	public void deleteKind(Long id) {
+
+		this.kindRepository.findById(id).orElseThrow(() -> new KindException("Cette nature n'existe pas"));
+
 		kindRepository.deleteById(id);
 	}
 
-	public KindDTO getKindVersion(long id, long millis) {
+	public KindDTO finKindVersionByIdAndTimestamp(long id, long millis) {
+
 		Kind kind = null;
 		AuditReader reader = AuditReaderFactory.get(em);
 		Number num = reader.getRevisionNumberForDate(Date.from(Instant.ofEpochMilli(millis)));
 		AuditQuery query = reader.createQuery().forEntitiesAtRevision(Kind.class, num);
 		query.add(AuditEntity.id().eq(id));
 		kind = (Kind) query.getSingleResult();
+
+		if (kind == null) {
+			throw new KindException("Cette version de nature n'existe pas");
+		}
+
 		return mapperKindService.toDTO(kind);
 	}
 
-	public List<KindDTO> getKindHistoric(long id) {
-		List<Kind> kinds = new ArrayList<>();
+	public List<HistoricDTO> findKindHistoricById(long id) {
+		List<HistoricDTO> historique = new ArrayList<>();
 		AuditReader reader = AuditReaderFactory.get(em);
 		List<Number> revs = reader.getRevisions(Kind.class, id);
+
+		if (revs == null) {
+			throw new KindException("Il n'y a pas d'historique de cette nature");
+		}
+
 		revs.stream().forEach(rev -> {
 			AuditQuery query = reader.createQuery().forEntitiesAtRevision(Kind.class, rev);
 			query.add(AuditEntity.id().eq(id));
 			Kind kind = (Kind) query.getSingleResult();
-			kinds.add(kind);
+			Date date = reader.getRevisionDate(rev);
+			historique.add(new HistoricDTO(date, mapperKindService.toDTO(kind)));
 		});
-		return mapperKindService.toDTOs(kinds);
+
+		return historique;
 	}
 
 }
