@@ -89,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			//	.logoutSuccessHandler(new AuthenticationLogoutSuccessHandler()).invalidateHttpSession(true).and()
 				.authorizeRequests().antMatchers("/login").permitAll()
 //				.antMatchers("/logout").permitAll()
-//				.antMatchers("/user").authenticated()
+				.antMatchers("/accueil").authenticated()
 //				.antMatchers("/**").permitAll()
 				.antMatchers("/*").authenticated()
 				.and().apply(securityConfigurerAdapter());
