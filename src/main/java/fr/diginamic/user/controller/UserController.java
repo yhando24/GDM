@@ -45,7 +45,6 @@ public class UserController {
 
 	@DeleteMapping("/delete/{id}")
 	public void deleteById(@PathVariable Long id) {
-		System.out.println(id+ "//////////////////////////////////////////////////////////////////////////////");
 		this.userServ.deleteById(id);
 	}
 }

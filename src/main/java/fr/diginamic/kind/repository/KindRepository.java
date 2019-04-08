@@ -7,11 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import fr.diginamic.kind.model.Kind;
 
+
 @Repository
 public interface KindRepository extends JpaRepository<Kind, Long> {
 
 	Optional<Kind> findByName(String name);
 
+	Optional<Kind> findById(Long id);
+	
+	
 	// delete
 
 	public void deleteById(Long id);

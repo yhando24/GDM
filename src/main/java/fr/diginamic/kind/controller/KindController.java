@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.diginamic.kind.model.HistoricDTO;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.service.KindService;
 
@@ -48,12 +49,12 @@ public class KindController {
 	}
 
 	@GetMapping("/historic/{id}/{millis}")
-	public KindDTO getKindVersion(@PathVariable("id") long id, @PathVariable("millis") long millis) {
-		return this.kindService.getKindVersion(id, millis);
+	public KindDTO finKindVersionByIdAndTimestamp(@PathVariable("id") long id, @PathVariable("millis") long millis) {
+		return this.kindService.finKindVersionByIdAndTimestamp(id, millis);
 	}
 
 	@GetMapping("/historic/{id}")
-	public List<KindDTO> getKindHistoric(@PathVariable("id") long id) {
-		return this.kindService.getKindHistoric(id);
+	public List<HistoricDTO> findKindHistoricById(@PathVariable("id") long id) {
+		return this.kindService.findKindHistoricById(id);
 	}
 }

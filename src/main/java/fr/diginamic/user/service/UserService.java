@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.mission.repository.MissionRepository;
 import fr.diginamic.user.exception.ControllerUserException;
 import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
@@ -17,6 +18,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private MissionRepository missionRepository;
 
 	@Autowired
 	private MapperUserService mpu;
@@ -48,7 +52,7 @@ public class UserService {
 		try {
 			return mpu.toDTOs(userRepository.findByFirstName(firstName));
 		} catch (Exception e) {
-			throw new ControllerUserException("Aucun utilisateur avec le nom : " + firstName + "n'a été trouvé.");
+			throw new ControllerUserException("Aucun utilisateur avec le prénom : " + firstName + "n'a été trouvé.");
 
 		}
 	}
@@ -104,7 +108,13 @@ public class UserService {
 	// delete
 
 	public void deleteById(Long id) {
-		userRepository.deleteById(id);
+		User u = userRepository.findById(id).orElseThrow(() ->  new ControllerUserException("Le user n'existe pas"));
+		if(missionRepository.findByUser(u).size()>0) {
+			throw new ControllerUserException("Cet utilisateur ne peut pas etre supprimé car il a déjà affecté à une mission");
+		}else {
+			userRepository.deleteById(id);
+		}
+		
 	}
 
 	public void delete(UserDTO userDTO) {
