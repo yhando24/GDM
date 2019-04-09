@@ -16,7 +16,7 @@ public class UserMissionServiceJeTimplementeCeQueTuVeuxHehe implements UserMissi
             e.printStackTrace();
         }
 
-        System.out.println("addPerson method has been invoked : " + p.toString());
+        System.out.println("addUser method has been invoked : " + p.toString());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserMissionServiceJeTimplementeCeQueTuVeuxHehe implements UserMissi
             throw new NullPointerException("Id is null");
         }
 
-        System.out.println("getPersonAt method has been invoked");
+        System.out.println("getUserById method has been invoked");
         return new User("Mickael BARON", "Migné-Auxances");
     }
     
