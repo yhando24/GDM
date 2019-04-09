@@ -18,6 +18,29 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+
+//
+
+@Path("/services")
+public class Service {
+	
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Services> getServices_JSON() {
+		List<Services> listOfCountries = EmployeeDAO.getAllEmployees();
+		return listOfCountries;
+	}
+	
+	@GET
+	@Path("/{empNo}")
+	@Produces({ MediaType,APPLICATION_JSON, MediaTpe,APPLICATION_XML})
+	public List<Services> getServices_JSON() {
+		
+	}
+}
+
+
+
 @Service
 public class CRUDService {
 
@@ -227,6 +250,8 @@ public class CRUDService {
 	}
 	
 	
+	
+	
 	Client client = ClientBuilder.newBuilder().newClient();
 	WebTarget target = client.target("http://<host>/test/rest");
 	target = target.path("ma-ressource/" + 1);
@@ -235,4 +260,7 @@ public class CRUDService {
 	Response response = builder.get();
 	MaRessource maRessource = builder.get(Absence.class);
 
+	
+	
+	
 }
