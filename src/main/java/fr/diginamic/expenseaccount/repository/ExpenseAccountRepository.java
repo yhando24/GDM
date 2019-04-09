@@ -19,11 +19,9 @@ public interface ExpenseAccountRepository extends CrudRepository<ExpenseAccount,
 
 	public List<ExpenseAccount> findAll();
 
-	public ExpenseAccount save(ExpenseAccount expenseAccount);
-
 	public Optional<ExpenseAccount> findById(Long id);
 
-	public boolean existsById(Long id);
+	public void deleteById(Long id);
 
 	void delete(ExpenseAccount expenseAccount);
 }
