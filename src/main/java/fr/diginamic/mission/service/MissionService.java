@@ -16,6 +16,7 @@ import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.model.TransportEnum;
 import fr.diginamic.mission.repository.MissionRepository;
+import fr.diginamic.user.exception.ControllerUserException;
 import fr.diginamic.user.model.User;
 
 @Service
@@ -84,6 +85,20 @@ public class MissionService {
 
 	public List<MissionDTO> findAll() {
 		return mapperMissionService.toDTOs(missionRepository.findAll());
+	}
+	
+	//delete
+	public void deleteById(Long id) {
+		Mission m = missionRepository.findById(id).orElseThrow(() ->  new ControllerUserException("Cette mission n'existe pas"));
+		if(m.getMissionStatus().getName().equals("Validé")) {
+			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja ete validé");
+		}else if(m.getExpenseAccounts().size()>0) {
+			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja des notes de frais");
+		}
+		else {
+			missionRepository.deleteById(id);
+		}
+
 	}
 
 	

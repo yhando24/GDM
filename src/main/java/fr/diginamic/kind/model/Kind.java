@@ -49,12 +49,15 @@ public class Kind {
 
 	@Column(nullable = false)
 	private Boolean authorizationToExceed;
+	
+	@Column (nullable = false)
+	private Boolean active = true;
 
 	public Kind() {
 	}
 	
 	public Kind(String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed) {
+			Float dailyCharges, Boolean authorizationToExceed, Boolean active) {
 		super();
 		this.name = name;
 		this.adr = adr;
@@ -64,10 +67,12 @@ public class Kind {
 		this.bonus = bonus;
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
+		this.active = active;
+		
 	}
 
 	public Kind(Long id,String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced, Boolean bonus,
-			Float dailyCharges, Boolean authorizationToExceed) {
+			Float dailyCharges, Boolean authorizationToExceed, Boolean active) {
 		this.id = id ;
 		this.name = name;
 		this.adr = adr;
@@ -77,13 +82,14 @@ public class Kind {
 		this.bonus = bonus;
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
+		this.active = active;
 	}
 
 	@Override
 	public String toString() {
 		return "kind [id=" + id + ", name=" + name + ", adr=" + adr + ", bonusPercentage=" + bonusPercentage
 				+ ", updatedAt=" + updatedAt + ", invoiced=" + invoiced + ", bonus=" + bonus + ", dailyCharges="
-				+ dailyCharges + ", authorizationToExceed=" + authorizationToExceed + "]";
+				+ dailyCharges + ", authorizationToExceed=" + authorizationToExceed + ", active=" + active + "]";
 	}
 
 
