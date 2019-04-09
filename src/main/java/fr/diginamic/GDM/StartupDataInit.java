@@ -62,7 +62,7 @@ public class StartupDataInit {
 		// 10.1f, true, k, 2L, LocalDateTime.now());
 
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
-				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+				MissionStatusEnum.INITIAL, TransportEnum.BUS, k, u, 150.01f);
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
 
