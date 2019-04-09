@@ -38,13 +38,16 @@ public class KindDTO {
 
 	@NotBlank
 	private Boolean invoiced;
+	
+	@NotBlank
+	private Boolean active = true;
 
 	@NotBlank
 	public KindDTO() {
 	}
 
 	public KindDTO(String name, Float adr, Float bonusPercentage, LocalDateTime updatedAt, Boolean invoiced,
-			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed) {
+			Boolean bonus, Float dailyCharges, Boolean authorizationToExceed, Boolean active) {
 		this.name = name;
 		this.adr = adr;
 		this.bonusPercentage = bonusPercentage;
@@ -53,12 +56,13 @@ public class KindDTO {
 		this.bonus = bonus;
 		this.dailyCharges = dailyCharges;
 		this.authorizationToExceed = authorizationToExceed;
+		this.active = active;
 	}
 
 	@Override
 	public String toString() {
 		return "kind [id=" + id + ", name=" + name + ", adr=" + adr + ", bonusPercentage=" + bonusPercentage
 				+ ", updatedAt=" + updatedAt + ", invoiced=" + invoiced + ", bonus=" + bonus + ", dailyCharges="
-				+ dailyCharges + ", authorizationToExceed=" + authorizationToExceed + "]";
+				+ dailyCharges + ", authorizationToExceed=" + authorizationToExceed + ", active=" + active + "]";
 	}
 }

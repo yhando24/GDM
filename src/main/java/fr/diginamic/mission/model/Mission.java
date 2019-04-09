@@ -80,7 +80,7 @@ public class Mission implements Serializable {
 	@Column
 	private Float amountOfBill;
 	
-	@OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "mission",fetch = FetchType.EAGER)
 	private List<ExpenseAccount> expenseAccounts = new ArrayList<>();
 	
 	

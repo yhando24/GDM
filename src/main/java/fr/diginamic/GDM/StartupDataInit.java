@@ -53,7 +53,7 @@ public class StartupDataInit {
 		userRepository.save(new User(3L, "Plop3", "Plopeur3",
 				"$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER));
 
-		Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true);
+		Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true, true);
 
 		// KindVersion kv = new KindVersion("Formation", 12.05f, 10f, true, true, 10.1f,
 		// true, k, 1L, LocalDateTime.now());
@@ -62,19 +62,28 @@ public class StartupDataInit {
 		// 10.1f, true, k, 2L, LocalDateTime.now());
 
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
+
+				MissionStatusEnum.INITIAL, TransportEnum.BUS, k, u, 150.01f);
+
+				//MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+		
+		Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "MARSEILLE", "TATAOUINE", 12f,
+				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k, u, 150.01f);
+		Mission m3 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "CASABLANCA", "POUBELLE", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
 		
-		Mission m2 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,
+		Mission m21 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.VELO, k, u, 150.01f);
-		ExpenseAccount ea2 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m2);
-		m2.addexpenseAccounts(ea2);
+		ExpenseAccount ea2 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m21);
+		m21.addexpenseAccounts(ea2);
 		
-		Mission m3 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes", 12f,
+		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
-		ExpenseAccount ea3 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m3);
-		m3.addexpenseAccounts(ea3);
+		ExpenseAccount ea3 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m31);
+		m31.addexpenseAccounts(ea3);
 
 		// k.addMission(m);
 		// kv2.addMission(m);
@@ -83,8 +92,8 @@ public class StartupDataInit {
 		// kindVersionRepository.save(kv);
 		// kindVersionRepository.save(kv2);
 		missionRepository.save(m);
-		missionRepository.save(m2);
-		missionRepository.save(m3);
+		missionRepository.save(m21);
+		missionRepository.save(m31);
 		expenseAccountRepository.save(ea);
 
 		// System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
