@@ -63,6 +63,11 @@ public class StartupDataInit {
 
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+		
+		Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "MARSEILLE", "TATAOUINE", 12f,
+				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k, u, 150.01f);
+		Mission m3 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "CASABLANCA", "POUBELLE", 12f,
+				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
 
@@ -73,6 +78,8 @@ public class StartupDataInit {
 		// kindVersionRepository.save(kv);
 		// kindVersionRepository.save(kv2);
 		missionRepository.save(m);
+		missionRepository.save(m2);
+		missionRepository.save(m3);
 		expenseAccountRepository.save(ea);
 
 		// System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
