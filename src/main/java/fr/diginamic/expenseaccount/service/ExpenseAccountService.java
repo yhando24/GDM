@@ -1,15 +1,23 @@
 package fr.diginamic.expenseaccount.service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.expenseaccount.exception.ExpenseAccountException;
 import fr.diginamic.expenseaccount.model.ExpenseAccount;
+import fr.diginamic.expenseaccount.model.ExpenseAccountDTO;
 import fr.diginamic.expenseaccount.model.ExpenseAccountStatusEnum;
 import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
+import fr.diginamic.kind.exception.KindException;
+import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.mission.model.Mission;
+import fr.diginamic.mission.service.MissionService;
+import fr.diginamic.user.exception.ControllerUserException;
+import fr.diginamic.user.model.User;
+import fr.diginamic.user.model.UserDTO;
 
 @Service
 public class ExpenseAccountService {
@@ -17,19 +25,42 @@ public class ExpenseAccountService {
 	@Autowired
 	ExpenseAccountRepository expenseAccountRepository;
 	
-	public List<ExpenseAccount> findAll(){
-		return expenseAccountRepository.findAll();
+	@Autowired
+	private MapperExpenseAccount mapperExpenseAccount;
+	
+	@Autowired
+	private MissionService missionService;
+	
+	public List<ExpenseAccountDTO> findAll(){
+		return mapperExpenseAccount.toDTOs(expenseAccountRepository.findAll());
 	}
 	
-	public  List<ExpenseAccount> findByMission(Mission mission){
-		
-		return  expenseAccountRepository.findByMission(mission);
+	public  List<ExpenseAccountDTO> findByMission(Mission mission){
+		return  mapperExpenseAccount.toDTOs(expenseAccountRepository.findByMission(mission));
 	}
 	
-	public List<ExpenseAccount> findByStatus(ExpenseAccountStatusEnum status){
-		return expenseAccountRepository.findByStatus(status);
+	public List<ExpenseAccountDTO> findByStatus(ExpenseAccountStatusEnum status){
+		return mapperExpenseAccount.toDTOs(expenseAccountRepository.findByStatus(status));
 	}
-//	public List<ExpenseAccount> findByUser(Mission mission){
-//		return expenseAccountRepository.findByUser(mission.getUser());
-//	}
+	
+	public ExpenseAccountDTO save(ExpenseAccountDTO k) {
+		return mapperExpenseAccount.toDTO(expenseAccountRepository.save(mapperExpenseAccount.toEntity(k)));
+	}
+	
+	public void deleteExpenseAccount(Long id) {
+
+		this.expenseAccountRepository.findById(id).orElseThrow(() -> new ExpenseAccountException("Cette nature n'existe pas"));
+
+		expenseAccountRepository.deleteById(id);
+	}
+	
+	public ExpenseAccountDTO findById(Long id) throws ExpenseAccountException {
+		Optional<ExpenseAccount> expenseAccountOptional = expenseAccountRepository.findById(id);
+		if (expenseAccountOptional.isPresent()) {
+			return mapperExpenseAccount.toDTO(expenseAccountOptional.get());
+		} else {
+			throw new ExpenseAccountException("L'id correpond à aucun frais");
+		}
+	}
+
 }
