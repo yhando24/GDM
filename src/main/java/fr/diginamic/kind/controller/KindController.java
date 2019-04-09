@@ -32,7 +32,7 @@ public class KindController {
 		return this.kindService.findAll();
 	}
 	
-	@GetMapping
+	@GetMapping("/active")
 	public List<KindDTO> findActive() {
 		return this.kindService.findActive();
 	}
