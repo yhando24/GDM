@@ -40,7 +40,7 @@ public class KindDTO {
 	private Boolean invoiced;
 	
 	@NotBlank
-	private Boolean active = true;
+	private Boolean active;
 
 	@NotBlank
 	public KindDTO() {
