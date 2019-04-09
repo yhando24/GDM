@@ -41,6 +41,10 @@ public class KindService {
 		return mapperKindService.toDTOs(kindRepository.findAll());
 	}
 
+	public List<KindDTO> findActive() {
+		return mapperKindService.toDTOs(kindRepository.findByActiveTrue());
+	}
+
 	public KindDTO save(KindDTO k) {
 		return mapperKindService.toDTO(kindRepository.save(mapperKindService.toEntity(k)));
 	}

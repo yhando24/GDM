@@ -31,6 +31,11 @@ public class KindController {
 	public List<KindDTO> findAll() {
 		return this.kindService.findAll();
 	}
+	
+	@GetMapping("/active")
+	public List<KindDTO> findActive() {
+		return this.kindService.findActive();
+	}
 
 	@Transactional
 	@PostMapping

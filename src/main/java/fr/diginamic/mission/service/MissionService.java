@@ -1,10 +1,12 @@
 package fr.diginamic.mission.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.kind.model.Kind;
@@ -14,6 +16,7 @@ import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.model.TransportEnum;
 import fr.diginamic.mission.repository.MissionRepository;
+import fr.diginamic.user.exception.ControllerUserException;
 import fr.diginamic.user.model.User;
 
 @Service
@@ -83,5 +86,42 @@ public class MissionService {
 	public List<MissionDTO> findAll() {
 		return mapperMissionService.toDTOs(missionRepository.findAll());
 	}
+	
+	//delete
+	public void deleteById(Long id) {
+		Mission m = missionRepository.findById(id).orElseThrow(() ->  new ControllerUserException("Cette mission n'existe pas"));
+		if(m.getMissionStatus().getName().equals("Validé")) {
+			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja ete validé");
+		}else if(m.getExpenseAccounts().size()>0) {
+			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja des notes de frais");
+		}
+		else {
+			missionRepository.deleteById(id);
+		}
 
+	}
+
+	
+	/*@Scheduled(cron="0 0 6 * * *")
+	public void test() {
+		System.out.println("cron");
+	}*/
+	
+	@Scheduled(cron="0 0 6 * * *")// tous les jours à 6h   //(cron="0 * * * * *")
+	public void changeStatusByNight() {
+		
+		List<Mission> missions = findByMissionStatus(MissionStatusEnum.INITIAL);
+				
+		if(missions.isEmpty()) {
+			System.out.println("Pas de modif");
+		}else {
+			for (Mission mission : missions) {		
+				mission.setMissionStatus(MissionStatusEnum.EN_ATTENTE);
+				update(mission);					
+			}
+		}
+		
+		
+	}
+	
 }

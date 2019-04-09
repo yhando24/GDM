@@ -1,5 +1,6 @@
 package fr.diginamic.kind.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,8 @@ public interface KindRepository extends JpaRepository<Kind, Long> {
 	Optional<Kind> findByName(String name);
 
 	Optional<Kind> findById(Long id);
+	
+	List<Kind> findByActiveTrue();
 	
 	
 	// delete
