@@ -53,7 +53,7 @@ public class StartupDataInit {
 		userRepository.save(new User(3L, "Plop3", "Plopeur3",
 				"$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER));
 
-		Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true);
+		Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true, true);
 
 		// KindVersion kv = new KindVersion("Formation", 12.05f, 10f, true, true, 10.1f,
 		// true, k, 1L, LocalDateTime.now());
