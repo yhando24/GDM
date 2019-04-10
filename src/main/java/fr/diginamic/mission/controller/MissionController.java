@@ -16,6 +16,7 @@ import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.service.MissionService;
+import fr.diginamic.security.SecurityUtils;
 
 @CrossOrigin
 @RestController()
