@@ -22,6 +22,16 @@ public class UserMissionServiceJeTimplementeCeQueTuVeuxHehe implements UserMissi
     @Override
     public List<User> getUser() {
         List<User> myUser = new ArrayList<User>();
+        
+        User myUser = new User();
+        myUser.setName("Mickael BARON");
+        myUser.setAddress("Migné-Auxances");
+        myUsers.add(myUser);
+        
+        myUser = new User();
+        myUser.setName("Sébastien LOEB");
+        myUser.setAddress("France");
+        myUsers.add(myPerson);
 
         myUser.add(new User("Mickael BARON", "Migné-Auxances"));
         myUser.add(new User("Sébastien LOEB", "France"));

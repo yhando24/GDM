@@ -146,6 +146,7 @@ public class CRUDService {
 		return Response.ok(absence).build();
 	}
 	
+	
 	@PUT
     @Path("/{reason}")
 	@Produces(MediaType.APPLICATION_JSON)
