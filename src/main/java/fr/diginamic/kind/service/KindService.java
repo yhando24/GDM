@@ -20,7 +20,6 @@ import fr.diginamic.kind.model.HistoricDTO;
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.repository.KindRepository;
-import fr.diginamic.mission.service.MissionService;
 
 @Service
 public class KindService {
@@ -31,8 +30,6 @@ public class KindService {
 	@Autowired
 	private MapperKindService mapperKindService;
 
-	@Autowired
-	private MissionService missionService;
 
 	@PersistenceContext
 	EntityManager em;
