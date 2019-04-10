@@ -1,7 +1,6 @@
 package fr.diginamic.mission.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class MissionService {
 	private MapperMissionService mapperMissionService;
 
 	// create
-	public Mission save(Mission mission) throws ErrorLogigDateMission {
+	public MissionDTO save(MissionDTO mission) throws ErrorLogigDateMission {
 		mission.setMissionStatus(MissionStatusEnum.INITIAL);
 
 		if (mission.getEndDate().isBefore(mission.getStartDate())) {
@@ -46,7 +45,7 @@ public class MissionService {
 		if (missionRepository.findVeriChevauchement(mission.getEndDate(), mission.getStartDate()).size() != 0) {
 			throw new ErrorLogigDateMission("Probleme de chevauchement de date de mission");
 		}
-		return missionRepository.save(mission);
+		return mapperMissionService.toDTO(missionRepository.save(mapperMissionService.toEntity(mission)));
 	}
 
 	// update
