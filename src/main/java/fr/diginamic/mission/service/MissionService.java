@@ -1,15 +1,19 @@
 package fr.diginamic.mission.service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.kind.model.Kind;
+import fr.diginamic.kind.service.KindService;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
@@ -27,6 +31,9 @@ public class MissionService {
 
 	@Autowired
 	private MapperMissionService mapperMissionService;
+
+	@Autowired
+	private KindService kindService;
 
 	// create
 	public Mission save(Mission mission) throws ErrorLogigDateMission {
@@ -86,38 +93,68 @@ public class MissionService {
 	public List<MissionDTO> findAll() {
 		return mapperMissionService.toDTOs(missionRepository.findAll());
 	}
-	
-	//delete
+
+	// delete
 	public void deleteById(Long id) {
-		Mission m = missionRepository.findById(id).orElseThrow(() ->  new ControllerUserException("Cette mission n'existe pas"));
-		if(m.getMissionStatus().getName().equals("Validé")) {
-			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja ete validé");
-		}else if(m.getExpenseAccounts().size()>0) {
-			throw new ControllerUserException("Cette Mission ne peut pas etre supprimé car la mission a deja des notes de frais");
-		}
-		else {
+		Mission m = missionRepository.findById(id)
+				.orElseThrow(() -> new ControllerUserException("Cette mission n'existe pas"));
+		if (m.getMissionStatus().getName().equals("Validé")) {
+			throw new ControllerUserException(
+					"Cette Mission ne peut pas etre supprimé car la mission a deja ete validé");
+		} else if (m.getExpenseAccounts().size() > 0) {
+			throw new ControllerUserException(
+					"Cette Mission ne peut pas etre supprimé car la mission a deja des notes de frais");
+		} else {
 			missionRepository.deleteById(id);
 		}
 
 	}
 
-	
-	
-	@Scheduled(cron="0 0 6 * * *")// tous les jours à 6h   //(cron="0 * * * * *") -> pour test toutes les minutes
+	@Scheduled(cron = "0 0 6 * * *") // tous les jours à 6h //(cron="0 * * * * *") -> pour test toutes les minutes
 	public void changeStatusByNight() {
-		
+
 		List<Mission> missions = missionRepository.findByMissionStatus(MissionStatusEnum.INITIAL);
-				
-		if(missions.isEmpty()) {
+
+		if (missions.isEmpty()) {
 			System.out.println("Pas de modif");
-		}else {
-			for (Mission mission : missions) {		
+		} else {
+			for (Mission mission : missions) {
 				mission.setMissionStatus(MissionStatusEnum.EN_ATTENTE);
-				update(mission);					
+				update(mission);
 			}
+		}
+
+	}
+
+	@Scheduled(cron="0 * * * * *") //tous les 15 du mois (cron="0 0 0 15 * *")
+	@Transactional
+	public void bonusCalcul() {
+		// récupération des missions validées avec prime null
+		List<Mission> missions = missionRepository
+				.findMissionByEndDateAndMissionStatusValideAndPrimeNull(LocalDate.now());
+
+		if(missions.isEmpty()) {
+			System.out.println("Pas de primes à calculer");
+		}else {			
+			//Pour chaque mission, on récupére l'id de la nature, avec cette id 
+			//on récupère la version de nature correspondant à la date de création de la mission 
+			for (Mission mission : missions) {
+				Long id = mission.getKind().getId();
+				Kind kind = kindService.findKindVersionByIdAndTimestamp(id, ZonedDateTime.now().toInstant().toEpochMilli());
+				
+				//On teste si bonus est à true puis on calcule le nombre de jours de mission, la prime et on sauvegarde en bdd
+				if (kind.getBonus() == true) {
+					Long days = ChronoUnit.DAYS.between(mission.getStartDate(), mission.getEndDate());
+					Float prime = days * kind.getAdr() * kind.getBonusPercentage() / 100;
+					mission.setPrime(prime);
+					update(mission);
+				}
+
+			}
+			
 		}
 		
 		
 	}
-	
+
 }

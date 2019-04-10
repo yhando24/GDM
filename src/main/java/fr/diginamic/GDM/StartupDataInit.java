@@ -2,6 +2,7 @@ package fr.diginamic.GDM;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -53,13 +54,14 @@ public class StartupDataInit {
 		userRepository.save(new User(3L, "Plop3", "Plopeur3",
 				"$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER));
 
-		Kind k = new Kind("Formation", 12.05f, 10f, LocalDateTime.now(), true, true, 10.1f, true, true);
+		Kind k = new Kind("Formation", 405.05f, 10f, LocalDateTime.of(2019,Month.JANUARY,3,0,0,0), true, true, 10.1f, true, true);
 
-		// KindVersion kv = new KindVersion("Formation", 12.05f, 10f, true, true, 10.1f,
-		// true, k, 1L, LocalDateTime.now());
-
-		// KindVersion kv2 = new KindVersion("Formation", 15.05f, 10f, true, true,
-		// 10.1f, true, k, 2L, LocalDateTime.now());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
 
@@ -71,6 +73,8 @@ public class StartupDataInit {
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k, u, 150.01f);
 		Mission m3 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "CASABLANCA", "POUBELLE", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+		Mission m4 = new Mission(LocalDate.of(2019, Month.JANUARY, 3), LocalDate.of(2019, Month.JANUARY, 6), "paris",
+				"madrid", null,MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
 
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
@@ -84,6 +88,7 @@ public class StartupDataInit {
 		missionRepository.save(m);
 		missionRepository.save(m2);
 		missionRepository.save(m3);
+		missionRepository.save(m4);
 		expenseAccountRepository.save(ea);
 
 		// System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
