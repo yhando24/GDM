@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,4 +46,10 @@ public class MissionController {
 	public MissionDTO update(@RequestBody MissionDTO mission) throws ErrorLogigDateMission {
 		return missionService.save(mission);
 	}
+	
+	@PostMapping
+	public MissionDTO save(@RequestBody MissionDTO m) throws ErrorLogigDateMission {
+		return missionService.save(m);
+	}
+	
 }
