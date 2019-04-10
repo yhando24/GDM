@@ -74,6 +74,16 @@ public class StartupDataInit {
 
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
+		
+		Mission m21 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,
+				MissionStatusEnum.EN_ATTENTE, TransportEnum.VELO, k, u, 150.01f);
+		ExpenseAccount ea2 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m21);
+		m21.addexpenseAccounts(ea2);
+		
+		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes", 12f,
+				MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
+		ExpenseAccount ea3 = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m31);
+		m31.addexpenseAccounts(ea3);
 
 		// k.addMission(m);
 		// kv2.addMission(m);
@@ -82,8 +92,8 @@ public class StartupDataInit {
 		// kindVersionRepository.save(kv);
 		// kindVersionRepository.save(kv2);
 		missionRepository.save(m);
-		missionRepository.save(m2);
-		missionRepository.save(m3);
+		missionRepository.save(m21);
+		missionRepository.save(m31);
 		expenseAccountRepository.save(ea);
 
 		// System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
