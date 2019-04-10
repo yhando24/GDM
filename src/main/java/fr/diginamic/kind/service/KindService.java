@@ -20,7 +20,6 @@ import fr.diginamic.kind.model.HistoricDTO;
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.kind.repository.KindRepository;
-import fr.diginamic.mission.service.MissionService;
 
 @Service
 public class KindService {
@@ -31,8 +30,6 @@ public class KindService {
 	@Autowired
 	private MapperKindService mapperKindService;
 
-	@Autowired
-	private MissionService missionService;
 
 	@PersistenceContext
 	EntityManager em;
@@ -56,7 +53,9 @@ public class KindService {
 		kindRepository.deleteById(id);
 	}
 
-	public KindDTO finKindVersionByIdAndTimestamp(long id, long millis) {
+	
+	
+	public KindDTO findKindDTOVersionByIdAndTimestamp(long id, long millis) {
 
 		Kind kind = null;
 		AuditReader reader = AuditReaderFactory.get(em);
@@ -71,7 +70,27 @@ public class KindService {
 
 		return mapperKindService.toDTO(kind);
 	}
+	
+	
+	
+	public Kind findKindVersionByIdAndTimestamp(long id, long millis) {
 
+		Kind kind = null;
+		AuditReader reader = AuditReaderFactory.get(em);
+		Number num = reader.getRevisionNumberForDate(Date.from(Instant.ofEpochMilli(millis)));
+		AuditQuery query = reader.createQuery().forEntitiesAtRevision(Kind.class, num);
+		query.add(AuditEntity.id().eq(id));
+		kind = (Kind) query.getSingleResult();
+
+		if (kind == null) {
+			throw new KindException("Cette version de nature n'existe pas");
+		}
+
+		return kind;
+	}
+
+	
+	
 	public List<HistoricDTO> findKindHistoricById(long id) {
 		List<HistoricDTO> historique = new ArrayList<>();
 		AuditReader reader = AuditReaderFactory.get(em);
