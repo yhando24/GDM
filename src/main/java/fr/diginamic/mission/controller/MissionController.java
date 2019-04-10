@@ -36,7 +36,7 @@ public class MissionController {
 
 	}
 	
-	@PatchMapping()
+	@PatchMapping
 	public MissionDTO updateMission(@RequestBody Mission m) {
 		System.err.println(m);
 		return this.missionService.update(m);
