@@ -21,7 +21,6 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	public Mission save(Mission mission);
 
 	// read
-
 	public Optional<Mission> findById(Long id);
 
 	public List<Mission> findByUser(User user);
@@ -30,7 +29,7 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 
 	public List<Mission> findByArrivalCity(String arrivalCity);
 
-	public List<MissionDTO> findByMissionStatus(MissionStatusEnum missionStatusEnum);
+	public List<Mission> findByMissionStatus(MissionStatusEnum missionStatusEnum);
 
 	public List<Mission> findByMissionStatusAndUser(MissionStatusEnum MissionStatusEnum, User user);
 

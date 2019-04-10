@@ -50,8 +50,8 @@ public class MissionService {
 	}
 
 	// update
-	public Mission update(Mission mission) {
-		return missionRepository.save(mission);
+	public MissionDTO update(Mission mission) {
+		return mapperMissionService.toDTO(missionRepository.save(mission));
 	}
 
 	// read
@@ -72,7 +72,7 @@ public class MissionService {
 	}
 
 	public List<MissionDTO> findByMissionStatus(MissionStatusEnum status) {
-		return missionRepository.findByMissionStatus(status);
+		return mapperMissionService.toDTOs(missionRepository.findByMissionStatus(status));
 	}
 
 	public List<Mission> findByMissionStatusAndUser(MissionStatusEnum MissionStatusEnum, User user) {

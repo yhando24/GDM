@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 
 import fr.diginamic.kind.model.KindDTO;
+import fr.diginamic.user.model.User;
+import fr.diginamic.user.model.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,12 +49,15 @@ public class MissionDTO implements Serializable {
 
 	@NotBlank
 	private BigDecimal amountOfBill;
+	
+	@NotBlank
+	private UserDTO user;
 
 //	CONSTRUCTEURS
 
 	public MissionDTO(Long id, LocalDate startDate, LocalDate endDate, String departureCity, String arrivalCity,
 			BigDecimal prime, MissionStatusEnum missionStatus, TransportEnum transportEnum, KindDTO kind,
-			BigDecimal amountOfBill) {
+			BigDecimal amountOfBill, UserDTO user) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -64,6 +69,7 @@ public class MissionDTO implements Serializable {
 		this.transportEnum = transportEnum;
 		this.kind = kind;
 		this.amountOfBill = amountOfBill;
+		this.user = user;
 	}
 
 	public MissionDTO() {
