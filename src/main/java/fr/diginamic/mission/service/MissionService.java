@@ -126,7 +126,7 @@ public class MissionService {
 
 	}
 
-	@Scheduled(cron="0 * * * * *") //tous les 15 du mois (cron="0 0 0 15 * *")
+	@Scheduled(cron="0 0 0 15 * *") //tous les 15 du mois 
 	@Transactional
 	public void bonusCalcul() {
 		// récupération des missions validées avec prime null
