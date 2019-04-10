@@ -51,7 +51,7 @@ public class Kind {
 	private Boolean authorizationToExceed;
 	
 	@Column (nullable = false)
-	private Boolean active = true;
+	private Boolean active;
 
 	public Kind() {
 	}

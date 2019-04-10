@@ -102,10 +102,10 @@ public class MissionService {
 	}
 
 	
-	/*@Scheduled(cron="0 0 6 * * *")// tous les jours à 6h   //(cron="0 * * * * *")
+
 	public void changeStatusByNight() {
 		
-		List<Mission> missions = findByMissionStatus(MissionStatusEnum.INITIAL);
+		List<Mission> missions = missionRepository.findByMissionStatus(MissionStatusEnum.INITIAL);
 				
 		if(missions.isEmpty()) {
 			System.out.println("Pas de modif");
@@ -117,6 +117,6 @@ public class MissionService {
 		}
 		
 		
-	}*/
+	}
 
 }
