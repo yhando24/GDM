@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.mission.model.Mission;
+import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.user.model.User;
 
@@ -20,7 +21,6 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	public Mission save(Mission mission);
 
 	// read
-
 	public Optional<Mission> findById(Long id);
 
 	public List<Mission> findByUser(User user);
@@ -29,7 +29,7 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 
 	public List<Mission> findByArrivalCity(String arrivalCity);
 
-	public List<Mission> findByMissionStatus(MissionStatusEnum MissionStatusEnum);
+	public List<Mission> findByMissionStatus(MissionStatusEnum missionStatusEnum);
 
 	public List<Mission> findByMissionStatusAndUser(MissionStatusEnum MissionStatusEnum, User user);
 

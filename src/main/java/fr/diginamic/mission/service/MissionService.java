@@ -57,8 +57,8 @@ public class MissionService {
 	}
 
 	// update
-	public Mission update(Mission mission) {
-		return missionRepository.save(mission);
+	public MissionDTO update(Mission mission) {
+		return mapperMissionService.toDTO(missionRepository.save(mission));
 	}
 
 	// read
@@ -78,8 +78,8 @@ public class MissionService {
 		return missionRepository.findByArrivalCity(arrivalCity);
 	}
 
-	public List<Mission> findByMissionStatus(MissionStatusEnum MissionStatusEnum) {
-		return missionRepository.findByMissionStatus(MissionStatusEnum);
+	public List<MissionDTO> findByMissionStatus(MissionStatusEnum status) {
+		return mapperMissionService.toDTOs(missionRepository.findByMissionStatus(status));
 	}
 
 	public List<Mission> findByMissionStatusAndUser(MissionStatusEnum MissionStatusEnum, User user) {
@@ -109,6 +109,7 @@ public class MissionService {
 		}
 
 	}
+
 
 	@Scheduled(cron = "0 0 6 * * *") // tous les jours à 6h //(cron="0 * * * * *") -> pour test toutes les minutes
 	public void changeStatusByNight() {
