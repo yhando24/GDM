@@ -59,6 +59,7 @@ public class CRUDService {
 		return Response.ok(Absence.getId(id)).build();
 	}
 	
+	
 	@GET
 	@Path("/{startDate}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -82,12 +83,13 @@ public class CRUDService {
 		// le service retourne une ressoure : MaRessource et un code HTTP 200
 		return Response.ok((Absence.getReason(reason)).build();
 	}
+
 	
 	@GET
 	@Path("/{idAbsenceType}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAbsenceParIdAbsenceType(@PathParam("idAbsenceType") int idAbsenceType) {
-		// le service retourne une ressoure : MaRessource et un code HTTP 200
+		// le service retourne une ressoure : idAbsenceType et un code HTTP 200
 		return Response.ok((Absence.getIdAbsenceType(idAbsenceType)).build();
 	}
 	
@@ -95,7 +97,7 @@ public class CRUDService {
 	@Path("/{idStatus}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAbsenceParIdStatus(@PathParam("idStatus") int idStatus) {
-		// le service retourne une ressoure : MaRessource et un code HTTP 200
+		// le service retourne une ressoure : idStatus et un code HTTP 200
 		return Response.ok((Absence.getIdStatus(idStatus)).build();
 	}
 	
@@ -103,7 +105,7 @@ public class CRUDService {
 	@Path("/{idUser}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAbsenceParIdUser(@PathParam("idUser") int idUser) {
-		// le service retourne une ressoure : MaRessource et un code HTTP 200
+		// le service retourne une ressoure : idUser et un code HTTP 200
 		return Response.ok((Absence.getIdUser(idUser)).build();
 	}
 	
@@ -111,7 +113,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createAbsence(Absence absence) {
-		// le service crï¿½e une ressoure MaRessource, retourne l'ID de la ressource et un code HTTP 201
+		// le service retourne une ressoure MaRessource, retourne l'ID de la ressource et un code HTTP 201
 		Absence result = Absence.createAbsence(Absence);
 		return Response.status(Status.CREATED).entity(result.getId()).build();
 	}
@@ -152,7 +154,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("reason") String reason) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour reason, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(absence);
 		return Response.ok(absence).build();
 	}
@@ -162,7 +164,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("idAbsenceType") int idAbsenceType) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour idAbsenceType, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(idAbsenceType);
 		return Response.ok(absence).build();
 	}
@@ -172,7 +174,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("idStatus") int idStatus) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour idStatus, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(idStatus);
 		return Response.ok(idStatus).build();
 	}
@@ -182,7 +184,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("idUser") int idUser) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour idUser, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(idUser);
 		return Response.ok(idUser).build();
 	}
@@ -191,7 +193,7 @@ public class CRUDService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAbsence(@PathParam("id") int id) {
-		// le service supprime une ressoure MaRessource et retourne un code HTTP 204
+		// le service supprime id et retourne un code HTTP 204
                 absence.deleteAbsence(id);
 		return Response.status(Status.NO_CONTENT).build();
 	}
@@ -200,7 +202,7 @@ public class CRUDService {
 	@Path("/{startDate}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAbsence(@PathParam("startDate") Date startDate) {
-		// le service supprime une ressoure MaRessource et retourne un code HTTP 204
+		// le service supprime  et retourne un code HTTP 204
                 absence.deleteAbsence(startDate);
 		return Response.status(Status.NO_CONTENT).build();
 	}
@@ -209,10 +211,15 @@ public class CRUDService {
 	@Path("/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAbsence(@PathParam("endDate") Date endDate) {
-		// le service supprime une ressoure MaRessource et retourne un code HTTP 204
+		// le service supprime endDate et retourne un code HTTP 204
                 absence.deleteAbsence(endDate);
 		return Response.status(Status.NO_CONTENT).build();
 	}
+	
+	
+
+	
+	
 	
 	@DELETE
 	@Path("/{reason}")
@@ -232,6 +239,8 @@ public class CRUDService {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+
+	
 	@DELETE
 	@Path("/{idStatus}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -245,7 +254,7 @@ public class CRUDService {
 	@Path("/{idUser}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteAbsence(@PathParam("idUser") int idUser) {
-		// le service supprime une ressoure MaRessource et retourne un code HTTP 204
+		// le service supprime idUser et retourne un code HTTP 204
                 absence.deleteAbsence(idUser);
 		return Response.status(Status.NO_CONTENT).build();
 	}
