@@ -69,8 +69,8 @@ public class MissionService {
 		return missionRepository.findById(id);
 	}
 
-	public List<Mission> findByUser(User user) {
-		return missionRepository.findByUser(user);
+	public List<MissionDTO> findByUser(Long idUser) {
+		return mapperMissionService.toDTOs(missionRepository.findByUserId(idUser));
 	}
 
 	public List<Mission> findByArrivalCity(String arrivalCity) {

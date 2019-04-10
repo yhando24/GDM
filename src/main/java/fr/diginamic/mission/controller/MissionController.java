@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,6 @@ import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.service.MissionService;
-import fr.diginamic.user.model.UserDTO;
 
 @CrossOrigin
 @RestController()
@@ -40,5 +40,10 @@ public class MissionController {
 	public MissionDTO updateMission(@RequestBody Mission m) {
 		System.err.println(m);
 		return this.missionService.update(m);
+	}
+	
+	@GetMapping("/{idUser}")
+	public List<MissionDTO> findByUser(@PathVariable Long idUser){
+		return this.missionService.findByUser(idUser);
 	}
 }
