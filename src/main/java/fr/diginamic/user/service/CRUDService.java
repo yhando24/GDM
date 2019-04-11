@@ -123,7 +123,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("id") int id) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour une ressoure MaRessource, retourne l'id et un code HTTP 200
 		absence.updateAbsence(absence);
 		return Response.ok(absence).build();
 	}
@@ -148,6 +148,7 @@ public class CRUDService {
 		return Response.ok(absence).build();
 	}
 	
+
 	
 	@PUT
     @Path("/{reason}")
@@ -179,6 +180,9 @@ public class CRUDService {
 		return Response.ok(idStatus).build();
 	}
 	
+	
+	
+	
 	@PUT
     @Path("/{idUser}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -207,6 +211,10 @@ public class CRUDService {
 		return Response.status(Status.NO_CONTENT).build();
 	}
 	
+	
+	
+	
+	
 	@DELETE
 	@Path("/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -229,6 +237,9 @@ public class CRUDService {
                 absence.deleteAbsence(reason);
 		return Response.status(Status.NO_CONTENT).build();
 	}
+	
+	
+
 	
 	@DELETE
 	@Path("/{idAbsenceType}")
