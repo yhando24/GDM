@@ -50,9 +50,9 @@ public class MissionController {
 	}
 
 	
-	@GetMapping("/{idUser}")
+	@GetMapping("/primes/{idUser}")
 	public List<MissionDTO> findByUser(@PathVariable Long idUser){
-		return this.missionService.findByUser(idUser);
+		return this.missionService.findByUserIdAndPrimeNotNull(idUser);
 	}
 
 
