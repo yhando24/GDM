@@ -22,6 +22,11 @@ import fr.diginamic.user.model.RoleEnum;
 import fr.diginamic.user.model.User;
 import fr.diginamic.user.repository.UserRepository;
 
+import java.lang.InterruptedException;
+
+
+
+
 @Component
 public class StartupDataInit {
 
@@ -48,18 +53,21 @@ public class StartupDataInit {
 		User u = new User(1L, "Plop1", "Plopeur1", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
 				"admin@admin.fr", RoleEnum.ADMIN);
 		userRepository.save(u);
-		
+
 		User u2 = new User(2L, "Plop2", "Plopeur2", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
-				"manager@manager.fr", RoleEnum.MANAGER); 
+				"manager@manager.fr", RoleEnum.MANAGER);
 		userRepository.save(u2);
-		
-		User u3 = new User(3L, "Plop3", "Plopeur3",
-				"$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER);
+
+		User u3 = new User(3L, "Plop3", "Plopeur3", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
+				"user@user.fr", RoleEnum.USER);
 		userRepository.save(u3);
 
-		Kind k = new Kind("Formation", 405.05f, 10f, LocalDateTime.of(2019,Month.JANUARY,3,0,0,0), true, true, 10.1f, true, true);
-		Kind k1 = new Kind("Expertise technique", 603.5f, 0f, LocalDateTime.of(2019,Month.FEBRUARY,3,0,0,0), false, false, 50f, true, true);
-		Kind k2 = new Kind("Conseil", 707.1f, 15f, LocalDateTime.of(2019,Month.FEBRUARY,10,0,0,0), true, true, 50f, false, true);
+		Kind k = new Kind("Formation", 405.05f, 10f, LocalDateTime.of(2019, Month.JANUARY, 3, 0, 0, 0), true, true,
+				10.1f, true, true);
+		Kind k1 = new Kind("Expertise technique", 603.5f, 0f, LocalDateTime.of(2019, Month.FEBRUARY, 3, 0, 0, 0), false,
+				false, 50f, true, true);
+		Kind k2 = new Kind("Conseil", 707.1f, 15f, LocalDateTime.of(2019, Month.FEBRUARY, 10, 0, 0, 0), true, true, 50f,
+				false, true);
 
 		try {
 			Thread.sleep(1000);
@@ -68,43 +76,37 @@ public class StartupDataInit {
 			e.printStackTrace();
 		}
 
-
-
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
 
 				MissionStatusEnum.INITIAL, TransportEnum.BUS, k, u, 150.01f);
 
-				//MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+		// MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
 
-		
 		Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "MARSEILLE", "TATAOUINE", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k2, u2, 150.01f);
 		Mission m3 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "CASABLANCA", "POUBELLE", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k1, u, 150.01f);
 		Mission m4 = new Mission(LocalDate.of(2019, Month.JANUARY, 3), LocalDate.of(2019, Month.JANUARY, 6), "paris",
-				"madrid", null,MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u3, 150.01f);
+				"madrid", null, MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u3, 150.01f);
 
 		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
 		m.addexpenseAccounts(ea);
-		
+
 		Mission m21 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.VELO, k, u, 150.01f);
 		ExpenseAccount ea2 = new ExpenseAccount(2L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m21);
 		m21.addexpenseAccounts(ea2);
-		
-		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes", 12f,
-				MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
+
+		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes",
+				12f, MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
 		ExpenseAccount ea3 = new ExpenseAccount(3L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m31);
 		m31.addexpenseAccounts(ea3);
-
-		
 
 		kindRepository.save(k);
 		kindRepository.save(k1);
 		kindRepository.save(k2);
-		
-		missionRepository.save(m);
 
+		missionRepository.save(m);
 
 		missionRepository.save(m2);
 		missionRepository.save(m3);
@@ -112,7 +114,6 @@ public class StartupDataInit {
 
 		missionRepository.save(m21);
 		missionRepository.save(m31);
-
 
 		expenseAccountRepository.save(ea);
 		expenseAccountRepository.save(ea2);
