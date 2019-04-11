@@ -76,10 +76,14 @@ public class MissionService {
 		return missionRepository.findById(id);
 	}
 
-	public List<MissionDTO> findByUser(Long idUser) {
+	public List<MissionDTO> findByUserId(Long idUser) {
 		return mapperMissionService.toDTOs(missionRepository.findByUserId(idUser));
 	}
 
+	public List<MissionDTO> findByUserIdAndPrimeNotNull(Long idUser){
+		return mapperMissionService.toDTOs(missionRepository.findMissionByUserIdAndPrimeNotNull(idUser));
+	}
+	
 	public List<Mission> findByArrivalCity(String arrivalCity) {
 		return missionRepository.findByArrivalCity(arrivalCity);
 	}
