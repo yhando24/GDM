@@ -45,7 +45,7 @@ public class MissionService {
 		if (missionDTO.getEndDate().isBefore(missionDTO.getStartDate())) {
 			throw new ControllerMissionException("La date de fin est avant la date de debut");
 		}
-		if (missionDTO.getStartDate().isBefore(LocalDate.now())) {
+		if (missionDTO.getStartDate().isBefore(LocalDate.now().plusDays(1))) {
 			throw new ControllerMissionException("Une mission doit commencer à J+1");
 		}
 		if (missionDTO.getTransportEnum().equals(TransportEnum.AVION)
@@ -78,8 +78,13 @@ public class MissionService {
 
 	public List<MissionDTO> findByUser() {
 		return mapperMissionService.toDTOs(missionRepository.findByUserId(securityUtils.getConnectedUser().getId()));
+
 	}
 
+	public List<MissionDTO> findByUserIdAndPrimeNotNull(Long idUser){
+		return mapperMissionService.toDTOs(missionRepository.findMissionByUserIdAndPrimeNotNull(idUser));
+	}
+	
 	public List<Mission> findByArrivalCity(String arrivalCity) {
 		return missionRepository.findByArrivalCity(arrivalCity);
 	}
