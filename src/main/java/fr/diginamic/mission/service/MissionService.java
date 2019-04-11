@@ -76,8 +76,9 @@ public class MissionService {
 		return missionRepository.findById(id);
 	}
 
-	public List<MissionDTO> findByUserId(Long idUser) {
-		return mapperMissionService.toDTOs(missionRepository.findByUserId(idUser));
+	public List<MissionDTO> findByUser() {
+		return mapperMissionService.toDTOs(missionRepository.findByUserId(securityUtils.getConnectedUser().getId()));
+
 	}
 
 	public List<MissionDTO> findByUserIdAndPrimeNotNull(Long idUser){
