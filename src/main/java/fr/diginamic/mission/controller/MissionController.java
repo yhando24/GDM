@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.service.MissionService;
+import fr.diginamic.security.SecurityUtils;
 
 @CrossOrigin
 @RestController()
@@ -42,6 +44,13 @@ public class MissionController {
 		return this.missionService.update(m);
 	}
 
+	
+	@GetMapping("/{idUser}")
+	public List<MissionDTO> findByUser(@PathVariable Long idUser){
+		return this.missionService.findByUser(idUser);
+	}
+
+
 	@PatchMapping("/update")
 	public MissionDTO update(@RequestBody MissionDTO mission) throws ErrorLogigDateMission {
 		return missionService.save(mission);
@@ -52,4 +61,5 @@ public class MissionController {
 		return missionService.save(m);
 	}
 	
+
 }

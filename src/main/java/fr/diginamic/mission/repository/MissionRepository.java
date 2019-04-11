@@ -24,6 +24,8 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	public Optional<Mission> findById(Long id);
 
 	public List<Mission> findByUser(User user);
+	
+	public List<Mission> findByUserId(Long idUser);
 
 	public List<Mission> findByDepartureCity(String departureCity);
 
