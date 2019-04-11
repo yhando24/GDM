@@ -61,7 +61,7 @@ public class StartupDataInit {
 		// KindVersion kv2 = new KindVersion("Formation", 15.05f, 10f, true, true,
 		// 10.1f, true, k, 2L, LocalDateTime.now());
 
-		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
+		Mission m = new Mission(LocalDate.now().plusDays(2), LocalDate.now().plusDays(7), "paris", "madrid", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
 		
 		Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "MARSEILLE", "TATAOUINE", 12f,
@@ -78,8 +78,8 @@ public class StartupDataInit {
 		// kindVersionRepository.save(kv);
 		// kindVersionRepository.save(kv2);
 		missionRepository.save(m);
-		missionRepository.save(m2);
-		missionRepository.save(m3);
+//		missionRepository.save(m2);
+//		missionRepository.save(m3);
 		expenseAccountRepository.save(ea);
 
 		// System.out.println(kindVersionRepository.findTopByNameOrderByVersionDesc(kv2.getName()).getVersion());
