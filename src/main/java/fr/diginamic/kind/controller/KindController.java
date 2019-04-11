@@ -55,7 +55,7 @@ public class KindController {
 
 	@GetMapping("/historic/{id}/{millis}")
 	public KindDTO finKindVersionByIdAndTimestamp(@PathVariable("id") long id, @PathVariable("millis") long millis) {
-		return this.kindService.finKindVersionByIdAndTimestamp(id, millis);
+		return this.kindService.findKindDTOVersionByIdAndTimestamp(id, millis);
 	}
 
 	@GetMapping("/historic/{id}")

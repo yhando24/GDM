@@ -19,6 +19,7 @@ public interface KindRepository extends JpaRepository<Kind, Long> {
 	List<Kind> findByActiveTrue();
 	
 	
+	
 	// delete
 
 	public void deleteById(Long id);
