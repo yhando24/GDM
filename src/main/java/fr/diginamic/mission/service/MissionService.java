@@ -56,7 +56,7 @@ public class MissionService {
 		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
 			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
 		}
-
+		System.out.println("//////////////////////////////////////////////////////////////////////////////////////////////");
 		Mission mission = mapperMissionService.toEntity(missionDTO);
 		mission.setUser(securityUtils.getConnectedUser());
 		return mapperMissionService.toDTO(missionRepository.save(mission));
