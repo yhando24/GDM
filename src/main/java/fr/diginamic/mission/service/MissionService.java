@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.service.KindService;
-import fr.diginamic.mission.exception.ErrorLogigDateMission;
+import fr.diginamic.mission.exception.ControllerMissionException;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
@@ -39,22 +39,22 @@ public class MissionService {
 	private KindService kindService;
 
 	// create
-	public MissionDTO save(MissionDTO missionDTO) throws ErrorLogigDateMission {
+	public MissionDTO save(MissionDTO missionDTO) throws ControllerMissionException {
 		missionDTO.setMissionStatus(MissionStatusEnum.INITIAL);
 
 		if (missionDTO.getEndDate().isBefore(missionDTO.getStartDate())) {
-			throw new ErrorLogigDateMission("La date de fin est avant la date de debut");
+			throw new ControllerMissionException("La date de fin est avant la date de debut");
 		}
-		if (missionDTO.getStartDate().isBefore(LocalDate.now())) {
-			throw new ErrorLogigDateMission("Une mission doit commencer à J+1");
+		if (missionDTO.getStartDate().isBefore(LocalDate.now().plusDays(1))) {
+			throw new ControllerMissionException("Une mission doit commencer à J+1");
 		}
 		if (missionDTO.getTransportEnum().equals(TransportEnum.AVION)
 				&& !missionDTO.getStartDate().isAfter(LocalDate.now().plusDays(7))) {
-			throw new ErrorLogigDateMission(
+			throw new ControllerMissionException(
 					"Si une mission se deroule grace à l'utilisation d'un avion, elle doit commencer au moin 7 jours apres la date d'aujourd'hui");
 		}
 		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
-			throw new ErrorLogigDateMission("Probleme de chevauchement de date de mission");
+			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
 		}
 
 		Mission mission = mapperMissionService.toEntity(missionDTO);
