@@ -92,7 +92,7 @@ public class StartupDataInit {
 		ExpenseAccount ea2 = new ExpenseAccount(2L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m21);
 		m21.addexpenseAccounts(ea2);
 		
-		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "monpellier", "nimes", 12f,
+		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "montpellier", "nimes", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
 		ExpenseAccount ea3 = new ExpenseAccount(3L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m31);
 		m31.addexpenseAccounts(ea3);
