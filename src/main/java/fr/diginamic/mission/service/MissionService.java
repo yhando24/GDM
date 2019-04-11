@@ -45,7 +45,7 @@ public class MissionService {
 		if (missionDTO.getEndDate().isBefore(missionDTO.getStartDate())) {
 			throw new ControllerMissionException("La date de fin est avant la date de debut");
 		}
-		if (missionDTO.getStartDate().isBefore(LocalDate.now())) {
+		if (missionDTO.getStartDate().isBefore(LocalDate.now().plusDays(1))) {
 			throw new ControllerMissionException("Une mission doit commencer à J+1");
 		}
 		if (missionDTO.getTransportEnum().equals(TransportEnum.AVION)
