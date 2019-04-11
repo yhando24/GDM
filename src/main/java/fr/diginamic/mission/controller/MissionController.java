@@ -45,9 +45,9 @@ public class MissionController {
 	}
 
 	
-	@GetMapping("/{idUser}")
-	public List<MissionDTO> findByUser(@PathVariable Long idUser){
-		return this.missionService.findByUser(idUser);
+	@GetMapping("/perso")
+	public List<MissionDTO> findByUser(){
+		return this.missionService.findByUser();
 	}
 
 
