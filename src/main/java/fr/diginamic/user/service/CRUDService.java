@@ -72,7 +72,7 @@ public class CRUDService {
 	@Path("/{endDate}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAbsenceParEndDate(@PathParam("endDate") Date endDate) {
-		// le service retourne une ressoure : MaRessource et un code HTTP 200
+		// le service retourne une ressoure : endDate et un code HTTP 200
 		return Response.ok((Absence.getEndDate(endDate)).build();
 	}
 	
@@ -80,7 +80,7 @@ public class CRUDService {
 	@Path("/{reason}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAbsenceParReason(@PathParam("reason") String reason) {
-		// le service retourne une ressoure : MaRessource et un code HTTP 200
+		// le service retourne une ressoure : reason et un code HTTP 200
 		return Response.ok((Absence.getReason(reason)).build();
 	}
 
@@ -123,7 +123,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("id") int id) {
-		// le service met à jour une ressoure MaRessource, retourne l'id et un code HTTP 200
+		// le service met à jour id, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(absence);
 		return Response.ok(absence).build();
 	}
@@ -133,7 +133,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("startDate") Date startDate) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service met à jour startDate, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(absence);
 		return Response.ok(absence).build();
 	}
@@ -143,7 +143,7 @@ public class CRUDService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateAbsence(@PathParam("endDate") Date endDate) {
-		// le service met ï¿½ jour une ressoure MaRessource, retourne la ressource et un code HTTP 200
+		// le service metà jour endDate, retourne la ressource et un code HTTP 200
 		absence.updateAbsence(absence);
 		return Response.ok(absence).build();
 	}
