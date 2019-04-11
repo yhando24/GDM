@@ -37,6 +37,11 @@ public class MissionController {
 		return this.missionService.findByMissionStatus(MissionStatusEnum.EN_ATTENTE);
 
 	}
+	@GetMapping("/display-all")
+	public List<MissionDTO> findAllForManager() {
+		return this.missionService.findByMissionStatus(MissionStatusEnum.VALIDE);
+
+	}
 
 	@PatchMapping
 	public MissionDTO updateMission(@RequestBody Mission m) {
