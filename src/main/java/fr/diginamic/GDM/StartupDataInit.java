@@ -68,11 +68,14 @@ public class StartupDataInit {
 			e.printStackTrace();
 		}
 
+
+
 		Mission m = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "paris", "madrid", 12f,
 
 				MissionStatusEnum.INITIAL, TransportEnum.BUS, k, u, 150.01f);
 
 				//MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u, 150.01f);
+
 		
 		Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(5), "MARSEILLE", "TATAOUINE", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k2, u2, 150.01f);
@@ -102,12 +105,14 @@ public class StartupDataInit {
 		
 		missionRepository.save(m);
 
+
 		missionRepository.save(m2);
 		missionRepository.save(m3);
 		missionRepository.save(m4);
 
 		missionRepository.save(m21);
 		missionRepository.save(m31);
+
 
 		expenseAccountRepository.save(ea);
 		expenseAccountRepository.save(ea2);
