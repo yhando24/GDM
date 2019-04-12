@@ -66,5 +66,9 @@ public class MissionController {
 		return missionService.save(m);
 	}
 	
+	@GetMapping("/primes/{idUser}")
+	public List<MissionDTO> findByUserAndPrimeNotNull(@PathVariable Long idUser){
+		return this.missionService.findByUserIdAndPrimeNotNull(idUser);
+	}
 
 }
