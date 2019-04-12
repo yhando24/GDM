@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.expenseaccount.model.ExpenseAccountDTO;
+import fr.diginamic.expenseaccount.model.ExpenseAccountStatusEnum;
+import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
 import fr.diginamic.expenseaccount.service.ExpenseAccountService;
+import fr.diginamic.expenseaccount.service.MapperExpenseAccount;
 
 
 @CrossOrigin
@@ -27,14 +30,23 @@ public class ExpenseAccountController {
 	@Autowired
 	private ExpenseAccountService expenseAccountService;
 	
+
+	
 	@GetMapping
 	public List <ExpenseAccountDTO> findAll(){
 		return this.expenseAccountService.findAll();
+	}
+	
+
+	@GetMapping("/{id}")
+	public List<ExpenseAccountDTO> findbyMission(@PathVariable("id") Long id) {
+		return expenseAccountService.findByMissionId(id);
 	}
 
 	@Transactional
 	@PostMapping
 	public ExpenseAccountDTO saveExpenseAccount(@RequestBody ExpenseAccountDTO k) {
+		k.setStatus(ExpenseAccountStatusEnum.INITIAL);
 		return expenseAccountService.save(k);
 	}
 	

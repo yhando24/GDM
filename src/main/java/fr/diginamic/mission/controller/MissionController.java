@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -70,6 +71,11 @@ public class MissionController {
 	public List<MissionDTO> findByUser(){
 		return this.missionService.findByUser();
 	}
+	
+	@GetMapping("/findById/{id}")
+	public MissionDTO findById(@PathVariable Long id){
+		return this.missionService.findById(id);
+	}
 
 
 	@PatchMapping("/update")
@@ -82,5 +88,9 @@ public class MissionController {
 		return missionService.save(m);
 	}
 	
+	@GetMapping("/primes")
+	public List<MissionDTO> findByUserAndPrimeNotNull(){
+		return this.missionService.findByUserIdAndPrimeNotNull();
+	}
 
 }

@@ -80,8 +80,12 @@ public class MissionService {
 		return missionRepository.findByDepartureCity(city);
 	}
 
-	public Optional<Mission> findById(Long id) {
-		return missionRepository.findById(id);
+	public MissionDTO findById(Long id) {
+		Optional<Mission> missionOptional = missionRepository.findById(id);
+		if(missionOptional.isPresent()) {
+			return this.mapperMissionService.toDTO(missionOptional.get());
+		}
+		return null;
 	}
 
 	public List<MissionDTO> findByUser() {
@@ -89,8 +93,8 @@ public class MissionService {
 
 	}
 
-	public List<MissionDTO> findByUserIdAndPrimeNotNull(Long idUser){
-		return mapperMissionService.toDTOs(missionRepository.findMissionByUserIdAndPrimeNotNull(idUser));
+	public List<MissionDTO> findByUserIdAndPrimeNotNull(){
+		return mapperMissionService.toDTOs(missionRepository.findMissionByUserIdAndPrimeNotNull(securityUtils.getConnectedUser().getId()));
 	}
 	
 	public List<Mission> findByArrivalCity(String arrivalCity) {
