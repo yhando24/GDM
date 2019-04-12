@@ -1,9 +1,9 @@
 package fr.diginamic.mission.controller;
 
+
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.boot.model.naming.ImplicitJoinColumnNameSource.Nature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,6 @@ import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.service.MissionService;
-import fr.diginamic.security.SecurityUtils;
 import fr.diginamic.user.model.User;
 
 @CrossOrigin
@@ -34,6 +33,12 @@ public class MissionController {
 	@GetMapping
 	public List<MissionDTO> findAll() {
 		return this.missionService.findAll();
+	}
+	
+	@GetMapping("/export")
+	public void findAllForExport() {
+		this.missionService.exportExcel();
+	
 	}
 
 	@GetMapping("/waiting")
@@ -58,6 +63,11 @@ public class MissionController {
 	public List<MissionDTO> findByUser(){
 		return this.missionService.findByUser();
 	}
+	
+	@GetMapping("/findById/{id}")
+	public MissionDTO findById(@PathVariable Long id){
+		return this.missionService.findById(id);
+	}
 
 	@GetMapping("/criteria{month}{year}")
 	public List<MissionDTO> criteriaMission(@RequestParam("month") int month,@RequestParam("year")  int year){
@@ -80,5 +90,9 @@ public class MissionController {
 		return missionService.save(m);
 	}
 	
+	@GetMapping("/primes")
+	public List<MissionDTO> findByUserAndPrimeNotNull(){
+		return this.missionService.findByUserIdAndPrimeNotNull();
+	}
 
 }
