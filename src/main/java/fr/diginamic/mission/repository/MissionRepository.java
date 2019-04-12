@@ -44,6 +44,9 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 	
 	@Query("SELECT m FROM Mission m WHERE m.endDate<=?1 AND m.missionStatus='VALIDE' AND m.prime=null")
 	public List<Mission> findMissionByEndDateAndMissionStatusValideAndPrimeNull(LocalDate endDate);
+	
+	@Query("SELECT m FROM Mission m WHERE m.prime IS NOT NULL AND m.missionStatus='VALIDE' AND m.user.id=?1")
+	public List<Mission> findMissionByUserIdAndPrimeNotNull(Long idUser);
 
 	// delete
 	public void delete(Mission mission);

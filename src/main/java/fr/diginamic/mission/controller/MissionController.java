@@ -38,6 +38,11 @@ public class MissionController {
 		return this.missionService.findByMissionStatus(MissionStatusEnum.EN_ATTENTE);
 
 	}
+	@GetMapping("/display-all")
+	public List<MissionDTO> findAllForManager() {
+		return this.missionService.findByMissionStatus(MissionStatusEnum.VALIDE);
+
+	}
 
 	@PatchMapping
 	public MissionDTO updateMission(@RequestBody Mission m) {
@@ -46,9 +51,9 @@ public class MissionController {
 	}
 
 	
-	@GetMapping("/{idUser}")
-	public List<MissionDTO> findByUser(@PathVariable Long idUser){
-		return this.missionService.findByUser(idUser);
+	@GetMapping("/perso")
+	public List<MissionDTO> findByUser(){
+		return this.missionService.findByUser();
 	}
 	
 	@GetMapping("/findById/{id}")
@@ -67,5 +72,9 @@ public class MissionController {
 		return missionService.save(m);
 	}
 	
+	@GetMapping("/primes/{idUser}")
+	public List<MissionDTO> findByUserAndPrimeNotNull(@PathVariable Long idUser){
+		return this.missionService.findByUserIdAndPrimeNotNull(idUser);
+	}
 
 }
