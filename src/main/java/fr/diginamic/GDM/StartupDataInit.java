@@ -45,15 +45,15 @@ public class StartupDataInit {
 	public void init() {
 
 		// Ajout user
-		User u = new User(1L, "Plop1", "Plopeur1", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
+		User u = new User(1L, "ADMIN", "Administrateur", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
 				"admin@admin.fr", RoleEnum.ADMIN);
 		userRepository.save(u);
 		
-		User u2 = new User(2L, "Plop2", "Plopeur2", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
+		User u2 = new User(2L, "MANAGER", "Manager", "$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6",
 				"manager@manager.fr", RoleEnum.MANAGER); 
 		userRepository.save(u2);
 		
-		User u3 = new User(3L, "Plop3", "Plopeur3",
+		User u3 = new User(3L, "USER", "User",
 				"$2a$10$xtCYOPKjj4yx3OUskgTANem5HXneF.yLOkeQ7Iu7JX.KY58j3nEn6", "user@user.fr", RoleEnum.USER);
 		userRepository.save(u3);
 
@@ -79,13 +79,13 @@ public class StartupDataInit {
 		
 		Mission m2 = new Mission(LocalDate.now().plusDays(51), LocalDate.now().plusDays(55), "MARSEILLE", "TATAOUINE", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.BUS, k2, u2, 150.01f);
-		Mission m3 = new Mission(LocalDate.now().plusDays(56), LocalDate.now().plusDays(58), "TUNIS", "POUBELLE", 12f,
+		Mission m3 = new Mission(LocalDate.now().plusDays(56), LocalDate.now().plusDays(58), "TUNIS", "PARIS", 12f,
 				MissionStatusEnum.VALIDE, TransportEnum.BUS, k1, u, 150.01f);
 		Mission m4 = new Mission(LocalDate.of(2019, Month.JANUARY, 3), LocalDate.of(2019, Month.JANUARY, 6), "paris",
 				"madrid", null,MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u3, 150.01f);
 		Mission m5 = new Mission(LocalDate.of(2019, Month.FEBRUARY, 15), LocalDate.of(2019, Month.FEBRUARY, 25), "nantes",
 				"montpellier", 150f,MissionStatusEnum.VALIDE, TransportEnum.AVION, k2, u2, 150.01f);
-		Mission m6 = new Mission(LocalDate.of(2019, Month.FEBRUARY, 15), LocalDate.of(2019, Month.FEBRUARY, 25), "nantes",
+		Mission m6 = new Mission(LocalDate.of(2019, Month.FEBRUARY, 15), LocalDate.of(2019, Month.FEBRUARY, 25), "Saint-Jean",
 				"montpellier", 250f,MissionStatusEnum.VALIDE, TransportEnum.AVION, k1, u3, 150.01f);
 		Mission m7 = new Mission(LocalDate.of(2019, Month.JANUARY, 10), LocalDate.of(2019, Month.JANUARY, 13), "nantes",
 				"montpellier", 350f,MissionStatusEnum.VALIDE, TransportEnum.AVION, k1, u3, 150.01f);
@@ -98,12 +98,12 @@ public class StartupDataInit {
 		
 		Mission m21 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.VELO, k, u, 150.01f);
-		ExpenseAccount ea2 = new ExpenseAccount(2L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m21);
+		ExpenseAccount ea2 = new ExpenseAccount(2L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.ATTENTE, m21);
 		m21.addexpenseAccounts(ea2);
 		
 		Mission m31 = new Mission(LocalDate.now().plusDays(35), LocalDate.now().plusDays(45), "montpellier", "nimes", 12f,
 				MissionStatusEnum.EN_ATTENTE, TransportEnum.HELICOPTERE, k, u, 150.01f);
-		ExpenseAccount ea3 = new ExpenseAccount(3L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m31);
+		ExpenseAccount ea3 = new ExpenseAccount(3L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.ATTENTE, m31);
 		m31.addexpenseAccounts(ea3);
 
 		

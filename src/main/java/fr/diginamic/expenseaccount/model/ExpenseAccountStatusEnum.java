@@ -1,7 +1,7 @@
 package fr.diginamic.expenseaccount.model;
 
 public enum ExpenseAccountStatusEnum {
-	EN_ATTENTE("En attente"),
+	ATTENTE("Attente"),
 	VALIDEE("Validée"),
 	REJETEE("Rejetée"),
 	INITIAL("Initial"),

@@ -44,7 +44,6 @@ public class ExpenseAccount implements Serializable {
 	private Float amount;
 
 	@Enumerated(EnumType.STRING)
-	@NonNull
 	private ExpenseAccountStatusEnum status;
 
 	@ManyToOne
