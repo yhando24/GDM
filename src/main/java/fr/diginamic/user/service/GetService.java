@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class GetService {
 	
-	
 
 	static final String URL_ABSENCES = "http://localhost:8081/GDA/listAbsences";
 	
