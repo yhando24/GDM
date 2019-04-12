@@ -47,4 +47,9 @@ public class UserController {
 	public void deleteById(@PathVariable Long id) {
 		this.userServ.deleteById(id);
 	}
+	@GetMapping("/withMission")
+	public List<UserDTO> findAllUserWithMission() {
+		return this.userServ.findAllUserWithMission();
+	}
+	
 }
