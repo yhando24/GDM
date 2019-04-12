@@ -30,15 +30,10 @@ public class ExpenseAccountService {
 	@Autowired
 	private MapperExpenseAccount mapperExpenseAccount;
 	
-	@Autowired
-	private UserMapper userMapper;
 	
 	@Autowired
 	private SecurityUtils securityUtils;
 
-	
-	@Autowired
-	private MissionService missionService;
 	
 	public List<ExpenseAccountDTO> findAll(){
 		return mapperExpenseAccount.toDTOs(expenseAccountRepository.findAll());
@@ -53,8 +48,6 @@ public class ExpenseAccountService {
 	}
 	
 	public ExpenseAccountDTO save(ExpenseAccountDTO k) {
-		k.setStatus(ExpenseAccountStatusEnum.INITIAL);
-		k.getMission().setUser(userMapper.userToUserDTO(securityUtils.getConnectedUser()));
 		return mapperExpenseAccount.toDTO(expenseAccountRepository.save(mapperExpenseAccount.toEntity(k)));
 	}
 	
@@ -74,9 +67,8 @@ public class ExpenseAccountService {
 		}
 	}
 
-	public List<ExpenseAccount> saveByMissionId(Long idMission) {
-		// TODO Auto-generated method stub
-	return expenseAccountRepository.findByMissionId(idMission);
+	public List<ExpenseAccountDTO> findByMissionId(Long idMission) {
+	return mapperExpenseAccount.toDTOs(expenseAccountRepository.findByMissionId(idMission));
 	}
 
 }

@@ -15,7 +15,6 @@ import fr.diginamic.user.service.dto.ListAbsenceDTO;
 
 public class GetService {
 	
-	
 
 	static final String URL_ABSENCES = "http://localhost:8081/api/absences";
 	
