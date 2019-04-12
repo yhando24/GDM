@@ -16,6 +16,9 @@ public class ExpenseAccountDTO implements Serializable {
 
 	@NotBlank
 	private Long id;
+	
+	@NotBlank
+	private String type;
 
 	@NotBlank
 	private LocalDate date;
@@ -29,7 +32,7 @@ public class ExpenseAccountDTO implements Serializable {
 	public ExpenseAccountDTO() {
 	}
 
-	public ExpenseAccountDTO(Long id, LocalDate date, Float amount, ExpenseAccountStatusEnum status) {
+	public ExpenseAccountDTO(Long id, String type, LocalDate date, Float amount, ExpenseAccountStatusEnum status) {
 		this.id = id;
 		this.date = date;
 		this.amount = amount;
@@ -38,7 +41,7 @@ public class ExpenseAccountDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ExpenseAccountDTO [id=" + id + ", date=" + date + ", amount=" + amount + ", status=" + status + "]";
+		return "ExpenseAccountDTO [id=" + id + ",type=" + type +", date=" + date + ", amount=" + amount + ", status=" + status + "]";
 	}
 
 }

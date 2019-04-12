@@ -35,6 +35,7 @@ public class ExpenseAccountController {
 	@Transactional
 	@PostMapping
 	public ExpenseAccountDTO saveExpenseAccount(@RequestBody ExpenseAccountDTO k) {
+		System.out.println("blabla");
 		return expenseAccountService.save(k);
 	}
 	
