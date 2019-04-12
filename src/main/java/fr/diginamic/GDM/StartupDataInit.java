@@ -81,7 +81,7 @@ public class StartupDataInit {
 		Mission m4 = new Mission(LocalDate.of(2019, Month.JANUARY, 3), LocalDate.of(2019, Month.JANUARY, 6), "paris",
 				"madrid", null,MissionStatusEnum.VALIDE, TransportEnum.BUS, k, u3, 150.01f);
 
-		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.EN_ATTENTE, m);
+		ExpenseAccount ea = new ExpenseAccount(1L, LocalDate.now(), 1250F, ExpenseAccountStatusEnum.INITIAL, m);
 		m.addexpenseAccounts(ea);
 		
 		Mission m21 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(25), "londres", "boston", 12f,

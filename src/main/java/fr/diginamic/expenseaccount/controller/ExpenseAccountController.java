@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.expenseaccount.model.ExpenseAccountDTO;
+import fr.diginamic.expenseaccount.repository.ExpenseAccountRepository;
 import fr.diginamic.expenseaccount.service.ExpenseAccountService;
+import fr.diginamic.expenseaccount.service.MapperExpenseAccount;
 
 
 @CrossOrigin
@@ -27,15 +29,24 @@ public class ExpenseAccountController {
 	@Autowired
 	private ExpenseAccountService expenseAccountService;
 	
+	@Autowired
+	private MapperExpenseAccount mapperExpenseAccount;
+	
 	@GetMapping
 	public List <ExpenseAccountDTO> findAll(){
 		return this.expenseAccountService.findAll();
+	}
+	
+
+	@GetMapping("/{id}")
+	public List<ExpenseAccountDTO> findbyMission(Long idMission) {
+		return mapperExpenseAccount.toDTOs(expenseAccountService.saveByMissionId(idMission));
 	}
 
 	@Transactional
 	@PostMapping
 	public ExpenseAccountDTO saveExpenseAccount(@RequestBody ExpenseAccountDTO k) {
-		System.out.println("blabla");
+		System.out.println(k.getMission().getArrivalCity());
 		return expenseAccountService.save(k);
 	}
 	

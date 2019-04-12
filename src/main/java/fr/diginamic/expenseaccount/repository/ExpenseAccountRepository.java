@@ -24,4 +24,6 @@ public interface ExpenseAccountRepository extends CrudRepository<ExpenseAccount,
 	public void deleteById(Long id);
 
 	void delete(ExpenseAccount expenseAccount);
+
+	public List<ExpenseAccount> findByMissionId(Long idMission);
 }

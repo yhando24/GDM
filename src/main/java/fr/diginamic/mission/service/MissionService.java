@@ -72,8 +72,12 @@ public class MissionService {
 		return missionRepository.findByDepartureCity(city);
 	}
 
-	public Optional<Mission> findById(Long id) {
-		return missionRepository.findById(id);
+	public MissionDTO findById(Long id) {
+		Optional<Mission> missionOptional = missionRepository.findById(id);
+		if(missionOptional.isPresent()) {
+			return this.mapperMissionService.toDTO(missionOptional.get());
+		}
+		return null;
 	}
 
 	public List<MissionDTO> findByUser(Long idUser) {

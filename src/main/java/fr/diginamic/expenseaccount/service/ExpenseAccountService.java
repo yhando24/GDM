@@ -15,7 +15,9 @@ import fr.diginamic.kind.exception.KindException;
 import fr.diginamic.kind.model.KindDTO;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.service.MissionService;
+import fr.diginamic.security.SecurityUtils;
 import fr.diginamic.user.exception.ControllerUserException;
+import fr.diginamic.user.mapper.UserMapper;
 import fr.diginamic.user.model.User;
 import fr.diginamic.user.model.UserDTO;
 
@@ -27,6 +29,13 @@ public class ExpenseAccountService {
 	
 	@Autowired
 	private MapperExpenseAccount mapperExpenseAccount;
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private SecurityUtils securityUtils;
+
 	
 	@Autowired
 	private MissionService missionService;
@@ -44,6 +53,8 @@ public class ExpenseAccountService {
 	}
 	
 	public ExpenseAccountDTO save(ExpenseAccountDTO k) {
+		k.setStatus(ExpenseAccountStatusEnum.INITIAL);
+		k.getMission().setUser(userMapper.userToUserDTO(securityUtils.getConnectedUser()));
 		return mapperExpenseAccount.toDTO(expenseAccountRepository.save(mapperExpenseAccount.toEntity(k)));
 	}
 	
@@ -61,6 +72,11 @@ public class ExpenseAccountService {
 		} else {
 			throw new ExpenseAccountException("L'id correpond à aucun frais");
 		}
+	}
+
+	public List<ExpenseAccount> saveByMissionId(Long idMission) {
+		// TODO Auto-generated method stub
+	return expenseAccountRepository.findByMissionId(idMission);
 	}
 
 }

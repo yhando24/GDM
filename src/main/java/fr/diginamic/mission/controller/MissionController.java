@@ -1,6 +1,7 @@
 package fr.diginamic.mission.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,6 +49,11 @@ public class MissionController {
 	@GetMapping("/{idUser}")
 	public List<MissionDTO> findByUser(@PathVariable Long idUser){
 		return this.missionService.findByUser(idUser);
+	}
+	
+	@GetMapping("/findById/{id}")
+	public MissionDTO findById(@PathVariable Long id){
+		return this.missionService.findById(id);
 	}
 
 

@@ -33,6 +33,10 @@ public class ExpenseAccount implements Serializable {
 
 	@Column
 	@NonNull
+	private String type;
+	
+	@Column
+	@NonNull
 	private LocalDate date;
 
 	@Column
@@ -60,7 +64,10 @@ public class ExpenseAccount implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ExpenseAccount [id=" + id + ", date=" + date + ", amount=" + amount + ", status=" + status + "]";
+		return "ExpenseAccount [id=" + id + ", date=" + date + ", amount=" + amount + ", status=" + status
+				+ ", mission=" + mission + "]";
 	}
+
+	
 
 }
