@@ -1,5 +1,11 @@
 package fr.diginamic.mission.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.diginamic.WorkBook.entities.MissionExcel;
+import fr.diginamic.WorkBook.service.SheetParser;
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
 import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
+import fr.diginamic.mission.model.TransportEnum;
 import fr.diginamic.mission.service.MissionService;
 import fr.diginamic.security.SecurityUtils;
+import fr.diginamic.user.model.User;
 
 @CrossOrigin
 @RestController()
@@ -30,6 +40,12 @@ public class MissionController {
 	@GetMapping
 	public List<MissionDTO> findAll() {
 		return this.missionService.findAll();
+	}
+	
+	@GetMapping("/export")
+	public void findAllForExport() {
+		this.missionService.exportExcel();
+	
 	}
 
 	@GetMapping("/waiting")

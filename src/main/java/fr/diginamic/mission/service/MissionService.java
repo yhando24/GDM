@@ -1,8 +1,14 @@
 package fr.diginamic.mission.service;
 
+import java.math.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +17,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.diginamic.WorkBook.entities.MissionExcel;
+import fr.diginamic.WorkBook.service.SheetParser;
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.service.KindService;
 import fr.diginamic.mission.exception.ControllerMissionException;
@@ -168,6 +176,53 @@ public class MissionService {
 
 		}
 
+	}
+
+	public void exportExcel() {
+		 SheetParser sp = new SheetParser();
+		 
+		 List<MissionExcel> missionsExcel = new ArrayList<>(); 
+		 
+		 List<MissionDTO>  missionsDTO = mapperMissionService.toDTOs(missionRepository.findAll());
+		 
+		 
+		System.out.println("dans le export");
+		
+		//transformation des missionsDTO EN missionsExcel
+		 for (MissionDTO mdto : missionsDTO) {
+			 MissionExcel me = new MissionExcel(mdto.getId(),mdto.getStartDate(),mdto.getEndDate(),mdto.getDepartureCity(), mdto.getArrivalCity(),
+					 mdto.getMissionStatus().toString(), mdto.getTransportEnum().toString(), mdto.getKind().getName(),mdto.getUser().getEmail());
+			 if(mdto.getPrime() == null) {
+				 me.setPrime("Pas de prime");
+			 }else {
+				 me.setPrime(mdto.getPrime().toString());
+			 }
+			 if(mdto.getAmountOfBill() == null) {
+				 me.setAmountOfBill("Non facturée");
+			 }else {
+				 me.setAmountOfBill(mdto.getAmountOfBill().toString());
+			 }
+			 missionsExcel.add(me);
+				System.out.println("je rajoute :"+ me.toString());
+		 }
+		 
+		 final String OUTPUT_FILE = "C:\\Users\\formation\\Desktop\\liste.xlsx";
+		 OutputStream out = null;
+		try {
+			out = new FileOutputStream(OUTPUT_FILE);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 try {
+			sp.createXLS(out, "Liste des missions", MissionExcel.class, missionsExcel);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
