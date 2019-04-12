@@ -5,6 +5,8 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -41,7 +43,7 @@ public class MissionService {
 	// create
 	public MissionDTO save(MissionDTO missionDTO) throws ControllerMissionException {
 		missionDTO.setMissionStatus(MissionStatusEnum.INITIAL);
-
+		
 		if (missionDTO.getEndDate().isBefore(missionDTO.getStartDate())) {
 			throw new ControllerMissionException("La date de fin est avant la date de debut");
 		}
@@ -53,15 +55,17 @@ public class MissionService {
 			throw new ControllerMissionException(
 					"Si une mission se deroule grace à l'utilisation d'un avion, elle doit commencer au moin 7 jours apres la date d'aujourd'hui");
 		}
-		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
-			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
-		}
+
+//		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate())>0) {
+//			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
+//		}
 
 		Mission mission = mapperMissionService.toEntity(missionDTO);
 		mission.setUser(securityUtils.getConnectedUser());
 		return mapperMissionService.toDTO(missionRepository.save(mission));
 	}
 
+	
 	// update
 	public MissionDTO update(Mission mission) {
 		return mapperMissionService.toDTO(missionRepository.save(mission));
