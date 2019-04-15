@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.mission.repository.MissionRepository;
@@ -29,6 +30,7 @@ public class UserService {
 
 	public UserDTO save(UserDTO userDTO) throws ControllerUserException {
 		try {
+			userDTO.setPassword(BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt()));
 			return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 
 		} catch (Exception e) {
