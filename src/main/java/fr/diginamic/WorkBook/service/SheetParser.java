@@ -102,7 +102,6 @@ public class SheetParser {
 			for (Map.Entry<Integer, String> entrySet : excelPositionMap.entrySet()) {
 				   CellStyle style2 = workbook.createCellStyle();
 				   Font font2 = workbook.createFont();
-				   font2.setColor(HSSFColor.BLACK.index);
 				   style2.setFillBackgroundColor(IndexedColors.RED.getIndex());
 				   style2.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 				   style2.setFont(font2);

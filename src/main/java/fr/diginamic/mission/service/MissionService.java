@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -182,7 +184,7 @@ public class MissionService {
 
 	}
 
-	public void exportExcel() {
+	public void exportExcel(HttpServletResponse response) {
 		 SheetParser sp = new SheetParser();
 		 
 		 List<MissionExcel> missionsExcel = new ArrayList<>(); 
@@ -207,18 +209,12 @@ public class MissionService {
 				 me.setAmountOfBill(mdto.getAmountOfBill().toString());
 			 }
 			 missionsExcel.add(me);
-				System.out.println("je rajoute :"+ me.toString());
+				
 		 }
 		 
-		 final String OUTPUT_FILE = "C:\\Users\\formation\\Desktop\\liste.xlsx";
-		 OutputStream out = null;
+		 OutputStream out;
 		try {
-			out = new FileOutputStream(OUTPUT_FILE);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		 try {
+			out = response.getOutputStream();
 			sp.createXLS(out, "Liste des missions", MissionExcel.class, missionsExcel);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
