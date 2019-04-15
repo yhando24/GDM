@@ -73,9 +73,9 @@ public class MissionService {
 		}
 
 
-		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate())>0) {
-			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
-		}
+//		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate())>0) {
+//			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
+//		}
 
 
 //		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
