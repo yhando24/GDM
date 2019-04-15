@@ -11,14 +11,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletResponse;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import fr.diginamic.WorkBook.entities.MissionExcel;
 import fr.diginamic.WorkBook.service.SheetParser;
 import fr.diginamic.kind.model.Kind;
@@ -47,6 +49,9 @@ public class MissionService {
 
 	@Autowired
 	private KindService kindService;
+	
+	@PersistenceContext
+	EntityManager em;
 
 	// create
 	public MissionDTO save(MissionDTO missionDTO) throws ControllerMissionException {
@@ -66,7 +71,7 @@ public class MissionService {
 		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
 			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
 		}
-
+		System.out.println("//////////////////////////////////////////////////////////////////////////////////////////////"+missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size());
 		Mission mission = mapperMissionService.toEntity(missionDTO);
 		mission.setUser(securityUtils.getConnectedUser());
 		return mapperMissionService.toDTO(missionRepository.save(mission));
@@ -80,6 +85,25 @@ public class MissionService {
 	// read
 	private List<Mission> findByDepartureCity(String city) {
 		return missionRepository.findByDepartureCity(city);
+	}
+	
+	
+	public List<MissionDTO> criteriaMission(LocalDate date){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
+		return mapperMissionService.toDTOs(crit.list());
+	}
+	public List<MissionDTO> criteriaMissionUser(LocalDate date, User m ){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
+		crit.add(Restrictions.eq("user", m));
+		return mapperMissionService.toDTOs(crit.list());
 	}
 
 	public MissionDTO findById(Long id) {
