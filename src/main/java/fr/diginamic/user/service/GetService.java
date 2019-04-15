@@ -9,10 +9,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import fr.diginamic.user.service.dto.AbsenceDTO;
+import fr.diginamic.user.service.dto.ListAbsenceDTO;
+
+
 public class GetService {
 	
 
-	static final String URL_ABSENCES = "http://localhost:8081/GDA/listAbsences";
+	static final String URL_ABSENCES = "http://localhost:8081/api/absences";
 	
 	public static void main(String[] args) {
 
@@ -26,7 +30,8 @@ public class GetService {
 		
 		  RestTemplate restTemplate = new RestTemplate();
 		  
-		  ResponseEntity<String> response = restTemplate.exchange(URL_ABSENCES, 
-	                HttpMethod.GET, entity, String.class);
+		  ResponseEntity<ListAbsenceDTO> response = restTemplate.exchange(URL_ABSENCES, 
+	                HttpMethod.GET, entity, ListAbsenceDTO.class);
+		  System.out.println(response.getBody().toString());
 	}
 }

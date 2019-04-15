@@ -3,10 +3,17 @@ package fr.diginamic.user.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.repository.MissionRepository;
 import fr.diginamic.user.exception.ControllerUserException;
 import fr.diginamic.user.model.RoleEnum;
@@ -25,6 +32,9 @@ public class UserService {
 
 	@Autowired
 	private MapperUserService mpu;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	// create
 
@@ -106,6 +116,16 @@ public class UserService {
 	public List<UserDTO> findAll() {
 		return mpu.toDTOs(userRepository.findAll());
 	}
+	
+	public List<UserDTO> findAllUserWithMission() {
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(User.class);
+		
+		crit.add(Restrictions.isNotEmpty("missions"));
+		return mpu.toDTOs(crit.list());
+	}
+	
 
 	// delete
 

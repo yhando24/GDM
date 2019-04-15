@@ -1,7 +1,10 @@
 package fr.diginamic.mission.controller;
 
+
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.mission.exception.ErrorLogigDateMission;
@@ -18,7 +22,7 @@ import fr.diginamic.mission.model.Mission;
 import fr.diginamic.mission.model.MissionDTO;
 import fr.diginamic.mission.model.MissionStatusEnum;
 import fr.diginamic.mission.service.MissionService;
-import fr.diginamic.security.SecurityUtils;
+import fr.diginamic.user.model.User;
 
 @CrossOrigin
 @RestController()
@@ -31,6 +35,17 @@ public class MissionController {
 	@GetMapping
 	public List<MissionDTO> findAll() {
 		return this.missionService.findAll();
+	}
+	
+	
+	
+	@GetMapping("/export")
+	public void findAllForExport(HttpServletResponse response) {
+		response.addHeader("Content-Disposition", "attachement; filename=\"filename.xls\"");
+		response.addHeader("Content-Type","application/vnd.ms-excel");
+//		response.addHeader("filename", "filename.xls");
+		this.missionService.exportExcel(response);
+	
 	}
 
 	@GetMapping("/waiting")
@@ -61,7 +76,17 @@ public class MissionController {
 		return this.missionService.findById(id);
 	}
 
-
+	@GetMapping("/criteria{month}{year}")
+	public List<MissionDTO> criteriaMission(@RequestParam("month") int month,@RequestParam("year")  int year){
+		LocalDate ld = LocalDate.of(year, month, 1);
+		return this.missionService.criteriaMission(ld);
+	}
+	@PostMapping("/criteria{month}{year}")
+	public List<MissionDTO> criteriaMissionUser(@RequestParam("month") int month,@RequestParam("year")  int year,@RequestBody User m){
+		
+		LocalDate ld = LocalDate.of(year, month, 1);
+		return this.missionService.criteriaMissionUser(ld,m);
+	}
 	@PatchMapping("/update")
 	public MissionDTO update(@RequestBody MissionDTO mission) throws ErrorLogigDateMission {
 		return missionService.save(mission);
