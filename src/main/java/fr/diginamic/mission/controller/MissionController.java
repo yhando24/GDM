@@ -41,7 +41,7 @@ public class MissionController {
 	
 	@GetMapping("/export")
 	public void findAllForExport(HttpServletResponse response) {
-		response.addHeader("Content-Disposition", "attachement; filename=\"filename.xls\"");
+		response.addHeader("Content-Disposition", "attachement; filename=\"filename.xlsx\"");
 		response.addHeader("Content-Type","application/vnd.ms-excel");
 //		response.addHeader("filename", "filename.xls");
 		this.missionService.exportExcel(response);
