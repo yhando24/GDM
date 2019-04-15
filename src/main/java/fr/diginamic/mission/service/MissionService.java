@@ -98,12 +98,37 @@ public class MissionService {
 		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
 		return mapperMissionService.toDTOs(crit.list());
 	}
-	public List<MissionDTO> criteriaMissionUser(LocalDate date, User m ){
+	public List<MissionDTO> criteriaMission(LocalDate date, int nbrMonth){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(nbrMonth)));
+		return mapperMissionService.toDTOs(crit.list());
+	}
+	
+	public List<MissionDTO> criteriaMission(LocalDate date, User m ){
 		Session session = (Session) em.getDelegate();
 		@SuppressWarnings({ "deprecation", "null" })
 		Criteria crit = session.createCriteria(Mission.class);
 		
 		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
+		crit.add(Restrictions.eq("user", m));
+		return mapperMissionService.toDTOs(crit.list());
+	}
+	public List<MissionDTO> criteriaMission(LocalDate date, User m , int nbrMonth){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(nbrMonth)));
+		crit.add(Restrictions.eq("user", m));
+		return mapperMissionService.toDTOs(crit.list());
+	}
+	public List<MissionDTO> criteriaMission( User m){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
 		crit.add(Restrictions.eq("user", m));
 		return mapperMissionService.toDTOs(crit.list());
 	}

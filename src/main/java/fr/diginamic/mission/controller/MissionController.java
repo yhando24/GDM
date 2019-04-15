@@ -71,14 +71,30 @@ public class MissionController {
 
 	@GetMapping("/criteria{month}{year}")
 	public List<MissionDTO> criteriaMission(@RequestParam("month") int month,@RequestParam("year")  int year){
-		LocalDate ld = LocalDate.of(year, month, 1);
-		return this.missionService.criteriaMission(ld);
+		LocalDate ld = null;
+		if(month == 0) {
+			ld = LocalDate.of(year, 1, 1);
+			return this.missionService.criteriaMission(ld,11);
+		}else {
+			ld = LocalDate.of(year, month, 1);
+			return this.missionService.criteriaMission(ld);
+		}
+		 
 	}
 	@PostMapping("/criteria{month}{year}")
 	public List<MissionDTO> criteriaMissionUser(@RequestParam("month") int month,@RequestParam("year")  int year,@RequestBody User m){
-		
-		LocalDate ld = LocalDate.of(year, month, 1);
-		return this.missionService.criteriaMissionUser(ld,m);
+		LocalDate ld = null;
+		if(year == 0) {
+			ld = LocalDate.of(year, 1, 1);
+			return this.missionService.criteriaMission(m);
+		}
+		if(month == 0) {
+			ld = LocalDate.of(year, 1, 1);
+			return this.missionService.criteriaMission(ld,m,11);
+		}else {
+			ld = LocalDate.of(year, month, 1);
+			return this.missionService.criteriaMission(ld,m);
+		}
 	}
 	@PatchMapping("/update")
 	public MissionDTO update(@RequestBody MissionDTO mission) throws ErrorLogigDateMission {
