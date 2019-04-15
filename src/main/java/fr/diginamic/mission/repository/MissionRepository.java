@@ -39,8 +39,9 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
 
 	public List<Mission> findAll();
 
-	@Query("SELECT m FROM Mission m WHERE m.startDate>?1 AND m.endDate<?2 ")
-	public List<Mission> findVeriChevauchement(LocalDate dateStart, LocalDate dateEnd);
+	@Query("SELECT COUNT(*) FROM Mission m WHERE (m.startDate>?1 AND ?1<m.endDate) OR (m.startDate>?2 AND ?2<m.endDate) "
+			+ "OR (?1<m.startDate AND ?2>m.endDate)")
+	public Long findVeriChevauchement(LocalDate dateStart, LocalDate dateEnd);
 	
 	@Query("SELECT m FROM Mission m WHERE m.endDate<=?1 AND m.missionStatus='VALIDE' AND m.prime=null")
 	public List<Mission> findMissionByEndDateAndMissionStatusValideAndPrimeNull(LocalDate endDate);

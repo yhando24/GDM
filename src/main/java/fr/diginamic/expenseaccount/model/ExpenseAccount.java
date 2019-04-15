@@ -53,8 +53,9 @@ public class ExpenseAccount implements Serializable {
 	public ExpenseAccount() {
 	}
 
-	public ExpenseAccount(Long id, LocalDate date, Float amount, ExpenseAccountStatusEnum status, Mission mission) {
+	public ExpenseAccount(Long id,String type, LocalDate date, Float amount, ExpenseAccountStatusEnum status, Mission mission) {
 		this.id = id;
+		this.type = type;
 		this.date = date;
 		this.amount = amount;
 		this.status = status;

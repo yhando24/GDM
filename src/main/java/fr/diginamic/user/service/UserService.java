@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.mission.model.Mission;
@@ -39,6 +40,7 @@ public class UserService {
 
 	public UserDTO save(UserDTO userDTO) throws ControllerUserException {
 		try {
+			userDTO.setPassword(BCrypt.hashpw(userDTO.getPassword(), BCrypt.gensalt()));
 			return mpu.toDTO(userRepository.save(mpu.toEntity(userDTO)));
 
 		} catch (Exception e) {

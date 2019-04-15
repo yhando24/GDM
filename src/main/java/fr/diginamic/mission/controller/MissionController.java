@@ -4,6 +4,8 @@ package fr.diginamic.mission.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,14 @@ public class MissionController {
 		return this.missionService.findAll();
 	}
 	
+	
+	
 	@GetMapping("/export")
-	public void findAllForExport() {
-		this.missionService.exportExcel();
+	public void findAllForExport(HttpServletResponse response) {
+		response.addHeader("Content-Disposition", "attachement; filename=\"filename.xls\"");
+		response.addHeader("Content-Type","application/vnd.ms-excel");
+//		response.addHeader("filename", "filename.xls");
+		this.missionService.exportExcel(response);
 	
 	}
 
