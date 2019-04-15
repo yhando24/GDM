@@ -1,18 +1,32 @@
 package fr.diginamic.mission.service;
 
+import java.math.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.diginamic.WorkBook.entities.MissionExcel;
+import fr.diginamic.WorkBook.service.SheetParser;
 import fr.diginamic.kind.model.Kind;
 import fr.diginamic.kind.service.KindService;
 import fr.diginamic.mission.exception.ControllerMissionException;
@@ -39,6 +53,9 @@ public class MissionService {
 
 	@Autowired
 	private KindService kindService;
+	
+	@PersistenceContext
+	EntityManager em;
 
 	// create
 	public MissionDTO save(MissionDTO missionDTO) throws ControllerMissionException {
@@ -56,10 +73,16 @@ public class MissionService {
 					"Si une mission se deroule grace à l'utilisation d'un avion, elle doit commencer au moin 7 jours apres la date d'aujourd'hui");
 		}
 
-//		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate())>0) {
+
+		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate())>0) {
+			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
+		}
+
+
+//		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
 //			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
 //		}
-
+		System.out.println("//////////////////////////////////////////////////////////////////////////////////////////////"+missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size());
 		Mission mission = mapperMissionService.toEntity(missionDTO);
 		mission.setUser(securityUtils.getConnectedUser());
 		return mapperMissionService.toDTO(missionRepository.save(mission));
@@ -74,6 +97,25 @@ public class MissionService {
 	// read
 	private List<Mission> findByDepartureCity(String city) {
 		return missionRepository.findByDepartureCity(city);
+	}
+	
+	
+	public List<MissionDTO> criteriaMission(LocalDate date){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
+		return mapperMissionService.toDTOs(crit.list());
+	}
+	public List<MissionDTO> criteriaMissionUser(LocalDate date, User m ){
+		Session session = (Session) em.getDelegate();
+		@SuppressWarnings({ "deprecation", "null" })
+		Criteria crit = session.createCriteria(Mission.class);
+		
+		crit.add(Restrictions.between("startDate", date ,date.plusMonths(1)));
+		crit.add(Restrictions.eq("user", m));
+		return mapperMissionService.toDTOs(crit.list());
 	}
 
 	public MissionDTO findById(Long id) {
@@ -176,6 +218,53 @@ public class MissionService {
 
 		}
 
+	}
+
+	public void exportExcel() {
+		 SheetParser sp = new SheetParser();
+		 
+		 List<MissionExcel> missionsExcel = new ArrayList<>(); 
+		 
+		 List<MissionDTO>  missionsDTO = mapperMissionService.toDTOs(missionRepository.findAll());
+		 
+		 
+		System.out.println("dans le export");
+		
+		//transformation des missionsDTO EN missionsExcel
+		 for (MissionDTO mdto : missionsDTO) {
+			 MissionExcel me = new MissionExcel(mdto.getId(),mdto.getStartDate(),mdto.getEndDate(),mdto.getDepartureCity(), mdto.getArrivalCity(),
+					 mdto.getMissionStatus().toString(), mdto.getTransportEnum().toString(), mdto.getKind().getName(),mdto.getUser().getEmail());
+			 if(mdto.getPrime() == null) {
+				 me.setPrime("Pas de prime");
+			 }else {
+				 me.setPrime(mdto.getPrime().toString());
+			 }
+			 if(mdto.getAmountOfBill() == null) {
+				 me.setAmountOfBill("Non facturée");
+			 }else {
+				 me.setAmountOfBill(mdto.getAmountOfBill().toString());
+			 }
+			 missionsExcel.add(me);
+				System.out.println("je rajoute :"+ me.toString());
+		 }
+		 
+		 final String OUTPUT_FILE = "C:\\Users\\formation\\Desktop\\liste.xlsx";
+		 OutputStream out = null;
+		try {
+			out = new FileOutputStream(OUTPUT_FILE);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 try {
+			sp.createXLS(out, "Liste des missions", MissionExcel.class, missionsExcel);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
