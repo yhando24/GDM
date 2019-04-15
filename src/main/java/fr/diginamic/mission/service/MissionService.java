@@ -14,9 +14,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import fr.diginamic.WorkBook.entities.MissionExcel;
 import fr.diginamic.WorkBook.service.SheetParser;
 import fr.diginamic.kind.model.Kind;
@@ -82,7 +81,7 @@ public class MissionService {
 //		if (missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size() != 0) {
 //			throw new ControllerMissionException("Probleme de chevauchement de date de mission");
 //		}
-		System.out.println("//////////////////////////////////////////////////////////////////////////////////////////////"+missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size());
+		//System.out.println("//////////////////////////////////////////////////////////////////////////////////////////////"+missionRepository.findVeriChevauchement(missionDTO.getEndDate(), missionDTO.getStartDate()).size());
 		Mission mission = mapperMissionService.toEntity(missionDTO);
 		mission.setUser(securityUtils.getConnectedUser());
 		return mapperMissionService.toDTO(missionRepository.save(mission));
@@ -220,7 +219,7 @@ public class MissionService {
 
 	}
 
-	public void exportExcel() {
+	public void exportExcel(HttpServletResponse response) {
 		 SheetParser sp = new SheetParser();
 		 
 		 List<MissionExcel> missionsExcel = new ArrayList<>(); 
@@ -245,18 +244,12 @@ public class MissionService {
 				 me.setAmountOfBill(mdto.getAmountOfBill().toString());
 			 }
 			 missionsExcel.add(me);
-				System.out.println("je rajoute :"+ me.toString());
+				
 		 }
 		 
-		 final String OUTPUT_FILE = "C:\\Users\\formation\\Desktop\\liste.xlsx";
-		 OutputStream out = null;
+		 OutputStream out;
 		try {
-			out = new FileOutputStream(OUTPUT_FILE);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		 try {
+			out = response.getOutputStream();
 			sp.createXLS(out, "Liste des missions", MissionExcel.class, missionsExcel);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
